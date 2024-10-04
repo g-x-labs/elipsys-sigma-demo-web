@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Plus Jakarta Sans", "sans-serif"], // Primary font
+        mono: ["Roboto Mono", "monospace"], // Secondary font
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
