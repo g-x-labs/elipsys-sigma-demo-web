@@ -26,9 +26,9 @@ const config: Config = {
     extend: {
       textStyles: {
         h1: createTextStyle(sansFontFamily, "32px", "700"),
-        h2: createTextStyle(sansFontFamily, "24px", "600"),
+        h2: createTextStyle(sansFontFamily, "24px", "700"),
         h3: createTextStyle(sansFontFamily, "20px", "700"),
-        sh1: createTextStyle(sansFontFamily, "24px", "700"),
+        sh1: createTextStyle(sansFontFamily, "24px", "600"),
         sh2: createTextStyle(sansFontFamily, "20px", "600"),
         b1: createTextStyle(sansFontFamily, "20px", "500"),
         b2: createTextStyle(sansFontFamily, "16px", "500"),
