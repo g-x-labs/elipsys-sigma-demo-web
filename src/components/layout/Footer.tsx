@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button } from "@/components/shared/Button";
 
 // TODO: Replace links
 const footerLinks = [
@@ -17,13 +18,11 @@ export default function Footer() {
         <ul className="flex gap-x-8">
           {footerLinks.map((link) => (
             <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-gray-600 text-sb2 hover:text-gray-200"
-                prefetch={false}
-              >
-                {link.label}
-              </Link>
+              <Button variant={"text"} size={"fit"}>
+                <Link href={link.href} prefetch={false}>
+                  {link.label}
+                </Link>
+              </Button>
             </li>
           ))}
         </ul>
