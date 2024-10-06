@@ -4,6 +4,8 @@ import "./globals.css";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import { ScreenSizeWrapper } from "@/components/layout/ScreenSizeWrapper";
+import { Providers } from "./providers";
+import "@rainbow-me/rainbowkit/styles.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -30,11 +32,13 @@ export default function RootLayout({
       <body
         className={`${plusJakartaSans.className} ${robotoMono.className} antialiased`}
       >
-        <ScreenSizeWrapper>
-          <Navbar />
-          {children}
-          <Footer />
-        </ScreenSizeWrapper>
+        <Providers>
+          <ScreenSizeWrapper>
+            <Navbar />
+            {children}
+            <Footer />
+          </ScreenSizeWrapper>
+        </Providers>
       </body>
     </html>
   );
