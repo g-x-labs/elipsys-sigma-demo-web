@@ -24,7 +24,9 @@ export default function TokenInput(props: TokenInputProps) {
         )}
         <Input value={value} disabled={isReadOnly} placeholder="0" />
         <div className="flex flex-col items-end justify-between">
-          <span className="text-gray-400 text-sb3">Balance</span>
+          <span className="text-gray-400 text-sb3">
+            {isReadOnly ? "USD" : "Balance"}
+          </span>
           <span className="text-gray-400 text-sb3">--</span>
         </div>
       </div>
