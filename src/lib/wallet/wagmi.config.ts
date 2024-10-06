@@ -34,8 +34,8 @@ export const wagmiConfig = getDefaultConfig({
 
   transports: {
     transports: {
-      [sepolia.id]: http("https://1rpc.io/sepolia"),
-      // [arbitrumSepolia.id]: http('https://eth-sepolia.g.alchemy.com/v2/...'),
+      [sepolia.id]: http("https://ethereum-sepolia-rpc.publicnode.com"),
+      [arbitrumSepolia.id]: http("https://sepolia-rollup.arbitrum.io/rpc"),
     },
   },
   ssr: true,
