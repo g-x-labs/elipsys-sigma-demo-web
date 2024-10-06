@@ -7,15 +7,16 @@ import {
 import { Button } from "@/components/ui/Button";
 import SwapIcon from "@/assets/icons/swap.svg";
 import TransactionDetail from "@/components/home/swap/TransactionDetails";
+import TokenInput from "@/components/home/swap/TokenInput";
 
 export default function SwapCard() {
   return (
     <Card>
-      <CardHeader className="items-center">
-        {/* Token Input */}
-        {/* TODO: Wrap in Button */}
+      <CardHeader className="items-center gap-y-4">
+        <TokenInput />
+        {/* TODO: Wrap button on icon */}
         <SwapIcon className="w-5 fill-gray-200" />
-        {/* Token Output */}
+        <TokenInput isReadOnly value="-" />
       </CardHeader>
       <CardContent className="flex flex-col gap-y-2">
         <TransactionDetail
