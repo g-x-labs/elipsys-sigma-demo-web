@@ -17,7 +17,9 @@ export default function Footer() {
       <nav className="flex flex-1 justify-end">
         <ul className="flex gap-x-8">
           {footerLinks.map((link) => (
-            <li key={link.href}>
+            <li key={link.label}>
+              {" "}
+              {/* Use label as key to avoid duplicate keys */}
               <Button variant={"text"} size={"fit"}>
                 <Link href={link.href} prefetch={false}>
                   {link.label}
