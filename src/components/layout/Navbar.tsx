@@ -1,5 +1,5 @@
 import ElipsysIcon from "@/assets/icons/elipsys-large.svg";
-import { Button } from "@/components/shared/Button";
+import { Button } from "@/components/ui/Button";
 
 export default function Navbar() {
   return (

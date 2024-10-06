@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "@/components/shared/Button";
+import { Button } from "@/components/ui/Button";
 
 // TODO: Replace links
 const footerLinks = [

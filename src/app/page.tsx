@@ -1,14 +1,12 @@
-import SwapHeader from "@/components/home/Header";
+import SwapBody from "@/components/home/swap/SwapBody";
+import SwapHeader from "@/components/home/swap/SwapHeader";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen w-full items-center justify-center">
-      {/* Swap Component */}
-      <div className="flex w-[456px] gap-x-6 p-4">
+      <div className="flex w-[456px] flex-col gap-y-6 p-4">
         <SwapHeader />
-        {/* TokenInput */}
-        {/* Cost Estimation */}
-        {/* Button */}
+        <SwapBody />
       </div>
     </div>
   );
