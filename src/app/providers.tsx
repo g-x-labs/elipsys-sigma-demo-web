@@ -4,6 +4,7 @@ import { WagmiProvider } from "wagmi";
 
 import { wagmiConfig } from "@/lib/wallet/wagmi.config";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { Provider } from "jotai"; // Import Jotai Provider
 
 const queryClient = new QueryClient();
 
@@ -11,7 +12,9 @@ export function Providers({ children }: React.PropsWithChildren) {
   return (
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>{children}</RainbowKitProvider>
+        <RainbowKitProvider>
+          <Provider>{children}</Provider>
+        </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );
