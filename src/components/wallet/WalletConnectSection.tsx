@@ -7,7 +7,7 @@ import { ConnectWalletButton } from "./ConnectWalletButton";
 export default function WalletConnectSection() {
   const { isConnected, address, connector } = useAccount();
   if (isConnected && address) {
-    return <UserWallet address={address} walletIcon={connector?.icon} />;
+    return <UserWallet address={address} walletName={connector?.name} />;
   }
   return <ConnectWalletButton />;
 }
