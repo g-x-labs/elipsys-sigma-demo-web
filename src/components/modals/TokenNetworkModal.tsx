@@ -5,6 +5,7 @@ import {
   selectedNetworkAtom,
   selectedTokenAtom,
 } from "@/atoms/tokenNetworkAtom";
+import SearchBar from "../ui/Search";
 
 // Mocked data for networks and tokens
 const networks = [
@@ -33,35 +34,38 @@ export default function TokenNetworkModal() {
   return (
     <Modal modalId="tokenNetworkModal" title="Select">
       {/* TODO: Add search bar */}
-      <div className="flex h-96 w-full gap-3 border-t border-gray-800 pb-4">
-        <div className="flex w-[172px] flex-col gap-y-3 overflow-y-auto border-r border-gray-800 pr-3">
-          <h3 className="pt-4 text-gray-400 text-sb3">Networks</h3>
-          <div>
-            {networks.map((network) => (
-              <ChainPill
-                key={network.id}
-                chain={network.name}
-                isSelected={network.id === selectedNetwork}
-                onSelect={() => {
-                  setSelectedNetwork(network.id);
-                  setSelectedToken(null);
-                }}
-              />
-            ))}
+      <div className="flex flex-col gap-y-2">
+        <SearchBar placeholder="Search for tokens" />
+        <div className="flex h-96 w-full border-t border-gray-800 pb-4">
+          <div className="flex w-[172px] flex-col gap-y-3 overflow-y-auto border-r border-gray-800 pr-3">
+            <h3 className="pt-4 text-gray-400 text-sb3">Networks</h3>
+            <div>
+              {networks.map((network) => (
+                <ChainPill
+                  key={network.id}
+                  chain={network.name}
+                  isSelected={network.id === selectedNetwork}
+                  onSelect={() => {
+                    setSelectedNetwork(network.id);
+                    setSelectedToken(null);
+                  }}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="flex w-[252px] flex-col gap-y-3 overflow-y-auto pr-3">
-          <h3 className="pt-4 text-gray-400 text-sb3">Tokens</h3>
-          <div>
-            {tokenList.map((token) => (
-              <TokenPill
-                key={token.ticker}
-                token={token.token}
-                ticker={token.ticker}
-                isSelected={token.token === selectedToken}
-                onSelect={() => setSelectedToken(token.token)}
-              />
-            ))}
+          <div className="flex w-[252px] flex-col gap-y-3 overflow-y-auto pl-3">
+            <h3 className="pt-4 text-gray-400 text-sb3">Tokens</h3>
+            <div>
+              {tokenList.map((token) => (
+                <TokenPill
+                  key={token.ticker}
+                  token={token.token}
+                  ticker={token.ticker}
+                  isSelected={token.token === selectedToken}
+                  onSelect={() => setSelectedToken(token.token)}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
