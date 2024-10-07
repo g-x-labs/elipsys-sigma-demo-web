@@ -9,7 +9,7 @@ import {
 interface ModalProps {
   modalId: string;
   title: string;
-  description: string;
+  description?: string;
   children: React.ReactNode;
 }
 
@@ -23,9 +23,9 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && closeModal()}>
-      <DialogContent>
+      <DialogContent className="w-[456px]">
         <DialogTitle>{title}</DialogTitle>
-        <DialogDescription>{description}</DialogDescription>
+        {description && <DialogDescription>{description}</DialogDescription>}
         {children}
       </DialogContent>
     </Dialog>
