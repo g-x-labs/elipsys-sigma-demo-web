@@ -13,7 +13,8 @@ const buttonVariants = cva(
           "bg-gray-800 hover:bg-gray-700 disabled:text-gray-600 active:bg-gray-700",
         link: "text-gray-600 underline-offset-4 hover:underline",
         text: "text-gray-600 hover:text-gray-200",
-        dropdown: "bg-black-800 hover:bg-black-700",
+        // TODO: Add hover back in later
+        dropdown: "bg-black-800",
       },
       size: {
         default: "h-[56px] px-5 py-4",

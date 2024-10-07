@@ -15,8 +15,8 @@ export default function TokenNetworkSelector(props: TokenNetworkSelectorProps) {
       className={cn(
         "w-full min-w-[120px] justify-between rounded-none bg-black-700 hover:bg-gray-800",
         isToken
-          ? "rounded-tl-[4px] border-r border-gray-800"
-          : "rounded-tr-[4px]",
+          ? "flex rounded-tl-[4px] border-r border-gray-800"
+          : "flex-1 rounded-tr-[4px]",
       )}
     >
       <div className="flex w-full items-center gap-x-2">

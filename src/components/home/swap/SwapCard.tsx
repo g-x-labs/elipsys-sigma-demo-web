@@ -13,6 +13,7 @@ export default function SwapCard() {
   return (
     <Card>
       <CardHeader className="items-center gap-y-4">
+        {/* TODO: Wallet connect component */}
         <TokenInput />
         {/* TODO: Wrap button on icon */}
         <SwapIcon className="w-5 fill-gray-200" />
