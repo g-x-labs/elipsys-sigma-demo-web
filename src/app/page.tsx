@@ -1,6 +1,5 @@
 import SwapCard from "@/components/home/swap/SwapCard";
 import SwapHeader from "@/components/home/swap/SwapHeader";
-// import TestModal from "@/components/home/TestModal";
 
 export default function Home() {
   return (
@@ -8,7 +7,6 @@ export default function Home() {
       <div className="mx-auto flex w-[456px] flex-col gap-y-6 p-4 pt-[134px]">
         <SwapHeader />
         <SwapCard />
-        {/* <TestModal /> */}
       </div>
     </div>
   );
