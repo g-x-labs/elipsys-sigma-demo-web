@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import { ScreenSizeWrapper } from "@/components/layout/ScreenSizeWrapper";
 import { Providers } from "./providers";
 import "@rainbow-me/rainbowkit/styles.css";
+import ModalManager from "@/components/modals/ModalManager";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
         <Providers>
           <ScreenSizeWrapper>
             <Navbar />
+            <ModalManager />
             {children}
             <Footer />
           </ScreenSizeWrapper>
