@@ -46,7 +46,7 @@ const config: Config = {
         white: "#FFFFFF",
         green: "#C2FB20",
         red: "#FF1744",
-        grey: {
+        gray: {
           800: "#282828",
           700: "#4A4A4A",
           600: "#646464",
