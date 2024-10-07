@@ -4,6 +4,7 @@ import { Address } from "viem";
 import { formatAddress } from "@/lib/utils/format";
 import { useAccountModal } from "@rainbow-me/rainbowkit";
 import Image from "next/image";
+import { Button } from "@/components/ui/Button";
 
 interface UserWalletProps {
   address: Address;
@@ -13,15 +14,22 @@ interface UserWalletProps {
 export default function UserWallet({ address, walletName }: UserWalletProps) {
   const { openAccountModal } = useAccountModal();
   return (
-    <button className="flex items-center gap-x-2" onClick={openAccountModal}>
+    <Button
+      variant="text"
+      size="fit"
+      className="flex items-center gap-x-1"
+      onClick={openAccountModal}
+    >
       <Image
         src={getWalletIcon(walletName)}
-        height={20}
-        width={20}
+        height={16}
+        width={16}
         alt={walletName ?? "wallet icon"}
       />
-      <div>{formatAddress(address)}</div>
-    </button>
+      <div className="text-gray-600 text-sb3 group-hover:text-gray-50">
+        {formatAddress(address)}
+      </div>
+    </Button>
   );
 }
 
