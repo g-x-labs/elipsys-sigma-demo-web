@@ -3,13 +3,14 @@ import { Button } from "@/components/ui/Button";
 
 import { cn } from "@/lib/utils/cn";
 import { useModal } from "@/lib/hooks/useModalAtom";
+import { ModalIds } from "@/enums/modals";
 
 interface TokenNetworkSelectorProps {
   variant?: "token" | "network";
 }
 
 export default function TokenNetworkSelector(props: TokenNetworkSelectorProps) {
-  const { openModal } = useModal("tokenNetworkModal");
+  const { openModal } = useModal(ModalIds.TokenNetworkModal);
 
   const { variant = "token" } = props;
   const isToken = variant === "token";

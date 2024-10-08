@@ -1,11 +1,11 @@
 import Modal from "@/components/ui/Modal";
-import { Button } from "../ui/Button";
+import { Button } from "@/components/ui/Button";
 import { useAtom } from "jotai";
 import {
   selectedNetworkAtom,
   selectedTokenAtom,
 } from "@/atoms/tokenNetworkAtom";
-import SearchBar from "../ui/Search";
+import SearchBar from "@/components/ui/Search";
 
 // Mocked data for networks and tokens
 const networks = [
