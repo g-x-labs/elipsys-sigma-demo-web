@@ -14,4 +14,9 @@ export type TokenInfo = {
   iconUrl?: string;
 };
 
-export type TokenConfig = Record<Address, TokenInfo>;
+export type ChainInfo = {
+  chainId: ChainId;
+  chainName: string;
+  iconUrl?: string;
+  tokenInfos: Record<Address, TokenInfo>;
+};
