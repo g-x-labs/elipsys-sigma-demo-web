@@ -1,16 +1,23 @@
+"use client";
 import { Button } from "@/components/ui/Button";
+
 import { cn } from "@/lib/utils/cn";
+import { useModal } from "@/lib/hooks/useModalAtom";
+import { ModalIds } from "@/enums/modals";
 
 interface TokenNetworkSelectorProps {
   variant?: "token" | "network";
 }
 
 export default function TokenNetworkSelector(props: TokenNetworkSelectorProps) {
+  const { openModal } = useModal(ModalIds.TokenNetworkModal);
+
   const { variant = "token" } = props;
   const isToken = variant === "token";
 
   return (
     <Button
+      onClick={openModal}
       size="large"
       className={cn(
         "w-full min-w-[120px] justify-between rounded-none bg-black-700 hover:bg-gray-800",

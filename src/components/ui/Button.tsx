@@ -15,11 +15,13 @@ const buttonVariants = cva(
         text: "text-gray-600 hover:text-gray-200",
         // TODO: Add hover back in later
         dropdown: "bg-black-800",
+        transparent:
+          "bg-transparent hover:bg-black-700 data-[active=true]:bg-black-700",
       },
       size: {
         default: "h-[56px] px-5 py-4",
         large: "h-[76px] p-4",
-        medium: "h-[44px] px-4 py-3",
+        dropdown: "h-[44px] px-4 py-3",
         small: "h-[26px] rounded-[4px] px-3 py-2 text-sb3",
         icon: "h-10 w-10",
         fit: "h-auto p-0",

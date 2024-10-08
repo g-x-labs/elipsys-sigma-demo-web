@@ -11,7 +11,7 @@ export default function SwapHeader() {
         {/* TODO: Replace with dropdown */}
         <Button
           className="border border-gray-600"
-          size={"medium"}
+          size={"dropdown"}
           variant={"dropdown"}
         >
           <WormholeLiteIcon className="w-[132px]" />
