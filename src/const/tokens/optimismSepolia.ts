@@ -1,5 +1,7 @@
-import { TokenConfig } from "@/types/token";
+import { TokenConfig } from "@/types/utils";
 import BigNumber from "bignumber.js";
+
+BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 // TODO: replace with actual token info
 export const optimismSepolia: TokenConfig = {
