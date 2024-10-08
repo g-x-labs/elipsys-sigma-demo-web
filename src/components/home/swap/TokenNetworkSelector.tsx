@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/Button";
 
 import { cn } from "@/lib/utils/cn";
 import { useModal } from "@/lib/hooks/useModalAtom";
-import { ModalIds } from "@/enums/modals";
+import { ModalIds } from "@/types/modals";
 
 interface TokenNetworkSelectorProps {
   variant?: "token" | "network";
