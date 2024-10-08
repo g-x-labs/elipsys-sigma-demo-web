@@ -1,4 +1,7 @@
+import BigNumber from "bignumber.js";
 import { Address } from "viem";
+
+BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 export enum ChainId {
   Sepolia = 11155111,
@@ -18,5 +21,5 @@ export type ChainInfo = {
   chainId: ChainId;
   chainName: string;
   iconUrl?: string;
-  tokenInfos: Record<Address, TokenInfo>;
+  tokens: Record<Address, TokenInfo>;
 };

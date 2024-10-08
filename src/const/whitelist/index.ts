@@ -3,30 +3,25 @@ import { optimismSepolia } from "./optimismSepolia";
 import { sepolia } from "./sepolia";
 import { Address } from "viem";
 
-export function getChainInfo(chainId: ChainId): ChainInfo {
-  switch (chainId) {
-    case ChainId.Sepolia:
-      return {
-        chainId: ChainId.Sepolia,
-        chainName: "Sepolia",
-        iconUrl: "/wallet/rabby.svg",
-        tokenInfos: sepolia,
-      };
-    case ChainId.OptimismSepolia:
-    default:
-      return {
-        chainId: ChainId.OptimismSepolia,
-        chainName: "Optimism Sepolia",
-        iconUrl: "/wallet/metamask.svg",
-        tokenInfos: optimismSepolia,
-      };
-  }
-}
+export const whitelistChains: Record<ChainId, ChainInfo> = {
+  11155111: {
+    chainId: ChainId.Sepolia,
+    chainName: "Sepolia",
+    iconUrl: "/wallet/rabby.svg",
+    tokens: sepolia,
+  },
+  11155420: {
+    chainId: ChainId.OptimismSepolia,
+    chainName: "Optimism Sepolia",
+    iconUrl: "/wallet/metamask.svg",
+    tokens: optimismSepolia,
+  },
+};
 
 export function getTokenInfo(
   chainId: ChainId,
   address: Address,
 ): TokenInfo | undefined {
-  const tokenConfig = getChainInfo(chainId);
-  return tokenConfig.tokenInfos[address];
+  const chainInfo = whitelistChains[chainId];
+  return chainInfo.tokens[address];
 }

@@ -6,30 +6,15 @@ import {
   selectedTokenAtom,
 } from "@/atoms/tokenNetworkAtom";
 import SearchBar from "@/components/ui/Search";
-
-// Mocked data for networks and tokens
-const networks = [
-  { id: "arb", name: "Arbitrum" },
-  { id: "op", name: "Optimism" },
-];
-
-const tokensByNetwork: { [key: string]: { token: string; ticker: string }[] } =
-  {
-    arb: [
-      { token: "Arbitrum Token A", ticker: "ATA" },
-      { token: "Arbitrum Token B", ticker: "ATB" },
-    ],
-    op: [
-      { token: "Optimism Token X", ticker: "OTX" },
-      { token: "Optimism Token Y", ticker: "OTY" },
-    ],
-  };
+import { whitelistChains } from "@/const/whitelist";
 
 export default function TokenNetworkModal() {
   const [selectedNetwork, setSelectedNetwork] = useAtom(selectedNetworkAtom);
   const [selectedToken, setSelectedToken] = useAtom(selectedTokenAtom);
 
-  const tokenList = selectedNetwork ? tokensByNetwork[selectedNetwork] : [];
+  const chainList = Object.values(whitelistChains);
+  const tokenList =
+    Object.values(whitelistChains[selectedNetwork].tokens) || [];
 
   return (
     <Modal modalId="tokenNetworkModal" title="Select">
@@ -40,13 +25,13 @@ export default function TokenNetworkModal() {
           <div className="flex w-[172px] flex-col gap-y-3 overflow-y-auto border-r border-gray-800 pr-3">
             <h3 className="pt-4 text-gray-400 text-sb3">Networks</h3>
             <div>
-              {networks.map((network) => (
+              {chainList.map((chain) => (
                 <ChainPill
-                  key={network.id}
-                  chain={network.name}
-                  isSelected={network.id === selectedNetwork}
+                  key={chain.chainId}
+                  chain={chain.chainName}
+                  isSelected={chain.chainId === selectedNetwork}
                   onSelect={() => {
-                    setSelectedNetwork(network.id);
+                    setSelectedNetwork(chain.chainId);
                     setSelectedToken(null);
                   }}
                 />
@@ -58,11 +43,11 @@ export default function TokenNetworkModal() {
             <div>
               {tokenList.map((token) => (
                 <TokenPill
-                  key={token.ticker}
-                  token={token.token}
-                  ticker={token.ticker}
-                  isSelected={token.token === selectedToken}
-                  onSelect={() => setSelectedToken(token.token)}
+                  key={token.tokenAddress}
+                  tokenName={token.tokenName}
+                  ticker={token.tokenSymbol}
+                  isSelected={token.tokenAddress === selectedToken}
+                  onSelect={() => setSelectedToken(token.tokenAddress)}
                 />
               ))}
             </div>
@@ -98,14 +83,14 @@ function ChainPill(props: ChainPillProps) {
 
 // TokenPill component
 interface TokenPillProps {
-  token: string;
+  tokenName: string;
   ticker: string;
   isSelected: boolean;
   onSelect: () => void;
 }
 
 function TokenPill(props: TokenPillProps) {
-  const { token, ticker, isSelected, onSelect } = props;
+  const { tokenName, ticker, isSelected, onSelect } = props;
 
   return (
     <Button
@@ -120,7 +105,7 @@ function TokenPill(props: TokenPillProps) {
         <div className="absolute bottom-0 right-0 h-[18px] w-[18px] rounded-[4px] bg-gray-600"></div>
       </div>
       <div className="flex flex-col items-start gap-y-[6px]">
-        <span className="text-gray-600 text-sb3">{token}</span>
+        <span className="text-gray-600 text-sb3">{tokenName}</span>
         <span className="uppercase text-gray-400 text-b3">{ticker}</span>
       </div>
     </Button>
