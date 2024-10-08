@@ -14,4 +14,12 @@ export const sepolia: Record<Address, TokenInfo> = {
     underlyingTokenDecimals: BigNumber(1e18),
     iconUrl: "/wallet/rabby.svg",
   },
+  "0xd98B590ebE0a3eD8C144170bA4122D402182976f": {
+    tokenAddress: "0xd98B590ebE0a3eD8C144170bA4122D402182976f",
+    tokenName: "USD Coin",
+    tokenSymbol: "USDC",
+    tokenDecimals: 18,
+    underlyingTokenDecimals: BigNumber(1e18),
+    iconUrl: "/wallet/metamask.svg",
+  },
 };
