@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/Button";
 
 import { useModal } from "@/lib/hooks/useModalAtom";
 import { ModalIds } from "@/types/modals";
+import ChevronDownIcon from "@/assets/icons/chevron_down.svg";
 
 interface TokenNetworkSelectorProps {
   variant?: "token" | "network";
@@ -33,14 +34,7 @@ export default function TokenNetworkSelector(props: TokenNetworkSelectorProps) {
           </span>
           <div className="flex flex-row items-center gap-x-1">
             <span className="text-gray-400 text-b2">Select</span>
-            <svg
-              className="h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="inherit"
-              stroke="#A0A0A2"
-            >
-              <path d="M6 9l6 6 6-6" strokeWidth="2" />
-            </svg>
+            <ChevronDownIcon className="w-3 fill-gray-400" />
           </div>
         </div>
       </div>

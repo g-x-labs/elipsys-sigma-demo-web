@@ -1,13 +1,7 @@
 import Tooltip from "@/components/ui/Tooltip";
 import InfoIcon from "@/assets/icons/info.svg";
 import RightArrowIcon from "@/assets/icons/right-arrow.svg";
-
-interface TransactionDetailProps {
-  label: string;
-  value: string;
-  secondaryValue?: string;
-  tooltip?: string;
-}
+import { TransactionDetailProps } from "@/types/home/TransactionDetailsProps";
 
 export default function TransactionDetail(props: TransactionDetailProps) {
   const { label, value, secondaryValue, tooltip } = props;

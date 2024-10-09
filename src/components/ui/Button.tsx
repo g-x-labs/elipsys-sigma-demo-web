@@ -13,9 +13,9 @@ const buttonVariants = cva(
           "bg-gray-800 hover:bg-gray-700 disabled:text-gray-600 rounded-lg active:bg-gray-700",
         link: "text-gray-600 underline-offset-4 hover:underline",
         text: "text-gray-600 hover:text-gray-200",
-        dropdown: "bg-black-800",
+        dropdown: "bg-black-800 rounded-lg",
         transparent:
-          "bg-transparent hover:bg-black-700 data-[active=true]:bg-black-700",
+          "bg-transparent hover:bg-black-700 data-[active=true]:bg-black-700 rounded-lg",
         // INFO: One-offs goes here
         tokenSelector:
           "bg-black-700 hover:bg-gray-800 flex rounded-tl-[4px] border-r border-gray-800",
