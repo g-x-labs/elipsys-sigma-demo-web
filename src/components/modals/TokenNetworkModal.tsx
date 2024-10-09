@@ -18,7 +18,6 @@ export default function TokenNetworkModal() {
 
   return (
     <Modal modalId="tokenNetworkModal" title="Select">
-      {/* TODO: Add search bar */}
       <div className="flex flex-col gap-y-2">
         <SearchBar placeholder="Search for tokens" />
         <div className="flex h-96 w-full border-t border-gray-800 pb-4">
