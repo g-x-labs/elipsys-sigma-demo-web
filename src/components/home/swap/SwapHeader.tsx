@@ -1,4 +1,4 @@
-import WormholeLiteIcon from "@/assets/icons/wormhole-lite.svg";
+import WormholeLiteIcon from "@/assets/icons//branding/wormhole-lite.svg";
 import { Button } from "@/components/ui/Button";
 
 export default function SwapHeader() {

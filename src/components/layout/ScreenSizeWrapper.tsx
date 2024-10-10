@@ -3,7 +3,7 @@
 import { useAtom } from "jotai";
 import { isScreenSupportedAtom } from "@/atoms/screenSizeAtom";
 import { useEffect } from "react";
-import ElipsysIcon from "@/assets/icons/elipsys-large.svg";
+import ElipsysIcon from "@/assets/icons/branding/elipsys-large.svg";
 
 export const ScreenSizeWrapper = ({
   children,

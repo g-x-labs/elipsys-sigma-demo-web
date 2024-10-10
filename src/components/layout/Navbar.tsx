@@ -1,4 +1,4 @@
-import ElipsysIcon from "@/assets/icons/elipsys-large.svg";
+import ElipsysIcon from "@/assets/icons/branding/elipsys-large.svg";
 import WalletConnectSection from "@/components/wallet/WalletConnectSection";
 
 export default function Navbar() {

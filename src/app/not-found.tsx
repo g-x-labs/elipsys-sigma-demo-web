@@ -1,4 +1,4 @@
-import ElipsysIcon from "@/assets/icons/elipsys-large.svg";
+import ElipsysIcon from "@/assets/icons/branding/elipsys-large.svg";
 
 export default function NotFound() {
   return (

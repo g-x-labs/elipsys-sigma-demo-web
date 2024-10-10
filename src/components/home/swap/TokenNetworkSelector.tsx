@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/Button";
 
 import { useModal } from "@/lib/hooks/useModalAtom";
 import { ModalIds } from "@/types/modals";
-import ChevronDownIcon from "@/assets/icons/chevron_down.svg";
+import ChevronDownIcon from "@/assets/icons//ui/chevron_down.svg";
 
 interface TokenNetworkSelectorProps {
   variant?: "token" | "network";

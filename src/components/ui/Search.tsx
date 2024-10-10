@@ -3,7 +3,7 @@ import { InputHTMLAttributes } from "react";
 import { Input } from "./Input";
 import { cn } from "@/lib/utils/cn";
 import React from "react";
-import SearchIcon from "@/assets/icons/search.svg";
+import SearchIcon from "@/assets/icons/ui/search.svg";
 
 const searchBarVariants = cva(
   [

@@ -1,6 +1,6 @@
 import Tooltip from "@/components/ui/Tooltip";
-import InfoIcon from "@/assets/icons/info.svg";
-import RightArrowIcon from "@/assets/icons/right-arrow.svg";
+import InfoIcon from "@/assets/icons/ui/info.svg";
+import RightArrowIcon from "@/assets/icons/ui/right-arrow.svg";
 import { TransactionDetailProps } from "@/types/home/TransactionDetailsProps";
 
 export default function TransactionDetail(props: TransactionDetailProps) {
