@@ -12,13 +12,13 @@ export default function TokenNetworkModal() {
   const [selectedNetwork, setSelectedNetwork] = useAtom(selectedNetworkAtom);
   const [selectedToken, setSelectedToken] = useAtom(selectedTokenAtom);
 
+  // TODO: Consider changing name to network
   const chainList = Object.values(whitelistChains);
   const tokenList =
     Object.values(whitelistChains[selectedNetwork].tokens) || [];
 
   return (
     <Modal modalId="tokenNetworkModal" title="Select">
-      {/* TODO: Add search bar */}
       <div className="flex flex-col gap-y-2">
         <SearchBar placeholder="Search for tokens" />
         <div className="flex h-96 w-full border-t border-gray-800 pb-4">
@@ -76,7 +76,7 @@ function ChainPill(props: ChainPillProps) {
       className="flex h-[46px] w-full flex-row items-center justify-start gap-x-2 px-3 py-2"
     >
       <div className="h-8 w-8 rounded-lg bg-gray-700"></div>
-      <span className="text-gray-400 text-b3">{chain}</span>
+      <span className="truncate text-gray-400 text-b3">{chain}</span>
     </Button>
   );
 }
@@ -105,8 +105,10 @@ function TokenPill(props: TokenPillProps) {
         <div className="absolute bottom-0 right-0 h-[18px] w-[18px] rounded-[4px] bg-gray-600"></div>
       </div>
       <div className="flex flex-col items-start gap-y-[6px]">
-        <span className="text-gray-600 text-sb3">{tokenName}</span>
-        <span className="uppercase text-gray-400 text-b3">{ticker}</span>
+        <span className="truncate text-gray-600 text-sb3">{tokenName}</span>
+        <span className="truncate uppercase text-gray-400 text-b3">
+          {ticker}
+        </span>
       </div>
     </Button>
   );

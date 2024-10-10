@@ -21,7 +21,6 @@ export default function SwapCard() {
         {/* TODO: Wrap button on icon */}
         <SwapIcon className="w-5 fill-gray-200" />
         <div className="flex w-full flex-col gap-y-2">
-          <BridgeWalletConnect />
           <TokenInput isReadOnly value="-" />
         </div>
       </CardHeader>
