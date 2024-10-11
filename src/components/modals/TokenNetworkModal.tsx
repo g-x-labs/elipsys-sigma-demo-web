@@ -7,6 +7,7 @@ import {
 } from "@/atoms/tokenNetworkAtom";
 import SearchBar from "@/components/ui/Search";
 import { whitelistChains } from "@/const/whitelist";
+import { ModalIds } from "@/types/modals";
 
 export default function TokenNetworkModal() {
   const [selectedNetwork, setSelectedNetwork] = useAtom(selectedNetworkAtom);
@@ -18,7 +19,7 @@ export default function TokenNetworkModal() {
     Object.values(whitelistChains[selectedNetwork].tokens) || [];
 
   return (
-    <Modal modalId="tokenNetworkModal" title="Select">
+    <Modal modalId={ModalIds.TokenNetworkModal} title="Select">
       <div className="flex flex-col gap-y-2">
         <SearchBar placeholder="Search for tokens" />
         <div className="flex h-96 w-full border-t border-gray-800 pb-4">
