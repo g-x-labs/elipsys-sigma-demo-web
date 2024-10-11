@@ -7,6 +7,9 @@ import {
 } from "@/atoms/tokenNetworkAtom";
 import SearchBar from "@/components/ui/Search";
 import { whitelistChains } from "@/const/whitelist";
+import Image from "next/image";
+import { ChainInfo, TokenInfo } from "@/types/utils";
+import { getChainIcon, getTokenIcon } from "@/lib/utils/iconUtils";
 
 export default function TokenNetworkModal() {
   const [selectedNetwork, setSelectedNetwork] = useAtom(selectedNetworkAtom);
@@ -28,7 +31,7 @@ export default function TokenNetworkModal() {
               {chainList.map((chain) => (
                 <ChainPill
                   key={chain.chainId}
-                  chain={chain.chainName}
+                  chain={chain}
                   isSelected={chain.chainId === selectedNetwork}
                   onSelect={() => {
                     setSelectedNetwork(chain.chainId);
@@ -44,8 +47,8 @@ export default function TokenNetworkModal() {
               {tokenList.map((token) => (
                 <TokenPill
                   key={token.tokenAddress}
-                  tokenName={token.tokenName}
-                  ticker={token.tokenSymbol}
+                  token={token}
+                  chain={whitelistChains[selectedNetwork]}
                   isSelected={token.tokenAddress === selectedToken}
                   onSelect={() => setSelectedToken(token.tokenAddress)}
                 />
@@ -60,7 +63,7 @@ export default function TokenNetworkModal() {
 
 // ChainPill component
 interface ChainPillProps {
-  chain: string;
+  chain: ChainInfo;
   isSelected: boolean;
   onSelect: () => void;
 }
@@ -75,22 +78,28 @@ function ChainPill(props: ChainPillProps) {
       onClick={onSelect}
       className="flex h-[46px] w-full flex-row items-center justify-start gap-x-2 px-3 py-2"
     >
-      <div className="h-8 w-8 rounded-lg bg-gray-700"></div>
-      <span className="truncate text-gray-400 text-b3">{chain}</span>
+      <Image
+        src={getChainIcon(chain.iconUrl)}
+        height={32}
+        width={32}
+        className="flex-shrink-0 rounded-lg"
+        alt={chain.chainName ?? "chain"}
+      />
+      <span className="truncate text-gray-400 text-b3">{chain.chainName}</span>
     </Button>
   );
 }
 
 // TokenPill component
 interface TokenPillProps {
-  tokenName: string;
-  ticker: string;
+  token: TokenInfo;
+  chain: ChainInfo;
   isSelected: boolean;
   onSelect: () => void;
 }
 
 function TokenPill(props: TokenPillProps) {
-  const { tokenName, ticker, isSelected, onSelect } = props;
+  const { token, chain, isSelected, onSelect } = props;
 
   return (
     <Button
@@ -100,14 +109,27 @@ function TokenPill(props: TokenPillProps) {
       className="flex h-[52px] w-full flex-row items-center justify-start gap-x-2 px-3 py-2"
     >
       <div className="relative w-[44px]">
-        <div className="h-9 w-9 rounded-full bg-gray-700"></div>
-
-        <div className="absolute bottom-0 right-0 h-[18px] w-[18px] rounded-[4px] bg-gray-600"></div>
+        <Image
+          src={getTokenIcon(token.iconUrl)}
+          height={36}
+          width={36}
+          className="flex-shrink-0 rounded-lg"
+          alt={token.tokenName ?? "chain"}
+        />
+        <Image
+          src={getChainIcon(chain.iconUrl)}
+          height={18}
+          width={18}
+          className="absolute bottom-0 right-0 rounded-[4px]"
+          alt={chain.chainName ?? "chain"}
+        />
       </div>
       <div className="flex flex-col items-start gap-y-[6px]">
-        <span className="truncate text-gray-600 text-sb3">{tokenName}</span>
+        <span className="truncate text-gray-600 text-sb3">
+          {token.tokenName}
+        </span>
         <span className="truncate uppercase text-gray-400 text-b3">
-          {ticker}
+          {token.tokenSymbol}
         </span>
       </div>
     </Button>
