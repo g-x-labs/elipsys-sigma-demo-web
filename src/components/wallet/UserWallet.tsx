@@ -36,12 +36,12 @@ export default function UserWallet({ address, walletName }: UserWalletProps) {
 function getWalletIcon(name: string | undefined) {
   switch (name) {
     case "MetaMask":
-      return "/wallets/metamask.svg";
+      return "assets/wallets/metamask.svg";
     case "Rabby Wallet":
-      return "/wallets/rabby.svg";
+      return "assets/wallets/rabby.svg";
     case "OKX Wallet":
-      return "/wallets/okx.svg";
+      return "assets/wallets/okx.svg";
     default:
-      return "/wallets/wallet-fallback.svg";
+      return "assets/wallets/wallet-fallback.svg";
   }
 }

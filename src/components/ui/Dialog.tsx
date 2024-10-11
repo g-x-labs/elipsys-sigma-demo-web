@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import CloseIcon from "@/assets/icons//ui/cross.svg";
+import CloseIcon from "@/assets/icons/cross.svg";
 
 import { cn } from "@/lib/utils/cn";
 
