@@ -2,7 +2,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
 
-import { wagmiConfig } from "@/lib/wallet/wagmi.config";
+import { wagmiConfig } from "@/contract/wagmi.config";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { Provider } from "jotai"; // Import Jotai Provider
 
