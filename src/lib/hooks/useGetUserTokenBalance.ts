@@ -12,7 +12,7 @@ import BigNumber from "bignumber.js";
  * @returns {BigNumber | null} - The token balance
  */
 
-export default function useGetTokenBalance({
+export default function useGetUserTokenBalance({
   tokenAddress,
   address,
 }: {
