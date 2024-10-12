@@ -1,15 +1,17 @@
 import { ChainInfo, TokenInfo } from "@/types/utils";
 import Image from "next/image";
 import { getChainIcon, getTokenIcon } from "@/lib/utils/iconUtils";
+import { Address } from "viem";
+import { formatAddress, formatAsUsd } from "@/lib/utils/format";
 
 // TODO: Excessive props for now, not sure what is actually needed
 interface TokenSummaryProps {
   token: TokenInfo;
   // TODO: Not sure if this is suppose to be BigNumber
   tokenAmount: string;
-  tokenUSDValue: string;
+  tokenUSDValue: number;
   chain: ChainInfo;
-  destinationAddress: string;
+  destinationAddress: Address;
 }
 
 export default function TokenSummary(props: TokenSummaryProps) {
@@ -37,10 +39,10 @@ export default function TokenSummary(props: TokenSummaryProps) {
       <div className="flex flex-col items-start gap-y-[6px]">
         <span className="truncate text-gray-400 text-b2">
           {tokenAmount}
-          <span className="uppercase">{token.tokenSymbol}</span>
+          <span className="truncate uppercase">{token.tokenSymbol}</span>
         </span>
         <span className="truncate text-gray-400 text-sb3">
-          {`(${tokenUSDValue}) ${chain.chainName} ${destinationAddress}`}
+          {`(${formatAsUsd(tokenUSDValue)}) ${chain.chainName} ${formatAddress(destinationAddress)}`}
         </span>
       </div>
     </div>

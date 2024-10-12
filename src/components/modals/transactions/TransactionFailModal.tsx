@@ -12,6 +12,7 @@ export default function TransactionFailModal() {
   // TODO: Remove these
   const tempChain = Object.values(whitelistChains)[0];
   const tempToken = Object.values(whitelistChains[ChainId.Sepolia].tokens)[0];
+  const tempTokenUsdValue = 1;
 
   const { closeModal } = useModal(ModalIds.TransactionSuccessModal);
 
@@ -21,7 +22,7 @@ export default function TransactionFailModal() {
         <TokenSummary
           token={tempToken}
           tokenAmount="0.0001"
-          tokenUSDValue="$0.0001"
+          tokenUSDValue={tempTokenUsdValue}
           chain={tempChain}
           destinationAddress="0x0000...0000"
         />
