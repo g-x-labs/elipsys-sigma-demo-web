@@ -22,15 +22,18 @@ export function useBridgeTransactionHandler() {
       const fakeHash = "0x1234567890abcdef"; // Placeholder hash
       setTransactionHash(fakeHash);
 
+      setTransactionStatus(TransactionStatus.Success);
+      setModal(ModalIds.TransactionSuccessModal);
+
       // Randomly set transaction success or failure
-      const isSuccess = Math.random() > 0.5;
-      if (isSuccess) {
-        setTransactionStatus(TransactionStatus.Success);
-        setModal(ModalIds.TransactionSuccessModal);
-      } else {
-        setTransactionStatus(TransactionStatus.Fail);
-        setModal(ModalIds.TransactionFailModal);
-      }
+      // const isSuccess = Math.random() > 0.5;
+      // if (isSuccess) {
+      //   setTransactionStatus(TransactionStatus.Success);
+      //   setModal(ModalIds.TransactionSuccessModal);
+      // } else {
+      //   setTransactionStatus(TransactionStatus.Fail);
+      //   setModal(ModalIds.TransactionFailModal);
+      // }
     }, 3000); // Fake 3 seconds for pending transaction
   };
 

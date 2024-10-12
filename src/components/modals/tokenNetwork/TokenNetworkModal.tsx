@@ -115,7 +115,7 @@ function TokenPill(props: TokenPillProps) {
           height={36}
           width={36}
           className="flex-shrink-0 rounded-lg"
-          alt={token.tokenName ?? "chain"}
+          alt={token.tokenName ?? "token"}
         />
         <Image
           src={getChainIcon(chain.iconUrl)}

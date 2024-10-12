@@ -19,7 +19,11 @@ export default function Footer() {
           {footerLinks.map((link) => (
             <li key={link.label}>
               <Button variant={"text"} size={"fit"}>
-                <Link href={link.href} prefetch={false}>
+                <Link
+                  href={link.href}
+                  prefetch={false}
+                  className="text-gray-600 text-sb2"
+                >
                   {link.label}
                 </Link>
               </Button>

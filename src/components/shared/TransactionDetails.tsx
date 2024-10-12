@@ -3,6 +3,8 @@ import InfoIcon from "@/assets/icons/info.svg";
 import RightArrowIcon from "@/assets/icons/right-arrow.svg";
 import { TransactionDetailProps } from "@/types/home/TransactionDetailsProps";
 
+// TODO: Reconsider where to place this
+// INFO: This is used in the main component and in the transaction modals
 export default function TransactionDetail(props: TransactionDetailProps) {
   const { label, value, secondaryValue, tooltip } = props;
 

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import SwapIcon from "@/assets/icons/swap.svg";
-import TransactionDetail from "@/components/home/swap/TransactionDetails";
+import TransactionDetail from "@/components/shared/TransactionDetails";
 import TokenInput from "@/components/home/swap/TokenInput";
 import BridgeWalletConnect from "./BridgeWalletConnect";
 import { useModal } from "@/lib/hooks/useModalAtom";
