@@ -5,6 +5,7 @@ import { formatAddress } from "@/lib/utils/format";
 import { useAccountModal } from "@rainbow-me/rainbowkit";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { getWalletIcon } from "@/lib/utils/iconUtils";
 
 interface UserWalletProps {
   address: Address;
@@ -31,15 +32,4 @@ export default function UserWallet({ address, walletName }: UserWalletProps) {
       </div>
     </Button>
   );
-}
-
-function getWalletIcon(name: string | undefined) {
-  switch (name) {
-    case "MetaMask":
-      return "/wallet/metamask.svg";
-    case "Rabby Wallet":
-      return "/wallet/rabby.svg";
-    default:
-      return ""; // TODO: Add more wallet icons, and default icon for unknown wallets
-  }
 }
