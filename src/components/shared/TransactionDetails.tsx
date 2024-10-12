@@ -2,6 +2,7 @@ import Tooltip from "@/components/ui/Tooltip";
 import InfoIcon from "@/assets/icons/info.svg";
 import RightArrowIcon from "@/assets/icons/right-arrow.svg";
 
+// TODO: Change values to type number
 export interface TransactionDetailProps {
   label: string;
   value: string;

@@ -12,10 +12,10 @@ export function formatAsUsd(value: number | undefined | null): string {
     return "~$-.--";
   }
 
-  return new Intl.NumberFormat("en-US", {
+  return `~${Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  }).format(value);
+  }).format(value)}`;
 }
