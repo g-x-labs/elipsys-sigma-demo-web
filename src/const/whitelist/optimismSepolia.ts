@@ -12,6 +12,6 @@ export const optimismSepolia: Record<Address, TokenInfo> = {
     tokenSymbol: "USDT",
     tokenDecimals: 18,
     underlyingTokenDecimals: BigNumber(1e18),
-    iconUrl: "/wallet/metamask.svg",
+    iconUrl: "assets/tokens/usdt.svg",
   },
 };
