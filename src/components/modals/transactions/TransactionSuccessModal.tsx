@@ -6,6 +6,7 @@ import { useModal } from "@/lib/hooks/useModalAtom";
 import { whitelistChains } from "@/const/whitelist";
 import { ChainId } from "@/types/utils";
 import TokenSummary from "@/components/shared/TokenSummary";
+import LinkOutIcon from "@/assets/icons/link-out.svg";
 
 export default function TransactionSuccessModal() {
   // TODO: Remove these
@@ -40,20 +41,21 @@ export default function TransactionSuccessModal() {
             destinationAddress="0x0000...0000"
           />
         </div>
-
         <TransactionDetail
           label="Network Cost"
           value="--"
           tooltip="Estimated network cost"
         />
         <div className="mx-auto flex w-full items-center justify-center border-t border-gray-600 pb-3 pt-7">
-          <Button variant={"link"} size={"fit"}>
-            <span className="text-green text-sb2">Wormholescan</span>
+          {/* TODO: Fix group hover */}
+          <Button variant={"link"} size={"fit"} className="gap-x-1">
+            <span className="text-green text-sb2">Wormholescan</span>{" "}
+            <LinkOutIcon className="w-3 stroke-green" />
           </Button>
         </div>
       </div>
       <Button variant={"action"} size={"medium"} onClick={closeModal}>
-        Confirm Transaction
+        <span className="uppercase text-sb3">Start a new transaction</span>
       </Button>
     </Modal>
   );

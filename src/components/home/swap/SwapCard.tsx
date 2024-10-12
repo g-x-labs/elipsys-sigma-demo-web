@@ -40,7 +40,7 @@ export default function SwapCard() {
         <TransactionDetail label="Est. Time to Destination" value="--" />
       </CardContent>
       <CardFooter>
-        <Button variant={"action"} onClick={openModal} className="w-full">
+        <Button variant={"action"} onClick={openModal}>
           Enter Amount
         </Button>
       </CardFooter>

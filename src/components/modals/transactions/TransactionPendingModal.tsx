@@ -39,7 +39,6 @@ export default function TransactionPendingModal() {
             destinationAddress="0x0000...0000"
           />
         </div>
-
         <TransactionDetail
           label="Network Cost"
           value="--"

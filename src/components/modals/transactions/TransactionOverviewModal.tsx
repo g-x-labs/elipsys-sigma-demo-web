@@ -38,7 +38,7 @@ export default function TransactionOverviewModal() {
         size={"medium"}
         onClick={startBridgeTransaction}
       >
-        Confirm Transaction
+        <span className="uppercase text-sb3">Confirm Transaction</span>
       </Button>
     </Modal>
   );
