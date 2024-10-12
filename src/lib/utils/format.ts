@@ -9,7 +9,7 @@ export function formatAddress(
 // TODO: Not sure if this function needs to handle string as well or not
 export function formatAsUsd(value: number | undefined | null): string {
   if (value === undefined || value === null) {
-    return "~$-.--";
+    return "--";
   }
 
   return `~${Intl.NumberFormat("en-US", {
