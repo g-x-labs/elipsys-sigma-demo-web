@@ -19,7 +19,7 @@ export default function TransactionOverviewModal() {
       modalId={ModalIds.TransactionOverviewModal}
       title="Transaction Overview"
     >
-      <div className="flex w-full flex-col gap-y-3 rounded-lg border border-gray-700 p-4">
+      <div className="flex w-full flex-col gap-y-3 rounded-lg border border-gray-800 p-4">
         <TokenSummary
           token={tempToken}
           tokenAmount="0.0001"

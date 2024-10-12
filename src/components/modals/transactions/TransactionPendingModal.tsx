@@ -15,7 +15,8 @@ export default function TransactionPendingModal() {
       modalId={ModalIds.TransactionPendingModal}
       title="Transaction Pending"
     >
-      <div className="flex w-full flex-col gap-y-5 rounded-lg border border-gray-700 p-4">
+      {/* TODO: Spinner animation */}
+      <div className="flex w-full flex-col gap-y-5 rounded-lg border border-gray-800 p-4">
         <h2 className="text-gray-400 text-sb3">Entering the Portal</h2>
         <div className="flex w-full flex-col">
           <TokenSummary

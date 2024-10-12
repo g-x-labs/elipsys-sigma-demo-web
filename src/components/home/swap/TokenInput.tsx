@@ -19,7 +19,7 @@ export default function TokenInput(props: TokenInputProps) {
       <div className="flex items-center justify-between p-4">
         {!isReadOnly && (
           <Button size={"small"} onClick={onMaxClick}>
-            Max
+            <span className="text-sb3">Max</span>
           </Button>
         )}
         <Input value={value} disabled={isReadOnly} placeholder="0" />
