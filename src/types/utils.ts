@@ -9,8 +9,8 @@ export enum NetworkId {
 }
 
 export type TokenInfo = {
-  tokenAddress: Address;
-  tokenName: string;
+  address: Address;
+  name: string;
   tokenSymbol: string;
   tokenDecimals: number;
   underlyingTokenDecimals: BigNumber;
@@ -18,8 +18,8 @@ export type TokenInfo = {
 };
 
 export type NetworkInfo = {
-  networkId: NetworkId;
-  networkName: string;
+  id: NetworkId;
+  name: string;
   iconUrl?: string;
   tokens: Record<Address, TokenInfo>;
 };

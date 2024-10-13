@@ -15,7 +15,6 @@ export default function TokenNetworkModal() {
   const [selectedNetwork, setSelectedNetwork] = useAtom(selectedNetworkAtom);
   const [selectedToken, setSelectedToken] = useAtom(selectedTokenAtom);
 
-  // TODO: Consider changing name to network
   const networkList = Object.values(whitelistNetworks);
   const tokenList =
     Object.values(whitelistNetworks[selectedNetwork].tokens) || [];
@@ -30,11 +29,11 @@ export default function TokenNetworkModal() {
             <div>
               {networkList.map((network) => (
                 <NetworkPill
-                  key={network.networkId}
+                  key={network.id}
                   network={network}
-                  isSelected={network.networkId === selectedNetwork}
+                  isSelected={network.id === selectedNetwork}
                   onSelect={() => {
-                    setSelectedNetwork(network.networkId);
+                    setSelectedNetwork(network.id);
                     setSelectedToken(null);
                   }}
                 />
@@ -46,11 +45,11 @@ export default function TokenNetworkModal() {
             <div>
               {tokenList.map((token) => (
                 <TokenPill
-                  key={token.tokenAddress}
+                  key={token.address}
                   token={token}
-                  chain={whitelistNetworks[selectedNetwork]}
-                  isSelected={token.tokenAddress === selectedToken}
-                  onSelect={() => setSelectedToken(token.tokenAddress)}
+                  network={whitelistNetworks[selectedNetwork]}
+                  isSelected={token.address === selectedToken}
+                  onSelect={() => setSelectedToken(token.address)}
                 />
               ))}
             </div>
@@ -83,11 +82,9 @@ function NetworkPill(props: NetworkPillProps) {
         height={32}
         width={32}
         className="flex-shrink-0 rounded-lg"
-        alt={network.networkName ?? "chain"}
+        alt={network.name ?? "network"}
       />
-      <span className="truncate text-gray-400 text-b3">
-        {network.networkName}
-      </span>
+      <span className="truncate text-gray-400 text-b3">{network.name}</span>
     </Button>
   );
 }
@@ -95,13 +92,13 @@ function NetworkPill(props: NetworkPillProps) {
 // TokenPill component
 interface TokenPillProps {
   token: TokenInfo;
-  chain: NetworkInfo;
+  network: NetworkInfo;
   isSelected: boolean;
   onSelect: () => void;
 }
 
 function TokenPill(props: TokenPillProps) {
-  const { token, chain, isSelected, onSelect } = props;
+  const { token, network, isSelected, onSelect } = props;
 
   return (
     <Button
@@ -116,20 +113,18 @@ function TokenPill(props: TokenPillProps) {
           height={36}
           width={36}
           className="flex-shrink-0 rounded-lg"
-          alt={token.tokenName ?? "chain"}
+          alt={token.name ?? "token"}
         />
         <Image
-          src={getChainIcon(chain.iconUrl)}
+          src={getChainIcon(network.iconUrl)}
           height={18}
           width={18}
           className="absolute bottom-0 right-0 rounded-[4px]"
-          alt={chain.networkName ?? "chain"}
+          alt={network.name ?? "network"}
         />
       </div>
       <div className="flex flex-col items-start gap-y-[6px]">
-        <span className="truncate text-gray-600 text-sb3">
-          {token.tokenName}
-        </span>
+        <span className="truncate text-gray-600 text-sb3">{token.name}</span>
         <span className="truncate uppercase text-gray-400 text-b3">
           {token.tokenSymbol}
         </span>
