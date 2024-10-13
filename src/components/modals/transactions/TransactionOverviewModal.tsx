@@ -3,14 +3,16 @@ import { ModalIds } from "@/types/modals";
 import { Button } from "@/components/ui/Button";
 import { useBridgeTransactionHandler } from "@/lib/hooks/useBridgeTransactionHandler";
 import TransactionDetail from "@/components/shared/TransactionDetails";
-import { whitelistChains } from "@/const/whitelist";
-import { ChainId } from "@/types/utils";
+import { whitelistNetworks } from "@/const/whitelist";
+import { NetworkId } from "@/types/utils";
 import TokenSummary from "@/components/shared/TokenSummary";
 
 export default function TransactionOverviewModal() {
   // TODO: Remove these
-  const tempChain = Object.values(whitelistChains)[0];
-  const tempToken = Object.values(whitelistChains[ChainId.Sepolia].tokens)[0];
+  const tempNetwork = Object.values(whitelistNetworks)[0];
+  const tempToken = Object.values(
+    whitelistNetworks[NetworkId.Sepolia].tokens,
+  )[0];
   const tempTokenUsdValue = 1;
 
   const { startBridgeTransaction } = useBridgeTransactionHandler();
@@ -25,7 +27,7 @@ export default function TransactionOverviewModal() {
           token={tempToken}
           tokenAmount="0.0001"
           tokenUSDValue={tempTokenUsdValue}
-          chain={tempChain}
+          network={tempNetwork}
           destinationAddress="0x0000...0000"
         />
         <TransactionDetail

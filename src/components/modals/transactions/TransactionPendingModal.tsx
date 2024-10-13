@@ -1,14 +1,16 @@
 import TokenSummary from "@/components/shared/TokenSummary";
 import TransactionDetail from "@/components/shared/TransactionDetails";
 import Modal from "@/components/ui/Modal";
-import { whitelistChains } from "@/const/whitelist";
+import { whitelistNetworks } from "@/const/whitelist";
 import { ModalIds } from "@/types/modals";
-import { ChainId } from "@/types/utils";
+import { NetworkId } from "@/types/utils";
 
 export default function TransactionPendingModal() {
   // TODO: Remove these
-  const tempChain = Object.values(whitelistChains)[0];
-  const tempToken = Object.values(whitelistChains[ChainId.Sepolia].tokens)[0];
+  const tempNetwork = Object.values(whitelistNetworks)[0];
+  const tempToken = Object.values(
+    whitelistNetworks[NetworkId.Sepolia].tokens,
+  )[0];
   const tempTokenUsdValue = 1;
 
   return (
@@ -24,7 +26,7 @@ export default function TransactionPendingModal() {
             token={tempToken}
             tokenAmount="0.0001"
             tokenUSDValue={tempTokenUsdValue}
-            chain={tempChain}
+            network={tempNetwork}
             destinationAddress="0x0000...0000"
           />
           <div className="flex h-[60px] flex-row items-center gap-x-1">
@@ -37,7 +39,7 @@ export default function TransactionPendingModal() {
             token={tempToken}
             tokenAmount="0.0001"
             tokenUSDValue={tempTokenUsdValue}
-            chain={tempChain}
+            network={tempNetwork}
             destinationAddress="0x0000...0000"
           />
         </div>

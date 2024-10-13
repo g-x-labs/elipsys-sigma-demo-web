@@ -2,16 +2,18 @@ import TokenSummary from "@/components/shared/TokenSummary";
 import TransactionDetail from "@/components/shared/TransactionDetails";
 import { Button } from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
-import { whitelistChains } from "@/const/whitelist";
+import { whitelistNetworks } from "@/const/whitelist";
 import { useModal } from "@/lib/hooks/useModalAtom";
 import { ModalIds } from "@/types/modals";
-import { ChainId } from "@/types/utils";
+import { NetworkId } from "@/types/utils";
 
 // TODO: Confirm what this is suppose to display
 export default function TransactionFailModal() {
   // TODO: Remove these
-  const tempChain = Object.values(whitelistChains)[0];
-  const tempToken = Object.values(whitelistChains[ChainId.Sepolia].tokens)[0];
+  const tempNetwork = Object.values(whitelistNetworks)[0];
+  const tempToken = Object.values(
+    whitelistNetworks[NetworkId.Sepolia].tokens,
+  )[0];
   const tempTokenUsdValue = 1;
 
   const { closeModal } = useModal(ModalIds.TransactionSuccessModal);
@@ -23,7 +25,7 @@ export default function TransactionFailModal() {
           token={tempToken}
           tokenAmount="0.0001"
           tokenUSDValue={tempTokenUsdValue}
-          chain={tempChain}
+          network={tempNetwork}
           destinationAddress="0x0000...0000"
         />
         <TransactionDetail

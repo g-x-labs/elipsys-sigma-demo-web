@@ -10,27 +10,25 @@ import { whitelistNetworks } from "@/const/whitelist";
 import Image from "next/image";
 import { NetworkInfo, TokenInfo } from "@/types/utils";
 import { getNetworkIcon, getTokenIcon } from "@/lib/utils/iconUtils";
-import { ModalIds } from "@/types/modals";
 
 export default function TokenNetworkModal() {
   const [selectedNetwork, setSelectedNetwork] = useAtom(selectedNetworkAtom);
   const [selectedToken, setSelectedToken] = useAtom(selectedTokenAtom);
 
-  // TODO: Consider changing name to network
   const networkList = Object.values(whitelistNetworks);
   const tokenList =
     Object.values(whitelistNetworks[selectedNetwork].tokens) || [];
 
   return (
-    <Modal modalId={ModalIds.TokenNetworkModal} title="Select">
+    <Modal modalId="tokenNetworkModal" title="Select">
       <div className="flex flex-col gap-y-2">
         <SearchBar placeholder="Search for tokens" />
-        <div className="flex h-96 w-full border-t border-gray-800">
+        <div className="flex h-96 w-full border-t border-gray-800 pb-4">
           <div className="flex w-[172px] flex-col gap-y-3 overflow-y-auto border-r border-gray-800 pr-3">
             <h3 className="pt-4 text-gray-400 text-sb3">Networks</h3>
             <div>
               {networkList.map((network) => (
-                <ChainPill
+                <NetworkPill
                   key={network.id}
                   network={network}
                   isSelected={network.id === selectedNetwork}
@@ -62,14 +60,14 @@ export default function TokenNetworkModal() {
   );
 }
 
-// ChainPill component
-interface ChainPillProps {
+// NetworkPill component
+interface NetworkPillProps {
   network: NetworkInfo;
   isSelected: boolean;
   onSelect: () => void;
 }
 
-function ChainPill(props: ChainPillProps) {
+function NetworkPill(props: NetworkPillProps) {
   const { network, isSelected, onSelect } = props;
 
   return (
@@ -122,7 +120,7 @@ function TokenPill(props: TokenPillProps) {
           height={18}
           width={18}
           className="absolute bottom-0 right-0 rounded-[4px]"
-          alt={network.name ?? "chain"}
+          alt={network.name ?? "network"}
         />
       </div>
       <div className="flex flex-col items-start gap-y-[6px]">
