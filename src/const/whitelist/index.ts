@@ -17,8 +17,8 @@ export const whitelistNetworks: Record<NetworkId, NetworkInfo> = {
     tokens: optimismSepolia,
   },
   168587773: {
-    chainId: ChainId.BlastSepolia,
-    chainName: "Blast Sepolia",
+    id: NetworkId.BlastSepolia,
+    name: "Blast Sepolia",
     iconUrl: "assets/networks/optimism.svg",
     tokens: {},
   },

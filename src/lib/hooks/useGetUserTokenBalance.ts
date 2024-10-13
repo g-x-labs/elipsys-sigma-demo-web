@@ -3,14 +3,14 @@ import { Address } from "viem";
 import { useBalance, useReadContract } from "wagmi";
 import { ierc20Abi } from "@/contract/abi";
 import BigNumber from "bignumber.js";
-import { ChainId } from "@/types/utils";
+import { NetworkId } from "@/types/utils";
 /**
  * Description: Retrieves the balance of a specified ERC-20 token for a given address.
  *
  * @function
  * @param {Address} tokenAddress - The address for ERC-20 token
  * @param {Address} address - The wallet address to check the balance for
- * @param {ChainId} chainId - The chain id to check the balance for
+ * @param {chainId} networkId - The chain id to check the balance for
  * @returns {BigNumber | null} - The token balance
  */
 
@@ -21,7 +21,7 @@ export default function useGetUserTokenBalance({
 }: {
   tokenAddress: Address | undefined;
   address: Address | undefined;
-  chainId: ChainId;
+  chainId: NetworkId;
 }) {
   // INFO: fetch native eth token balance
   const balance = useBalance({
