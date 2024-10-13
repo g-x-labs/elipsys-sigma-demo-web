@@ -12,6 +12,10 @@ export function formatAsUsd(value: number | undefined | null): string {
     return "--";
   }
 
+  if (value < 0.01 && value > 0) {
+    return "~<$0.01";
+  }
+
   return `~${Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
