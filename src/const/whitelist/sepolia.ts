@@ -12,7 +12,7 @@ export const sepolia: Record<Address, TokenInfo> = {
     name: "Mock Token",
     symbol: "MOCK",
     decimals: 18,
-    underlyingTokenDecimals: BigNumber(1e18),
+    underlyingDecimals: BigNumber(1e18),
     iconUrl: "assets/tokens/mock-token.svg",
   },
   // TODO: Replace with fake token
@@ -21,7 +21,7 @@ export const sepolia: Record<Address, TokenInfo> = {
     name: "Fake Token",
     symbol: "FAKE",
     decimals: 18,
-    underlyingTokenDecimals: BigNumber(1e18),
+    underlyingDecimals: BigNumber(1e18),
     iconUrl: "assets/tokens/fake-token.svg",
   },
   "0xe90a57A45F1Eae578F5aec8eed5bA8Fc6F55eF65": {
@@ -29,7 +29,7 @@ export const sepolia: Record<Address, TokenInfo> = {
     name: "Tether USD",
     symbol: "USDT",
     decimals: 18,
-    underlyingTokenDecimals: BigNumber(1e18),
+    underlyingDecimals: BigNumber(1e18),
     iconUrl: "assets/tokens/usdt.svg",
   },
   "0xd98B590ebE0a3eD8C144170bA4122D402182976f": {
@@ -37,7 +37,7 @@ export const sepolia: Record<Address, TokenInfo> = {
     name: "USD Coin",
     symbol: "USDC",
     decimals: 18,
-    underlyingTokenDecimals: BigNumber(1e18),
+    underlyingDecimals: BigNumber(1e18),
     iconUrl: "assets/tokens/usdc.svg",
   },
 };

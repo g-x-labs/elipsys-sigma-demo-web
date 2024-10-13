@@ -11,7 +11,7 @@ export const optimismSepolia: Record<Address, TokenInfo> = {
     name: "Tether USD",
     symbol: "USDT",
     decimals: 18,
-    underlyingTokenDecimals: BigNumber(1e18),
+    underlyingDecimals: BigNumber(1e18),
     iconUrl: "assets/tokens/usdt.svg",
   },
 };

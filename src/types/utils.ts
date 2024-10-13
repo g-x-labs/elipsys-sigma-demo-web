@@ -13,7 +13,7 @@ export type TokenInfo = {
   name: string;
   symbol: string;
   decimals: number;
-  underlyingTokenDecimals: BigNumber;
+  underlyingDecimals: BigNumber;
   iconUrl?: string;
 };
 
