@@ -39,7 +39,7 @@ export default function TokenSummary(props: TokenSummaryProps) {
       <div className="flex flex-col items-start gap-y-[6px]">
         <span className="truncate text-gray-400 text-b2">
           {tokenAmount}
-          <span className="truncate uppercase">{token.tokenSymbol}</span>
+          <span className="truncate uppercase">{token.symbol}</span>
         </span>
         <span className="truncate text-gray-400 text-sb3">
           {`(${formatAsUsd(tokenUSDValue)}) ${network.name} ${formatAddress(destinationAddress)}`}

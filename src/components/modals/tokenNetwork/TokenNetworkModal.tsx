@@ -128,7 +128,7 @@ function TokenPill(props: TokenPillProps) {
       <div className="flex flex-col items-start gap-y-[6px]">
         <span className="truncate text-gray-600 text-sb3">{token.name}</span>
         <span className="truncate uppercase text-gray-400 text-b3">
-          {token.tokenSymbol}
+          {token.symbol}
         </span>
       </div>
     </Button>
