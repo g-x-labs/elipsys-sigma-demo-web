@@ -22,12 +22,12 @@ export default function SwapCard() {
       <CardHeader className="items-center gap-y-4">
         <div className="flex w-full flex-col gap-y-2">
           <BridgeWalletConnect />
-          <TokenInput tokenBalance={BigInt(12332112564)} />
+          <TokenInput />
         </div>
         {/* TODO: Wrap button on icon */}
         <SwapIcon className="w-5 fill-gray-200" />
         <div className="flex w-full flex-col gap-y-2">
-          <TokenInput isReadOnly usdValue={null} />
+          <TokenInput isReadOnly />
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-y-2">

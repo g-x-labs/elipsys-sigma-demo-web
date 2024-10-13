@@ -12,15 +12,15 @@ import { useAtom } from "jotai";
 import { tokenInputAtom } from "@/atoms/inputAtom";
 interface TokenInputProps {
   isReadOnly?: boolean;
-  // TODO: Not sure how these values are going to be passed in, so leaving as props for now.
-  // They might be coming from Jotai store.
-  usdValue?: number | undefined | null;
-  tokenBalance?: bigint | undefined | null;
   onMaxClick?: () => void;
 }
 
 export default function TokenInput(props: TokenInputProps) {
-  const { isReadOnly, usdValue, tokenBalance, onMaxClick } = props;
+  // TODO: Not sure how these values are going to be passed in, so leaving as props for now.
+  const usdValue = null;
+  const tokenBalance = null;
+
+  const { isReadOnly, onMaxClick } = props;
 
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
 
