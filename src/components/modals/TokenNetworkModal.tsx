@@ -6,9 +6,9 @@ import {
   selectedTokenAtom,
 } from "@/atoms/tokenNetworkAtom";
 import SearchBar from "@/components/ui/Search";
-import { whitelistChains } from "@/const/whitelist";
+import { whitelistNetworks } from "@/const/whitelist";
 import Image from "next/image";
-import { ChainInfo, TokenInfo } from "@/types/utils";
+import { NetworkInfo, TokenInfo } from "@/types/utils";
 import { getChainIcon, getTokenIcon } from "@/lib/utils/iconUtils";
 
 export default function TokenNetworkModal() {
@@ -16,9 +16,9 @@ export default function TokenNetworkModal() {
   const [selectedToken, setSelectedToken] = useAtom(selectedTokenAtom);
 
   // TODO: Consider changing name to network
-  const chainList = Object.values(whitelistChains);
+  const networkList = Object.values(whitelistNetworks);
   const tokenList =
-    Object.values(whitelistChains[selectedNetwork].tokens) || [];
+    Object.values(whitelistNetworks[selectedNetwork].tokens) || [];
 
   return (
     <Modal modalId="tokenNetworkModal" title="Select">
@@ -28,13 +28,13 @@ export default function TokenNetworkModal() {
           <div className="flex w-[172px] flex-col gap-y-3 overflow-y-auto border-r border-gray-800 pr-3">
             <h3 className="pt-4 text-gray-400 text-sb3">Networks</h3>
             <div>
-              {chainList.map((chain) => (
-                <ChainPill
-                  key={chain.chainId}
-                  chain={chain}
-                  isSelected={chain.chainId === selectedNetwork}
+              {networkList.map((network) => (
+                <NetworkPill
+                  key={network.networkId}
+                  network={network}
+                  isSelected={network.networkId === selectedNetwork}
                   onSelect={() => {
-                    setSelectedNetwork(chain.chainId);
+                    setSelectedNetwork(network.networkId);
                     setSelectedToken(null);
                   }}
                 />
@@ -48,7 +48,7 @@ export default function TokenNetworkModal() {
                 <TokenPill
                   key={token.tokenAddress}
                   token={token}
-                  chain={whitelistChains[selectedNetwork]}
+                  chain={whitelistNetworks[selectedNetwork]}
                   isSelected={token.tokenAddress === selectedToken}
                   onSelect={() => setSelectedToken(token.tokenAddress)}
                 />
@@ -61,15 +61,15 @@ export default function TokenNetworkModal() {
   );
 }
 
-// ChainPill component
-interface ChainPillProps {
-  chain: ChainInfo;
+// NetworkPill component
+interface NetworkPillProps {
+  network: NetworkInfo;
   isSelected: boolean;
   onSelect: () => void;
 }
 
-function ChainPill(props: ChainPillProps) {
-  const { chain, isSelected, onSelect } = props;
+function NetworkPill(props: NetworkPillProps) {
+  const { network, isSelected, onSelect } = props;
 
   return (
     <Button
@@ -79,13 +79,15 @@ function ChainPill(props: ChainPillProps) {
       className="flex h-[46px] w-full flex-row items-center justify-start gap-x-2 px-3 py-2"
     >
       <Image
-        src={getChainIcon(chain.iconUrl)}
+        src={getChainIcon(network.iconUrl)}
         height={32}
         width={32}
         className="flex-shrink-0 rounded-lg"
-        alt={chain.chainName ?? "chain"}
+        alt={network.networkName ?? "chain"}
       />
-      <span className="truncate text-gray-400 text-b3">{chain.chainName}</span>
+      <span className="truncate text-gray-400 text-b3">
+        {network.networkName}
+      </span>
     </Button>
   );
 }
@@ -93,7 +95,7 @@ function ChainPill(props: ChainPillProps) {
 // TokenPill component
 interface TokenPillProps {
   token: TokenInfo;
-  chain: ChainInfo;
+  chain: NetworkInfo;
   isSelected: boolean;
   onSelect: () => void;
 }
@@ -121,7 +123,7 @@ function TokenPill(props: TokenPillProps) {
           height={18}
           width={18}
           className="absolute bottom-0 right-0 rounded-[4px]"
-          alt={chain.chainName ?? "chain"}
+          alt={chain.networkName ?? "chain"}
         />
       </div>
       <div className="flex flex-col items-start gap-y-[6px]">
