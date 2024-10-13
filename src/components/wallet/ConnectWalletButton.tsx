@@ -17,9 +17,7 @@ export const ConnectWalletButton = () => {
             aria-hidden={!ready}
             onClick={openConnectModal}
           >
-            <span className="text-gray-600 text-sb3 group-hover:text-gray-50">
-              Connect
-            </span>
+            <span className="text-gray-600 text-sb2">Connect</span>
           </Button>
         );
       }}
