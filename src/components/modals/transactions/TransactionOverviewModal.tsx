@@ -6,6 +6,9 @@ import TransactionDetail from "@/components/shared/TransactionDetails";
 import { whitelistNetworks } from "@/const/whitelist";
 import { NetworkId } from "@/types/utils";
 import TokenSummary from "@/components/shared/TokenSummary";
+import BigNumber from "bignumber.js";
+
+BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 export default function TransactionOverviewModal() {
   // TODO: Remove these
@@ -14,6 +17,7 @@ export default function TransactionOverviewModal() {
     whitelistNetworks[NetworkId.Sepolia].tokens,
   )[0];
   const tempTokenUsdValue = 1;
+  const tempTokenAmount = BigNumber(10000000000000000);
 
   const { startBridgeTransaction } = useBridgeTransactionHandler();
 
@@ -25,7 +29,7 @@ export default function TransactionOverviewModal() {
       <div className="flex w-full flex-col gap-y-3 rounded-lg border border-gray-800 p-4">
         <TokenSummary
           token={tempToken}
-          tokenAmount="0.0001"
+          tokenAmount={tempTokenAmount}
           tokenUSDValue={tempTokenUsdValue}
           network={tempNetwork}
           destinationAddress="0x0000...0000"

@@ -6,6 +6,9 @@ import { whitelistNetworks } from "@/const/whitelist";
 import { useModal } from "@/lib/hooks/useModalAtom";
 import { ModalIds } from "@/types/modals";
 import { NetworkId } from "@/types/utils";
+import BigNumber from "bignumber.js";
+
+BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 // TODO: Confirm what this is suppose to display
 export default function TransactionFailModal() {
@@ -15,6 +18,7 @@ export default function TransactionFailModal() {
     whitelistNetworks[NetworkId.Sepolia].tokens,
   )[0];
   const tempTokenUsdValue = 1;
+  const tempTokenAmount = BigNumber(10000000000000000);
 
   const { closeModal } = useModal(ModalIds.TransactionSuccessModal);
 
@@ -23,7 +27,7 @@ export default function TransactionFailModal() {
       <div className="flex w-full flex-col gap-y-3 rounded-lg border border-gray-700 p-4">
         <TokenSummary
           token={tempToken}
-          tokenAmount="0.0001"
+          tokenAmount={tempTokenAmount}
           tokenUSDValue={tempTokenUsdValue}
           network={tempNetwork}
           destinationAddress="0x0000...0000"

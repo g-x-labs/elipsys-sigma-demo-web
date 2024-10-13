@@ -2,13 +2,20 @@ import { NetworkInfo, TokenInfo } from "@/types/utils";
 import Image from "next/image";
 import { getNetworkIcon, getTokenIcon } from "@/lib/utils/iconUtils";
 import { Address } from "viem";
-import { formatAddress, formatAsUsd } from "@/lib/utils/format";
+import {
+  formatAddress,
+  formatAsUsd,
+  formatTokenAmount,
+} from "@/lib/utils/format";
+import BigNumber from "bignumber.js";
+
+BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 // TODO: Excessive props for now, not sure what is actually needed
 interface TokenSummaryProps {
   token: TokenInfo;
   // TODO: Not sure if this is suppose to be BigNumber
-  tokenAmount: string;
+  tokenAmount: BigNumber;
   tokenUSDValue: number;
   network: NetworkInfo;
   destinationAddress: Address;
@@ -38,7 +45,7 @@ export default function TokenSummary(props: TokenSummaryProps) {
       </div>
       <div className="flex flex-col items-start gap-y-[6px]">
         <span className="truncate text-gray-400 text-b2">
-          {tokenAmount}
+          {formatTokenAmount(tokenAmount)}{" "}
           <span className="truncate uppercase">{token.symbol}</span>
         </span>
         <span className="truncate text-gray-400 text-sb3">

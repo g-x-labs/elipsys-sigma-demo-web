@@ -1,3 +1,7 @@
+import BigNumber from "bignumber.js";
+
+BigNumber.config({ EXPONENTIAL_AT: 1e9 });
+
 export function formatAddress(
   address: string,
   starting = 5,
@@ -48,7 +52,7 @@ export function formatEstimateTime(seconds: number): string {
   return `~${formattedMins}:${formattedSecs} mins`;
 }
 
-export function formatTokenAmount(value: bigint | undefined | null): string {
+export function formatTokenAmount(value: BigNumber | undefined | null): string {
   if (value === undefined || value === null) {
     return "--";
   }
@@ -57,9 +61,9 @@ export function formatTokenAmount(value: bigint | undefined | null): string {
 
   const decimals = 18; // Ethereum Standard
   const precision = 8; // Up to 8 decimals to show
-  const divisor = BigInt(10 ** decimals);
+  const divisor = BigNumber(10 ** decimals);
 
-  const formattedValue = Number(value) / Number(divisor);
+  const formattedValue = Number(value.div(divisor));
 
   // TODO: Reconsider if this should show suffix or show exponential
   // TODO: Also this can be its own little function
