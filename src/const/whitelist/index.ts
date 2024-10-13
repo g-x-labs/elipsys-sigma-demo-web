@@ -16,6 +16,12 @@ export const whitelistChains: Record<ChainId, ChainInfo> = {
     iconUrl: "assets/networks/optimism.svg",
     tokens: optimismSepolia,
   },
+  168587773: {
+    chainId: ChainId.BlastSepolia,
+    chainName: "Blast Sepolia",
+    iconUrl: "assets/networks/optimism.svg",
+    tokens: {},
+  },
 };
 
 export function getTokenInfo(
