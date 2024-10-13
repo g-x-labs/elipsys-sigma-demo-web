@@ -16,7 +16,6 @@ export default function TokenNetworkModal() {
   const [selectedNetwork, setSelectedNetwork] = useAtom(selectedNetworkAtom);
   const [selectedToken, setSelectedToken] = useAtom(selectedTokenAtom);
 
-  // TODO: Consider changing name to network
   const networkList = Object.values(whitelistNetworks);
   const tokenList =
     Object.values(whitelistNetworks[selectedNetwork].tokens) || [];
@@ -30,7 +29,7 @@ export default function TokenNetworkModal() {
             <h3 className="pt-4 text-gray-400 text-sb3">Networks</h3>
             <div>
               {networkList.map((network) => (
-                <ChainPill
+                <NetworkPill
                   key={network.id}
                   network={network}
                   isSelected={network.id === selectedNetwork}
@@ -62,14 +61,14 @@ export default function TokenNetworkModal() {
   );
 }
 
-// ChainPill component
-interface ChainPillProps {
+// NetworkPill component
+interface NetworkPillProps {
   network: NetworkInfo;
   isSelected: boolean;
   onSelect: () => void;
 }
 
-function ChainPill(props: ChainPillProps) {
+function NetworkPill(props: NetworkPillProps) {
   const { network, isSelected, onSelect } = props;
 
   return (
@@ -122,7 +121,7 @@ function TokenPill(props: TokenPillProps) {
           height={18}
           width={18}
           className="absolute bottom-0 right-0 rounded-[4px]"
-          alt={network.name ?? "chain"}
+          alt={network.name ?? "network"}
         />
       </div>
       <div className="flex flex-col items-start gap-y-[6px]">
