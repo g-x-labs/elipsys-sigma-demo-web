@@ -5,7 +5,7 @@ import { Address } from "viem";
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 // TODO: replace with actual token info
-export const sepolia: Record<Address, TokenInfo> = {
+export const sepoliaWhitelist: Record<Address, TokenInfo> = {
   // TODO: Replace with mock token
   "0x1234567890abcdef1234567890abcdef12345678": {
     address: "0x1234567890abcdef1234567890abcdef12345678",
