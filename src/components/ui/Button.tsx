@@ -9,14 +9,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
+        action:
           "bg-gray-800 hover:bg-gray-700 disabled:text-gray-600 rounded-lg active:bg-gray-700",
         link: "text-gray-600 underline-offset-4 hover:underline",
         text: "text-gray-600 hover:text-gray-200",
-        dropdown: "bg-black-800 rounded-lg",
         transparent:
           "bg-transparent hover:bg-black-700 data-[active=true]:bg-black-700 rounded-lg",
         // INFO: One-offs goes here
+        dropdown: "bg-black-800 rounded-lg",
         tokenSelector:
           "bg-black-700 hover:bg-gray-800 flex rounded-tl-[4px] border-r border-gray-800",
         networkSelector:
@@ -25,14 +25,15 @@ const buttonVariants = cva(
       size: {
         default: "h-[56px] px-5 py-4",
         large: "h-[76px] p-4",
+        medium: "h-[44px] px-3 py-4",
         dropdown: "h-[44px] px-4 py-3",
-        small: "h-[26px] rounded-[4px] px-3 py-2 text-sb3",
+        small: "h-[26px] rounded-[4px] px-3 py-2",
         icon: "h-10 w-10",
         fit: "h-auto p-0",
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "action",
       size: "default",
     },
   },

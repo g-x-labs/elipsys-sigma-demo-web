@@ -1,18 +1,18 @@
-import { ChainId, ChainInfo, TokenInfo } from "@/types/utils";
+import { NetworkId, NetworkInfo, TokenInfo } from "@/types/utils";
 import { optimismSepolia } from "./optimismSepolia";
 import { sepolia } from "./sepolia";
 import { Address } from "viem";
 
-export const whitelistChains: Record<ChainId, ChainInfo> = {
+export const whitelistNetworks: Record<NetworkId, NetworkInfo> = {
   11155111: {
-    chainId: ChainId.Sepolia,
-    chainName: "Sepolia",
+    id: NetworkId.Sepolia,
+    name: "Sepolia",
     iconUrl: "assets/networks/ethereum.svg",
     tokens: sepolia,
   },
   11155420: {
-    chainId: ChainId.OptimismSepolia,
-    chainName: "Optimism Sepolia",
+    id: NetworkId.OptimismSepolia,
+    name: "Optimism Sepolia",
     iconUrl: "assets/networks/optimism.svg",
     tokens: optimismSepolia,
   },
@@ -25,9 +25,9 @@ export const whitelistChains: Record<ChainId, ChainInfo> = {
 };
 
 export function getTokenInfo(
-  chainId: ChainId,
+  id: NetworkId,
   address: Address,
 ): TokenInfo | undefined {
-  const chainInfo = whitelistChains[chainId];
+  const chainInfo = whitelistNetworks[id];
   return chainInfo.tokens[address];
 }
