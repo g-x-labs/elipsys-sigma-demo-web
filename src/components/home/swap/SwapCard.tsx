@@ -27,17 +27,17 @@ export default function SwapCard() {
         {/* TODO: Wrap button on icon */}
         <SwapIcon className="w-5 fill-gray-200" />
         <div className="flex w-full flex-col gap-y-2">
-          <TokenInput isReadOnly value="-" />
+          <TokenInput isReadOnly />
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-y-2">
         <TransactionDetail
           label="Est. Cost"
-          value="--"
-          secondaryValue="--"
+          value={null}
+          secondaryValue={null}
           tooltip="Estimated cost of transaction"
         />
-        <TransactionDetail label="Est. Time to Destination" value="--" />
+        <TransactionDetail label="Est. Time to Destination" value={null} />
       </CardContent>
       <CardFooter>
         <Button variant={"action"} onClick={openModal} className="w-full">

@@ -7,6 +7,9 @@ import { whitelistNetworks } from "@/const/whitelist";
 import { NetworkId } from "@/types/utils";
 import TokenSummary from "@/components/shared/TokenSummary";
 import LinkOutIcon from "@/assets/icons/link-out.svg";
+import BigNumber from "bignumber.js";
+
+BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 export default function TransactionSuccessModal() {
   // TODO: Remove these
@@ -15,6 +18,7 @@ export default function TransactionSuccessModal() {
     whitelistNetworks[NetworkId.Sepolia].tokens,
   )[0];
   const tempTokenUsdValue = 1;
+  const tempTokenAmount = BigNumber(10000000000000000);
 
   const { closeModal } = useModal(ModalIds.TransactionSuccessModal);
 
@@ -28,7 +32,7 @@ export default function TransactionSuccessModal() {
         <div className="flex w-full flex-col">
           <TokenSummary
             token={tempToken}
-            tokenAmount="0.0001"
+            tokenAmount={tempTokenAmount}
             tokenUSDValue={tempTokenUsdValue}
             network={tempNetwork}
             destinationAddress="0x0000...0000"
@@ -38,7 +42,7 @@ export default function TransactionSuccessModal() {
           </div>
           <TokenSummary
             token={tempToken}
-            tokenAmount="0.0001"
+            tokenAmount={tempTokenAmount}
             tokenUSDValue={tempTokenUsdValue}
             network={tempNetwork}
             destinationAddress="0x0000...0000"
@@ -46,7 +50,7 @@ export default function TransactionSuccessModal() {
         </div>
         <TransactionDetail
           label="Network Cost"
-          value="--"
+          value={null}
           tooltip="Estimated network cost"
         />
         <div className="mx-auto flex w-full items-center justify-center border-t border-gray-600 pb-3 pt-7">

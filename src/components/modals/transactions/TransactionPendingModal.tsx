@@ -4,6 +4,9 @@ import Modal from "@/components/ui/Modal";
 import { whitelistNetworks } from "@/const/whitelist";
 import { ModalIds } from "@/types/modals";
 import { NetworkId } from "@/types/utils";
+import BigNumber from "bignumber.js";
+
+BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 export default function TransactionPendingModal() {
   // TODO: Remove these
@@ -12,6 +15,7 @@ export default function TransactionPendingModal() {
     whitelistNetworks[NetworkId.Sepolia].tokens,
   )[0];
   const tempTokenUsdValue = 1;
+  const tempTokenAmount = BigNumber(10000000000000000);
 
   return (
     <Modal
@@ -24,7 +28,7 @@ export default function TransactionPendingModal() {
         <div className="flex w-full flex-col">
           <TokenSummary
             token={tempToken}
-            tokenAmount="0.0001"
+            tokenAmount={tempTokenAmount}
             tokenUSDValue={tempTokenUsdValue}
             network={tempNetwork}
             destinationAddress="0x0000...0000"
@@ -37,7 +41,7 @@ export default function TransactionPendingModal() {
           </div>
           <TokenSummary
             token={tempToken}
-            tokenAmount="0.0001"
+            tokenAmount={tempTokenAmount}
             tokenUSDValue={tempTokenUsdValue}
             network={tempNetwork}
             destinationAddress="0x0000...0000"
@@ -45,7 +49,7 @@ export default function TransactionPendingModal() {
         </div>
         <TransactionDetail
           label="Network Cost"
-          value="--"
+          value={null}
           tooltip="Estimated network cost"
         />
       </div>
