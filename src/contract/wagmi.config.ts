@@ -9,14 +9,14 @@ import {
   walletConnectWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 import { http } from "viem";
-import { optimismSepolia, sepolia } from "wagmi/chains";
+import { blastSepolia, optimismSepolia, sepolia } from "wagmi/chains";
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID ?? "";
 
 export const wagmiConfig = getDefaultConfig({
   appName: "Elipsys App",
   projectId: projectId,
-  chains: [sepolia, optimismSepolia],
+  chains: [sepolia, optimismSepolia, blastSepolia],
   wallets: [
     {
       groupName: "Recommended",
@@ -33,10 +33,9 @@ export const wagmiConfig = getDefaultConfig({
   ],
 
   transports: {
-    transports: {
-      [sepolia.id]: http("https://ethereum-sepolia-rpc.publicnode.com"),
-      [optimismSepolia.id]: http("https://sepolia.optimism.io"),
-    },
+    [sepolia.id]: http("https://ethereum-sepolia-rpc.publicnode.com"),
+    [optimismSepolia.id]: http("https://sepolia.optimism.io"),
+    [blastSepolia.id]: http("https://sepolia.blast.io"),
   },
   ssr: true,
 });
