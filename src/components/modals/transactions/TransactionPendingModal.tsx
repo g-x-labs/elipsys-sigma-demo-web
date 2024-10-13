@@ -43,7 +43,7 @@ export default function TransactionPendingModal() {
         </div>
         <TransactionDetail
           label="Network Cost"
-          value="--"
+          value={null}
           tooltip="Estimated network cost"
         />
       </div>

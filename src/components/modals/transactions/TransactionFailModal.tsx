@@ -28,7 +28,7 @@ export default function TransactionFailModal() {
         />
         <TransactionDetail
           label="Network Cost"
-          value="--"
+          value={null}
           tooltip="Estimated network cost"
         />
       </div>

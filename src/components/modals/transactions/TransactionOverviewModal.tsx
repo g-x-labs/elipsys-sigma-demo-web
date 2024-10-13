@@ -30,7 +30,7 @@ export default function TransactionOverviewModal() {
         />
         <TransactionDetail
           label="Network Cost"
-          value="--"
+          value={null}
           tooltip="Estimated network cost"
         />
       </div>

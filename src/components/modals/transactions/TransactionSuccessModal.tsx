@@ -44,7 +44,7 @@ export default function TransactionSuccessModal() {
         </div>
         <TransactionDetail
           label="Network Cost"
-          value="--"
+          value={null}
           tooltip="Estimated network cost"
         />
         <div className="mx-auto flex w-full items-center justify-center border-t border-gray-600 pb-3 pt-7">

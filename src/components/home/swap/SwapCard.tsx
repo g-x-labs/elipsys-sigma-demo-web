@@ -33,11 +33,11 @@ export default function SwapCard() {
       <CardContent className="flex flex-col gap-y-2">
         <TransactionDetail
           label="Est. Cost"
-          value="--"
-          secondaryValue="--"
+          value={null}
+          secondaryValue={null}
           tooltip="Estimated cost of transaction"
         />
-        <TransactionDetail label="Est. Time to Destination" value="--" />
+        <TransactionDetail label="Est. Time to Destination" value={null} />
       </CardContent>
       <CardFooter>
         <Button variant={"action"} onClick={openModal} className="w-full">
