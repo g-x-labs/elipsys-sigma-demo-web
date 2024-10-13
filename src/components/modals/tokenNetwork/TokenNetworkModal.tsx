@@ -24,7 +24,7 @@ export default function TokenNetworkModal() {
     <Modal modalId={ModalIds.TokenNetworkModal} title="Select">
       <div className="flex flex-col gap-y-2">
         <SearchBar placeholder="Search for tokens" />
-        <div className="flex h-96 w-full border-t border-gray-800 pb-4">
+        <div className="flex h-96 w-full border-t border-gray-800">
           <div className="flex w-[172px] flex-col gap-y-3 overflow-y-auto border-r border-gray-800 pr-3">
             <h3 className="pt-4 text-gray-400 text-sb3">Networks</h3>
             <div>
