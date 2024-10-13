@@ -3,15 +3,17 @@ import Modal from "@/components/ui/Modal";
 import { ModalIds } from "@/types/modals";
 import { Button } from "@/components/ui/Button";
 import { useModal } from "@/lib/hooks/useModalAtom";
-import { whitelistChains } from "@/const/whitelist";
-import { ChainId } from "@/types/utils";
+import { whitelistNetworks } from "@/const/whitelist";
+import { NetworkId } from "@/types/utils";
 import TokenSummary from "@/components/shared/TokenSummary";
 import LinkOutIcon from "@/assets/icons/link-out.svg";
 
 export default function TransactionSuccessModal() {
   // TODO: Remove these
-  const tempChain = Object.values(whitelistChains)[0];
-  const tempToken = Object.values(whitelistChains[ChainId.Sepolia].tokens)[0];
+  const tempNetwork = Object.values(whitelistNetworks)[0];
+  const tempToken = Object.values(
+    whitelistNetworks[NetworkId.Sepolia].tokens,
+  )[0];
   const tempTokenUsdValue = 1;
 
   const { closeModal } = useModal(ModalIds.TransactionSuccessModal);
@@ -28,7 +30,7 @@ export default function TransactionSuccessModal() {
             token={tempToken}
             tokenAmount="0.0001"
             tokenUSDValue={tempTokenUsdValue}
-            chain={tempChain}
+            network={tempNetwork}
             destinationAddress="0x0000...0000"
           />
           <div className="flex h-[40px] flex-row items-center gap-x-1">
@@ -38,7 +40,7 @@ export default function TransactionSuccessModal() {
             token={tempToken}
             tokenAmount="0.0001"
             tokenUSDValue={tempTokenUsdValue}
-            chain={tempChain}
+            network={tempNetwork}
             destinationAddress="0x0000...0000"
           />
         </div>

@@ -3,23 +3,23 @@ import { Address } from "viem";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
-export enum ChainId {
+export enum NetworkId {
   Sepolia = 11155111,
   OptimismSepolia = 11155420,
 }
 
 export type TokenInfo = {
-  tokenAddress: Address;
-  tokenName: string;
-  tokenSymbol: string;
-  tokenDecimals: number;
-  underlyingTokenDecimals: BigNumber;
+  address: Address;
+  name: string;
+  symbol: string;
+  decimals: number;
+  underlyingDecimals: BigNumber;
   iconUrl?: string;
 };
 
-export type ChainInfo = {
-  chainId: ChainId;
-  chainName: string;
+export type NetworkInfo = {
+  id: NetworkId;
+  name: string;
   iconUrl?: string;
   tokens: Record<Address, TokenInfo>;
 };
