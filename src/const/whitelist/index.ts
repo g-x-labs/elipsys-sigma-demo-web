@@ -2,6 +2,7 @@ import { NetworkId, NetworkInfo, TokenInfo } from "@/types/utils";
 import { optimismSepolia } from "./optimismSepolia";
 import { sepolia } from "./sepolia";
 import { Address } from "viem";
+import { blastSepolia } from "viem/chains";
 
 export const whitelistNetworks: Record<NetworkId, NetworkInfo> = {
   11155111: {
@@ -15,6 +16,12 @@ export const whitelistNetworks: Record<NetworkId, NetworkInfo> = {
     name: "Optimism Sepolia",
     iconUrl: "assets/networks/optimism.svg",
     tokens: optimismSepolia,
+  },
+  168587773: {
+    id: NetworkId.BlastSepolia,
+    name: "Blast Sepolia",
+    iconUrl: "assets/networks/optimism.svg",
+    tokens: blastSepolia,
   },
 };
 
