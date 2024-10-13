@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardContent,
@@ -6,11 +8,15 @@ import {
 } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import SwapIcon from "@/assets/icons/swap.svg";
-import TransactionDetail from "@/components/home/swap/TransactionDetails";
+import TransactionDetail from "@/components/shared/TransactionDetails";
 import TokenInput from "@/components/home/swap/TokenInput";
 import BridgeWalletConnect from "./BridgeWalletConnect";
+import { useModal } from "@/lib/hooks/useModalAtom";
+import { ModalIds } from "@/types/modals";
 
 export default function SwapCard() {
+  const { openModal } = useModal(ModalIds.TransactionOverviewModal);
+
   return (
     <Card>
       <CardHeader className="items-center gap-y-4">
@@ -34,7 +40,7 @@ export default function SwapCard() {
         <TransactionDetail label="Est. Time to Destination" value="--" />
       </CardContent>
       <CardFooter>
-        <Button disabled className="w-full">
+        <Button variant={"action"} onClick={openModal} className="w-full">
           Enter Amount
         </Button>
       </CardFooter>

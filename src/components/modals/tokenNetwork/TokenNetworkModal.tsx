@@ -10,6 +10,7 @@ import { whitelistChains } from "@/const/whitelist";
 import Image from "next/image";
 import { ChainInfo, TokenInfo } from "@/types/utils";
 import { getChainIcon, getTokenIcon } from "@/lib/utils/iconUtils";
+import { ModalIds } from "@/types/modals";
 
 export default function TokenNetworkModal() {
   const [selectedNetwork, setSelectedNetwork] = useAtom(selectedNetworkAtom);
@@ -21,10 +22,10 @@ export default function TokenNetworkModal() {
     Object.values(whitelistChains[selectedNetwork].tokens) || [];
 
   return (
-    <Modal modalId="tokenNetworkModal" title="Select">
+    <Modal modalId={ModalIds.TokenNetworkModal} title="Select">
       <div className="flex flex-col gap-y-2">
         <SearchBar placeholder="Search for tokens" />
-        <div className="flex h-96 w-full border-t border-gray-800 pb-4">
+        <div className="flex h-96 w-full border-t border-gray-800">
           <div className="flex w-[172px] flex-col gap-y-3 overflow-y-auto border-r border-gray-800 pr-3">
             <h3 className="pt-4 text-gray-400 text-sb3">Networks</h3>
             <div>
@@ -114,7 +115,7 @@ function TokenPill(props: TokenPillProps) {
           height={36}
           width={36}
           className="flex-shrink-0 rounded-lg"
-          alt={token.tokenName ?? "chain"}
+          alt={token.tokenName ?? "token"}
         />
         <Image
           src={getChainIcon(chain.iconUrl)}
