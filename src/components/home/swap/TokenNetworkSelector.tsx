@@ -56,8 +56,8 @@ export default function TokenNetworkSelector(props: TokenNetworkSelectorProps) {
           <span className="text-gray-400 text-sb3">
             {isToken ? "Token" : "Network"}
           </span>
-          <div className="flex flex-row items-center gap-x-1">
-            <span className="text-gray-400 text-b2">
+          <div className="flex w-full flex-row items-center gap-x-1">
+            <span className="truncate text-gray-400 text-b2">
               {displayName ? displayName : "Select"}
             </span>
             <ChevronDownIcon className="w-3 fill-gray-400" />
