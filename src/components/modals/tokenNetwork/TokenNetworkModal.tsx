@@ -5,7 +5,7 @@ import SearchBar from "@/components/ui/Search";
 import { whitelistNetworks } from "@/const/whitelist";
 import Image from "next/image";
 import { NetworkInfo, TokenInfo } from "@/types/utils";
-import { getNetworkIcon, getTokenIcon } from "@/lib/utils/iconUtils";
+import { getNetworkIcon, getTokenIcon } from "@/lib/utils/icons/iconUtils";
 import { ModalIds } from "@/enums/modals";
 import { useModal } from "@/lib/hooks/useModalAtom";
 import {

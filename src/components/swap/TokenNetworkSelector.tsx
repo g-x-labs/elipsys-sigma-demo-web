@@ -6,7 +6,7 @@ import { useModal } from "@/lib/hooks/useModalAtom";
 import { ModalIds } from "@/enums/modals";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
 import { NetworkInfo, TokenInfo } from "@/types/utils";
-import { getTokenIcon } from "@/lib/utils/iconUtils";
+import { getTokenIcon } from "@/lib/utils/icons/iconUtils";
 import { useSetAtom } from "jotai";
 import { InputType } from "@/enums/inputs";
 import { inputSideAtom } from "@/atoms/modal/tokenNetworkAtom";

@@ -1,7 +1,7 @@
 import { cva, VariantProps } from "class-variance-authority";
 import { InputHTMLAttributes } from "react";
 import { Input } from "./Input";
-import { cn } from "@/lib/utils/cn";
+import { cn } from "@/lib/utils/common/cn";
 import React from "react";
 import SearchIcon from "@/assets/icons/search.svg";
 

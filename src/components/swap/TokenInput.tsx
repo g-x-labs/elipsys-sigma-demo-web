@@ -7,7 +7,7 @@ import {
   formatAsUsd,
   formatTokenAmount,
   tokenAmountInputFilter,
-} from "@/lib/utils/format";
+} from "@/lib/utils/formatting/format";
 import { useAtom } from "jotai";
 import { tokenInputAtom } from "@/atoms/swap/inputAtom";
 import { NetworkId } from "@/enums/networks";
