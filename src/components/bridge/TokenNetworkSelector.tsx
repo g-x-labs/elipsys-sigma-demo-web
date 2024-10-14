@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
-import { useModal } from "@/lib/hooks/useModalAtom";
+import { useModal } from "@/lib/hooks/common/useModalAtom";
 import { ModalIds } from "@/enums/modals";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
 import { getTokenIcon } from "@/lib/utils/icons/iconUtils";

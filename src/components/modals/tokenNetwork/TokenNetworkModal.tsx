@@ -6,7 +6,7 @@ import { whitelistNetworks } from "@/const/whitelist";
 import Image from "next/image";
 import { getNetworkIcon, getTokenIcon } from "@/lib/utils/icons/iconUtils";
 import { ModalIds } from "@/enums/modals";
-import { useModal } from "@/lib/hooks/useModalAtom";
+import { useModal } from "@/lib/hooks/common/useModalAtom";
 import {
   inputSideAtom,
   networkFromAtom,

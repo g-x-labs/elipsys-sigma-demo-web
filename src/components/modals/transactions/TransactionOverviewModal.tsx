@@ -1,7 +1,7 @@
 import Modal from "@/components/ui/Modal";
 import { ModalIds } from "@/enums/modals";
 import { Button } from "@/components/ui/Button";
-import { useBridgeTransactionHandler } from "@/lib/hooks/useBridgeTransactionHandler";
+import { useBridgeTransactionHandler } from "@/lib/hooks/bridge/useBridgeTransactionHandler";
 import TransactionDetail from "@/components/shared/TransactionDetails";
 import { whitelistNetworks } from "@/const/whitelist";
 import { NetworkId } from "@/enums/networks";

@@ -11,7 +11,7 @@ import SwapIcon from "@/assets/icons/swap.svg";
 import TransactionDetail from "@/components/shared/TransactionDetails";
 import TokenInput from "@/components/bridge/TokenInput";
 import BridgeWalletConnect from "./BridgeWalletConnect";
-import { useModal } from "@/lib/hooks/useModalAtom";
+import { useModal } from "@/lib/hooks/common/useModalAtom";
 import { ModalIds } from "@/enums/modals";
 import {
   networkFromAtom,

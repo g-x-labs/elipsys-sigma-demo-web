@@ -3,7 +3,7 @@ import TransactionDetail from "@/components/shared/TransactionDetails";
 import { Button } from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import { whitelistNetworks } from "@/const/whitelist";
-import { useModal } from "@/lib/hooks/useModalAtom";
+import { useModal } from "@/lib/hooks/common/useModalAtom";
 import { ModalIds } from "@/enums/modals";
 import { NetworkId } from "@/enums/networks";
 import BigNumber from "bignumber.js";
