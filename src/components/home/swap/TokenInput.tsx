@@ -16,18 +16,28 @@ import { getNetworkInfo, getTokenInfo } from "@/const/whitelist";
 import { InputType } from "@/atoms/tokenNetworkAtom";
 import useGetUserTokenBalance from "@/lib/hooks/useGetUserTokenBalance";
 import { useAccount } from "wagmi";
+import BigNumber from "bignumber.js";
+
+BigNumber.config({ EXPONENTIAL_AT: 1e9 });
+
 interface TokenInputProps {
   tokenAddress: Address | null;
   networkId: NetworkId | null;
   inputType: InputType;
   isReadOnly?: boolean;
-  onMaxClick?: () => void;
+  onMaxClick?: (tokenBalance: BigNumber) => void;
 }
 
 export default function TokenInput(props: TokenInputProps) {
   const usdValue = null;
 
-  const { tokenAddress, networkId, inputType, isReadOnly, onMaxClick } = props;
+  const {
+    tokenAddress,
+    networkId,
+    inputType,
+    isReadOnly,
+    onMaxClick = () => {},
+  } = props;
 
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
   const { address } = useAccount();
@@ -35,11 +45,12 @@ export default function TokenInput(props: TokenInputProps) {
   const tokenInfo = getTokenInfo(networkId, tokenAddress);
   const networkInfo = getNetworkInfo(networkId);
 
-  const tokenBalance = useGetUserTokenBalance({
-    tokenAddress,
-    address,
-    chainId: networkId,
-  });
+  const tokenBalance =
+    useGetUserTokenBalance({
+      tokenAddress,
+      address,
+      chainId: networkId,
+    }) ?? BigNumber(0);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -62,7 +73,12 @@ export default function TokenInput(props: TokenInputProps) {
       </div>
       <div className="flex items-center justify-between p-4">
         {!isReadOnly && (
-          <Button size={"small"} onClick={onMaxClick}>
+          <Button
+            size={"small"}
+            onClick={() => {
+              onMaxClick(tokenBalance);
+            }}
+          >
             <span className="text-sb3">Max</span>
           </Button>
         )}

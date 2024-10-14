@@ -21,6 +21,9 @@ import {
   tokenToAtom,
 } from "@/atoms/tokenNetworkAtom";
 import { useAtomValue } from "jotai";
+import BigNumber from "bignumber.js";
+
+BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 export default function SwapCard() {
   const { openModal } = useModal(ModalIds.TransactionOverviewModal);
@@ -31,6 +34,11 @@ export default function SwapCard() {
   const tokenTo = useAtomValue(tokenToAtom);
   const networkTo = useAtomValue(networkToAtom);
 
+  const onSetInputValue = (tokenBalance: BigNumber) => {
+    //TODO: Implement this
+    console.log("Set input value here", tokenBalance.toString());
+  };
+
   return (
     <Card>
       <CardHeader className="items-center gap-y-4">
@@ -40,6 +48,7 @@ export default function SwapCard() {
             tokenAddress={tokenFrom}
             networkId={networkFrom}
             inputType={InputType.FROM}
+            onMaxClick={onSetInputValue}
           />
         </div>
         {/* TODO: Wrap button on icon */}
