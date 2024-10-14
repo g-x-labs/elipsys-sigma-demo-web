@@ -6,17 +6,17 @@ import { whitelistNetworks } from "@/const/whitelist";
 import Image from "next/image";
 import { NetworkInfo, TokenInfo } from "@/types/utils";
 import { getNetworkIcon, getTokenIcon } from "@/lib/utils/iconUtils";
-import { ModalIds } from "@/types/modals";
+import { ModalIds } from "@/enums/modals";
 import { useModal } from "@/lib/hooks/useModalAtom";
 import {
   inputSideAtom,
-  InputType,
   networkFromAtom,
   networkToAtom,
   tokenFromAtom,
   tokenToAtom,
 } from "@/atoms/modal/tokenNetworkAtom";
 import { useAtomValue } from "jotai";
+import { InputType } from "@/enums/inputs";
 
 export default function TokenNetworkModal() {
   const { closeModal } = useModal(ModalIds.TokenNetworkModal);

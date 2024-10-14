@@ -3,12 +3,13 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { useModal } from "@/lib/hooks/useModalAtom";
-import { ModalIds } from "@/types/modals";
+import { ModalIds } from "@/enums/modals";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
 import { NetworkInfo, TokenInfo } from "@/types/utils";
 import { getTokenIcon } from "@/lib/utils/iconUtils";
-import { inputSideAtom, InputType } from "@/atoms/modal/tokenNetworkAtom";
 import { useSetAtom } from "jotai";
+import { InputType } from "@/enums/inputs";
+import { inputSideAtom } from "@/atoms/modal/tokenNetworkAtom";
 
 interface TokenNetworkSelectorProps {
   inputType: InputType;

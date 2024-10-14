@@ -1,13 +1,8 @@
+import { NetworkId } from "@/enums/networks";
 import BigNumber from "bignumber.js";
 import { Address } from "viem";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
-
-export enum NetworkId {
-  Sepolia = 11155111,
-  OptimismSepolia = 11155420,
-  BlastSepolia = 168587773,
-}
 
 export type TokenInfo = {
   address: Address;

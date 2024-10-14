@@ -12,9 +12,8 @@ import TransactionDetail from "@/components/shared/TransactionDetails";
 import TokenInput from "@/components/home/swap/TokenInput";
 import BridgeWalletConnect from "./BridgeWalletConnect";
 import { useModal } from "@/lib/hooks/useModalAtom";
-import { ModalIds } from "@/types/modals";
+import { ModalIds } from "@/enums/modals";
 import {
-  InputType,
   networkFromAtom,
   networkToAtom,
   tokenFromAtom,
@@ -22,6 +21,7 @@ import {
 } from "@/atoms/modal/tokenNetworkAtom";
 import { useAtomValue } from "jotai";
 import BigNumber from "bignumber.js";
+import { InputType } from "@/enums/inputs";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 

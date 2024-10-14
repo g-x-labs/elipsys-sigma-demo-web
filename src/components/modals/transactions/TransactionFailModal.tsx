@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import { whitelistNetworks } from "@/const/whitelist";
 import { useModal } from "@/lib/hooks/useModalAtom";
-import { ModalIds } from "@/types/modals";
-import { NetworkId } from "@/types/utils";
+import { ModalIds } from "@/enums/modals";
+import { NetworkId } from "@/enums/networks";
 import BigNumber from "bignumber.js";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });

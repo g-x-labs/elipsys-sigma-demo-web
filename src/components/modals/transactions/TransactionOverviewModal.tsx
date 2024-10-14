@@ -1,10 +1,10 @@
 import Modal from "@/components/ui/Modal";
-import { ModalIds } from "@/types/modals";
+import { ModalIds } from "@/enums/modals";
 import { Button } from "@/components/ui/Button";
 import { useBridgeTransactionHandler } from "@/lib/hooks/useBridgeTransactionHandler";
 import TransactionDetail from "@/components/shared/TransactionDetails";
 import { whitelistNetworks } from "@/const/whitelist";
-import { NetworkId } from "@/types/utils";
+import { NetworkId } from "@/enums/networks";
 import TokenSummary from "@/components/shared/TokenSummary";
 import BigNumber from "bignumber.js";
 

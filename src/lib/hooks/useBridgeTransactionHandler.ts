@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { ModalIds } from "@/types/modals";
+import { ModalIds } from "@/enums/modals";
 import {
   modalAtom,
   transactionHashAtom,

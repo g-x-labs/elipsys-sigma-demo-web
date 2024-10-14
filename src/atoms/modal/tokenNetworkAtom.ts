@@ -1,12 +1,9 @@
-import { NetworkId } from "@/types/utils";
+import { InputType } from "@/enums/inputs";
+import { NetworkId } from "@/enums/networks";
 import { atom } from "jotai";
 import { Address } from "viem";
 
-// Atoms for managing selected network and tokens
-export enum InputType {
-  FROM = "FROM",
-  TO = "TO",
-}
+// TODO: Refactor this
 export const inputSideAtom = atom<InputType>(InputType.FROM);
 
 export const tokenFromAtom = atom<Address | null>(null);
