@@ -1,24 +1,60 @@
 import Modal from "@/components/ui/Modal";
 import { Button } from "@/components/ui/Button";
 import { useAtom } from "jotai";
-import {
-  selectedNetworkAtom,
-  selectedTokenAtom,
-} from "@/atoms/tokenNetworkAtom";
 import SearchBar from "@/components/ui/Search";
 import { whitelistNetworks } from "@/const/whitelist";
 import Image from "next/image";
 import { NetworkInfo, TokenInfo } from "@/types/utils";
 import { getNetworkIcon, getTokenIcon } from "@/lib/utils/iconUtils";
 import { ModalIds } from "@/types/modals";
+import { useModal } from "@/lib/hooks/useModalAtom";
+import {
+  inputSideAtom,
+  InputType,
+  networkFromAtom,
+  networkToAtom,
+  tokenFromAtom,
+  tokenToAtom,
+} from "@/atoms/tokenNetworkAtom";
+import { useAtomValue } from "jotai";
 
 export default function TokenNetworkModal() {
-  const [selectedNetwork, setSelectedNetwork] = useAtom(selectedNetworkAtom);
-  const [selectedToken, setSelectedToken] = useAtom(selectedTokenAtom);
+  const { closeModal } = useModal(ModalIds.TokenNetworkModal);
+
+  const inputSide = useAtomValue(inputSideAtom);
+
+  const [networkFrom, setNetworkFrom] = useAtom(networkFromAtom);
+  const [tokenFrom, setTokenFrom] = useAtom(tokenFromAtom);
+
+  const [networkTo, setNetworkTo] = useAtom(networkToAtom);
+  const [tokenTo, setTokenTo] = useAtom(tokenToAtom);
+
+  const selectedNetwork =
+    inputSide === InputType.FROM ? networkFrom : networkTo;
+  const selectedToken = inputSide === InputType.FROM ? tokenFrom : tokenTo;
 
   const networkList = Object.values(whitelistNetworks);
   const tokenList =
     Object.values(whitelistNetworks[selectedNetwork].tokens) || [];
+
+  const onNetworkSelect = (network: NetworkInfo) => {
+    if (inputSide === InputType.FROM) {
+      setNetworkFrom(network.id);
+      setTokenFrom(null);
+    } else {
+      setNetworkTo(network.id);
+      setTokenTo(null);
+    }
+  };
+
+  const onTokenSelect = (token: TokenInfo) => {
+    if (inputSide === InputType.FROM) {
+      setTokenFrom(token.address);
+    } else {
+      setTokenTo(token.address);
+    }
+    closeModal();
+  };
 
   return (
     <Modal modalId={ModalIds.TokenNetworkModal} title="Select">
@@ -34,8 +70,7 @@ export default function TokenNetworkModal() {
                   network={network}
                   isSelected={network.id === selectedNetwork}
                   onSelect={() => {
-                    setSelectedNetwork(network.id);
-                    setSelectedToken(null);
+                    onNetworkSelect(network);
                   }}
                 />
               ))}
@@ -50,7 +85,9 @@ export default function TokenNetworkModal() {
                   token={token}
                   network={whitelistNetworks[selectedNetwork]}
                   isSelected={token.address === selectedToken}
-                  onSelect={() => setSelectedToken(token.address)}
+                  onSelect={() => {
+                    onTokenSelect(token);
+                  }}
                 />
               ))}
             </div>
