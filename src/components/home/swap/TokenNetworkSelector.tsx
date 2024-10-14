@@ -7,7 +7,7 @@ import { ModalIds } from "@/types/modals";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
 import { NetworkInfo, TokenInfo } from "@/types/utils";
 import { getTokenIcon } from "@/lib/utils/iconUtils";
-import { inputSideAtom, InputType } from "@/atoms/tokenNetworkAtom";
+import { inputSideAtom, InputType } from "@/atoms/modal/tokenNetworkAtom";
 import { useSetAtom } from "jotai";
 
 interface TokenNetworkSelectorProps {

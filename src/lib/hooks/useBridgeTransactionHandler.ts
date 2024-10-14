@@ -5,7 +5,7 @@ import {
   transactionHashAtom,
   TransactionStatus,
   transactionStatusAtom,
-} from "@/atoms/modalAtom";
+} from "@/atoms/modal/modalAtom";
 
 export function useBridgeTransactionHandler() {
   const [, setTransactionStatus] = useAtom(transactionStatusAtom);

@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { modalAtom } from "@/atoms/modalAtom";
+import { modalAtom } from "@/atoms/modal/modalAtom";
 
 // TODO: Not sure if this can be inside modalAtom.ts
 export const useModal = (modalId: string) => {

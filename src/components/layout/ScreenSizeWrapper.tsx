@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtom } from "jotai";
-import { isScreenSupportedAtom } from "@/atoms/screenSizeAtom";
+import { isScreenSupportedAtom } from "@/atoms/common/screenSizeAtom";
 import { useEffect } from "react";
 import ElipsysIcon from "@/assets/icons/elipsys-large.svg";
 

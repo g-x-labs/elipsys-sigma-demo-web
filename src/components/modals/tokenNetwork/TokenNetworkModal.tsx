@@ -15,7 +15,7 @@ import {
   networkToAtom,
   tokenFromAtom,
   tokenToAtom,
-} from "@/atoms/tokenNetworkAtom";
+} from "@/atoms/modal/tokenNetworkAtom";
 import { useAtomValue } from "jotai";
 
 export default function TokenNetworkModal() {

@@ -9,11 +9,11 @@ import {
   tokenAmountInputFilter,
 } from "@/lib/utils/format";
 import { useAtom } from "jotai";
-import { tokenInputAtom } from "@/atoms/inputAtom";
+import { tokenInputAtom } from "@/atoms/swap/inputAtom";
 import { NetworkId } from "@/types/utils";
 import { Address } from "viem";
 import { getNetworkInfo, getTokenInfo } from "@/const/whitelist";
-import { InputType } from "@/atoms/tokenNetworkAtom";
+import { InputType } from "@/atoms/modal/tokenNetworkAtom";
 import useGetUserTokenBalance from "@/lib/hooks/useGetUserTokenBalance";
 import { useAccount } from "wagmi";
 import BigNumber from "bignumber.js";
