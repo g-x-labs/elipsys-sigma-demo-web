@@ -14,6 +14,8 @@ import { NetworkId } from "@/types/utils";
 import { Address } from "viem";
 import { getNetworkInfo, getTokenInfo } from "@/const/whitelist";
 import { InputType } from "@/atoms/tokenNetworkAtom";
+import useGetUserTokenBalance from "@/lib/hooks/useGetUserTokenBalance";
+import { useAccount } from "wagmi";
 interface TokenInputProps {
   tokenAddress: Address | null;
   networkId: NetworkId | null;
@@ -24,14 +26,20 @@ interface TokenInputProps {
 
 export default function TokenInput(props: TokenInputProps) {
   const usdValue = null;
-  const tokenBalance = null;
 
   const { tokenAddress, networkId, inputType, isReadOnly, onMaxClick } = props;
 
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
+  const { address } = useAccount();
 
   const tokenInfo = getTokenInfo(networkId, tokenAddress);
   const networkInfo = getNetworkInfo(networkId);
+
+  const tokenBalance = useGetUserTokenBalance({
+    tokenAddress,
+    address,
+    chainId: networkId,
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

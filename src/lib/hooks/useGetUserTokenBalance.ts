@@ -19,20 +19,20 @@ export default function useGetUserTokenBalance({
   address,
   chainId,
 }: {
-  tokenAddress: Address | undefined;
+  tokenAddress: Address | null;
   address: Address | undefined;
-  chainId: NetworkId;
+  chainId: NetworkId | null;
 }) {
   // INFO: fetch native eth token balance
   const balance = useBalance({
     address: address,
-    chainId,
+    chainId: chainId ?? undefined,
   });
 
   const result = useReadContract({
     abi: ierc20Abi,
-    chainId,
-    address: tokenAddress,
+    chainId: chainId ?? undefined,
+    address: tokenAddress ?? undefined,
     functionName: "balanceOf",
     args: [address!],
     query: {
