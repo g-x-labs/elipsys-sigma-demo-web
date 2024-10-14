@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import SwapIcon from "@/assets/icons/swap.svg";
 import TransactionDetail from "@/components/shared/TransactionDetails";
-import TokenInput from "@/components/swap/TokenInput";
+import TokenInput from "@/components/bridge/TokenInput";
 import BridgeWalletConnect from "./BridgeWalletConnect";
 import { useModal } from "@/lib/hooks/useModalAtom";
 import { ModalIds } from "@/enums/modals";
@@ -25,7 +25,7 @@ import { InputType } from "@/enums/inputs";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
-export default function SwapCard() {
+export default function BridgeCard() {
   const { openModal } = useModal(ModalIds.TransactionOverviewModal);
 
   const tokenFrom = useAtomValue(tokenFromAtom);

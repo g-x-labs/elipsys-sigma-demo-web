@@ -1,7 +1,7 @@
 import WormholeLiteIcon from "@/assets/icons/wormhole-lite.svg";
 import { Button } from "@/components/ui/Button";
 
-export default function SwapHeader() {
+export default function BridgeHeader() {
   return (
     <div className="flex w-full flex-col items-start justify-center gap-y-5">
       <h2 className="text-gray-200 text-h3">Transfer</h2>

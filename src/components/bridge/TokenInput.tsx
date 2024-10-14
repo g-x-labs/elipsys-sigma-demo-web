@@ -2,14 +2,14 @@
 
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import TokenNetworkSelector from "@/components/swap/TokenNetworkSelector";
+import TokenNetworkSelector from "@/components/bridge/TokenNetworkSelector";
 import {
   formatAsUsd,
   formatTokenAmount,
   tokenAmountInputFilter,
 } from "@/lib/utils/formatting/format";
 import { useAtom } from "jotai";
-import { tokenInputAtom } from "@/atoms/swap/inputAtom";
+import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
 import { NetworkId } from "@/enums/networks";
 import { Address } from "viem";
 import { getNetworkInfo, getTokenInfo } from "@/const/whitelist";
