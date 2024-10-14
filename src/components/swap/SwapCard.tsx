@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import SwapIcon from "@/assets/icons/swap.svg";
 import TransactionDetail from "@/components/shared/TransactionDetails";
-import TokenInput from "@/components/home/swap/TokenInput";
+import TokenInput from "@/components/swap/TokenInput";
 import BridgeWalletConnect from "./BridgeWalletConnect";
 import { useModal } from "@/lib/hooks/useModalAtom";
 import { ModalIds } from "@/enums/modals";

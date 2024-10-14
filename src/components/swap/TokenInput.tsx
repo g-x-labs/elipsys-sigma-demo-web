@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import TokenNetworkSelector from "@/components/home/swap/TokenNetworkSelector";
+import TokenNetworkSelector from "@/components/swap/TokenNetworkSelector";
 import {
   formatAsUsd,
   formatTokenAmount,

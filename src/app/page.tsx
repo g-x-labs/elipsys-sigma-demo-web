@@ -1,5 +1,5 @@
-import SwapCard from "@/components/home/swap/SwapCard";
-import SwapHeader from "@/components/home/swap/SwapHeader";
+import SwapCard from "@/components/swap/SwapCard";
+import SwapHeader from "@/components/swap/SwapHeader";
 
 export default function Home() {
   return (
