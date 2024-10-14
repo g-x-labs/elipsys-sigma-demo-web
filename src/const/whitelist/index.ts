@@ -1,9 +1,10 @@
-import { NetworkInfo, TokenInfo } from "@/types/utils";
 import { optimismSepoliaWhitelist } from "./optimismSepolia";
 import { sepoliaWhitelist } from "./sepolia";
 import { Address } from "viem";
 import { blastSepoliaWhitelist } from "./blastSepolia";
 import { NetworkId } from "@/enums/networks";
+import { NetworkInfo } from "@/types/network";
+import { TokenInfo } from "@/types/token";
 
 export const whitelistNetworks: Record<NetworkId, NetworkInfo> = {
   11155111: {

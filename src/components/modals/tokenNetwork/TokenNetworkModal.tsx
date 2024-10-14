@@ -4,7 +4,6 @@ import { useAtom } from "jotai";
 import SearchBar from "@/components/ui/Search";
 import { whitelistNetworks } from "@/const/whitelist";
 import Image from "next/image";
-import { NetworkInfo, TokenInfo } from "@/types/utils";
 import { getNetworkIcon, getTokenIcon } from "@/lib/utils/icons/iconUtils";
 import { ModalIds } from "@/enums/modals";
 import { useModal } from "@/lib/hooks/useModalAtom";
@@ -17,6 +16,8 @@ import {
 } from "@/atoms/modal/tokenNetworkAtom";
 import { useAtomValue } from "jotai";
 import { InputType } from "@/enums/inputs";
+import { NetworkInfo } from "@/types/network";
+import { TokenInfo } from "@/types/token";
 
 export default function TokenNetworkModal() {
   const { closeModal } = useModal(ModalIds.TokenNetworkModal);

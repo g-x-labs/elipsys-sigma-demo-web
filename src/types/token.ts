@@ -1,4 +1,3 @@
-import { NetworkId } from "@/enums/networks";
 import BigNumber from "bignumber.js";
 import { Address } from "viem";
 
@@ -11,11 +10,4 @@ export type TokenInfo = {
   decimals: number;
   underlyingDecimals: BigNumber;
   iconUrl?: string;
-};
-
-export type NetworkInfo = {
-  id: NetworkId;
-  name: string;
-  iconUrl?: string;
-  tokens: Record<Address, TokenInfo>;
 };

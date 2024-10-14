@@ -1,4 +1,4 @@
-import { TokenInfo } from "@/types/utils";
+import { TokenInfo } from "@/types/token";
 import BigNumber from "bignumber.js";
 import { Address } from "viem";
 

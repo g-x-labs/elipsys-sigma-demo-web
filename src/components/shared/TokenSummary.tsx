@@ -1,4 +1,3 @@
-import { NetworkInfo, TokenInfo } from "@/types/utils";
 import Image from "next/image";
 import { getNetworkIcon, getTokenIcon } from "@/lib/utils/icons/iconUtils";
 import { Address } from "viem";
@@ -8,6 +7,8 @@ import {
   formatTokenAmount,
 } from "@/lib/utils/formatting/format";
 import BigNumber from "bignumber.js";
+import { TokenInfo } from "@/types/token";
+import { NetworkInfo } from "@/types/network";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
