@@ -7,17 +7,21 @@ import { ModalIds } from "@/types/modals";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
 import { NetworkInfo, TokenInfo } from "@/types/utils";
 import { getTokenIcon } from "@/lib/utils/iconUtils";
+import { inputSideAtom, InputType } from "@/atoms/tokenNetworkAtom";
+import { useSetAtom } from "jotai";
 
 interface TokenNetworkSelectorProps {
+  inputType: InputType;
   networkInfo?: NetworkInfo | null;
   tokenInfo?: TokenInfo | null;
   variant?: "token" | "network";
 }
 
 export default function TokenNetworkSelector(props: TokenNetworkSelectorProps) {
-  const { networkInfo, tokenInfo, variant = "token" } = props;
+  const { inputType, networkInfo, tokenInfo, variant = "token" } = props;
 
   const { openModal } = useModal(ModalIds.TokenNetworkModal);
+  const setInputSide = useSetAtom(inputSideAtom);
 
   const isToken = variant === "token";
 
@@ -26,7 +30,10 @@ export default function TokenNetworkSelector(props: TokenNetworkSelectorProps) {
 
   return (
     <Button
-      onClick={openModal}
+      onClick={() => {
+        openModal();
+        setInputSide(inputType);
+      }}
       variant={isToken ? "tokenSelector" : "networkSelector"}
       size="large"
       className="w-full min-w-[120px]"

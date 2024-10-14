@@ -14,6 +14,7 @@ import BridgeWalletConnect from "./BridgeWalletConnect";
 import { useModal } from "@/lib/hooks/useModalAtom";
 import { ModalIds } from "@/types/modals";
 import {
+  InputType,
   networkFromAtom,
   networkToAtom,
   tokenFromAtom,
@@ -35,12 +36,21 @@ export default function SwapCard() {
       <CardHeader className="items-center gap-y-4">
         <div className="flex w-full flex-col gap-y-2">
           <BridgeWalletConnect />
-          <TokenInput tokenAddress={tokenFrom} networkId={networkFrom} />
+          <TokenInput
+            tokenAddress={tokenFrom}
+            networkId={networkFrom}
+            inputType={InputType.FROM}
+          />
         </div>
         {/* TODO: Wrap button on icon */}
         <SwapIcon className="w-5 fill-gray-200" />
         <div className="flex w-full flex-col gap-y-2">
-          <TokenInput tokenAddress={tokenTo} networkId={networkTo} isReadOnly />
+          <TokenInput
+            tokenAddress={tokenTo}
+            networkId={networkTo}
+            inputType={InputType.TO}
+            isReadOnly
+          />
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-y-2">

@@ -13,9 +13,11 @@ import { tokenInputAtom } from "@/atoms/inputAtom";
 import { NetworkId } from "@/types/utils";
 import { Address } from "viem";
 import { getNetworkInfo, getTokenInfo } from "@/const/whitelist";
+import { InputType } from "@/atoms/tokenNetworkAtom";
 interface TokenInputProps {
   tokenAddress: Address | null;
   networkId: NetworkId | null;
+  inputType: InputType;
   isReadOnly?: boolean;
   onMaxClick?: () => void;
 }
@@ -24,7 +26,7 @@ export default function TokenInput(props: TokenInputProps) {
   const usdValue = null;
   const tokenBalance = null;
 
-  const { tokenAddress, networkId, isReadOnly, onMaxClick } = props;
+  const { tokenAddress, networkId, inputType, isReadOnly, onMaxClick } = props;
 
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
 
@@ -39,8 +41,16 @@ export default function TokenInput(props: TokenInputProps) {
   return (
     <div className="flex w-full flex-col rounded-md border border-gray-700">
       <div className="flex items-center justify-between border-b border-gray-700">
-        <TokenNetworkSelector variant="token" tokenInfo={tokenInfo} />
-        <TokenNetworkSelector variant="network" networkInfo={networkInfo} />
+        <TokenNetworkSelector
+          variant="token"
+          tokenInfo={tokenInfo}
+          inputType={inputType}
+        />
+        <TokenNetworkSelector
+          variant="network"
+          networkInfo={networkInfo}
+          inputType={inputType}
+        />
       </div>
       <div className="flex items-center justify-between p-4">
         {!isReadOnly && (
