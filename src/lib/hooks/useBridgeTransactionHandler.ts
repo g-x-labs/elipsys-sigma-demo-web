@@ -3,9 +3,9 @@ import { ModalIds } from "@/enums/modals";
 import {
   modalAtom,
   transactionHashAtom,
-  TransactionStatus,
   transactionStatusAtom,
 } from "@/atoms/modal/modalAtom";
+import { TransactionStatus } from "@/enums/transactionStatus";
 
 export function useBridgeTransactionHandler() {
   const [, setTransactionStatus] = useAtom(transactionStatusAtom);

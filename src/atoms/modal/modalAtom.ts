@@ -1,13 +1,7 @@
+import { TransactionStatus } from "@/enums/transactionStatus";
 import { atom } from "jotai";
 
 export const modalAtom = atom<string | null>(null);
-
-// Enum for transaction status
-export enum TransactionStatus {
-  Pending = "pending",
-  Success = "success",
-  Fail = "fail",
-}
 
 // Atom to store transaction status
 export const transactionStatusAtom = atom<TransactionStatus | null>(null);
