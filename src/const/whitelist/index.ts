@@ -25,10 +25,15 @@ export const whitelistNetworks: Record<NetworkId, NetworkInfo> = {
   },
 };
 
+export function getNetworkInfo(id: NetworkId | null): NetworkInfo | null {
+  if (!id) return null;
+  return whitelistNetworks[id];
+}
+
 export function getTokenInfo(
-  id: NetworkId,
-  address: Address,
-): TokenInfo | undefined {
-  const chainInfo = whitelistNetworks[id];
-  return chainInfo.tokens[address];
+  id: NetworkId | null,
+  address: Address | null,
+): TokenInfo | null {
+  if (!id || !address) return null;
+  return whitelistNetworks[id].tokens[address];
 }

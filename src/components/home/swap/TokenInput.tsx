@@ -10,19 +10,26 @@ import {
 } from "@/lib/utils/format";
 import { useAtom } from "jotai";
 import { tokenInputAtom } from "@/atoms/inputAtom";
+import { NetworkId } from "@/types/utils";
+import { Address } from "viem";
+import { getNetworkInfo, getTokenInfo } from "@/const/whitelist";
 interface TokenInputProps {
+  tokenAddress: Address | null;
+  networkId: NetworkId | null;
   isReadOnly?: boolean;
   onMaxClick?: () => void;
 }
 
 export default function TokenInput(props: TokenInputProps) {
-  // TODO: Not sure how these values are going to be passed in, so leaving as props for now.
   const usdValue = null;
   const tokenBalance = null;
 
-  const { isReadOnly, onMaxClick } = props;
+  const { tokenAddress, networkId, isReadOnly, onMaxClick } = props;
 
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
+
+  const tokenInfo = getTokenInfo(networkId, tokenAddress);
+  const networkInfo = getNetworkInfo(networkId);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -32,8 +39,8 @@ export default function TokenInput(props: TokenInputProps) {
   return (
     <div className="flex w-full flex-col rounded-md border border-gray-700">
       <div className="flex items-center justify-between border-b border-gray-700">
-        <TokenNetworkSelector variant="token" />
-        <TokenNetworkSelector variant="network" />
+        <TokenNetworkSelector variant="token" tokenInfo={tokenInfo} />
+        <TokenNetworkSelector variant="network" networkInfo={networkInfo} />
       </div>
       <div className="flex items-center justify-between p-4">
         {!isReadOnly && (

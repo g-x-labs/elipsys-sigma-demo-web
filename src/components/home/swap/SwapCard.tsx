@@ -13,21 +13,34 @@ import TokenInput from "@/components/home/swap/TokenInput";
 import BridgeWalletConnect from "./BridgeWalletConnect";
 import { useModal } from "@/lib/hooks/useModalAtom";
 import { ModalIds } from "@/types/modals";
+import {
+  networkFromAtom,
+  networkToAtom,
+  tokenFromAtom,
+  tokenToAtom,
+} from "@/atoms/tokenNetworkAtom";
+import { useAtomValue } from "jotai";
 
 export default function SwapCard() {
   const { openModal } = useModal(ModalIds.TransactionOverviewModal);
+
+  const tokenFrom = useAtomValue(tokenFromAtom);
+  const networkFrom = useAtomValue(networkFromAtom);
+
+  const tokenTo = useAtomValue(tokenToAtom);
+  const networkTo = useAtomValue(networkToAtom);
 
   return (
     <Card>
       <CardHeader className="items-center gap-y-4">
         <div className="flex w-full flex-col gap-y-2">
           <BridgeWalletConnect />
-          <TokenInput />
+          <TokenInput tokenAddress={tokenFrom} networkId={networkFrom} />
         </div>
         {/* TODO: Wrap button on icon */}
         <SwapIcon className="w-5 fill-gray-200" />
         <div className="flex w-full flex-col gap-y-2">
-          <TokenInput isReadOnly />
+          <TokenInput tokenAddress={tokenTo} networkId={networkTo} isReadOnly />
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-y-2">
