@@ -1,34 +1,39 @@
 import { NetworkId, NetworkInfo, TokenInfo } from "@/types/utils";
-import { optimismSepolia } from "./optimismSepolia";
-import { sepolia } from "./sepolia";
+import { optimismSepoliaWhitelist } from "./optimismSepolia";
+import { sepoliaWhitelist } from "./sepolia";
 import { Address } from "viem";
-import { blastSepolia } from "viem/chains";
+import { blastSepoliaWhitelist } from "./blastSepolia";
 
 export const whitelistNetworks: Record<NetworkId, NetworkInfo> = {
   11155111: {
     id: NetworkId.Sepolia,
     name: "Sepolia",
     iconUrl: "assets/networks/ethereum.svg",
-    tokens: sepolia,
+    tokens: sepoliaWhitelist,
   },
   11155420: {
     id: NetworkId.OptimismSepolia,
     name: "Optimism Sepolia",
     iconUrl: "assets/networks/optimism.svg",
-    tokens: optimismSepolia,
+    tokens: optimismSepoliaWhitelist,
   },
   168587773: {
     id: NetworkId.BlastSepolia,
     name: "Blast Sepolia",
     iconUrl: "assets/networks/optimism.svg",
-    tokens: blastSepolia,
+    tokens: blastSepoliaWhitelist,
   },
 };
 
+export function getNetworkInfo(id: NetworkId | null): NetworkInfo | null {
+  if (!id) return null;
+  return whitelistNetworks[id];
+}
+
 export function getTokenInfo(
-  id: NetworkId,
-  address: Address,
-): TokenInfo | undefined {
-  const chainInfo = whitelistNetworks[id];
-  return chainInfo.tokens[address];
+  id: NetworkId | null,
+  address: Address | null,
+): TokenInfo | null {
+  if (!id || !address) return null;
+  return whitelistNetworks[id].tokens[address];
 }
