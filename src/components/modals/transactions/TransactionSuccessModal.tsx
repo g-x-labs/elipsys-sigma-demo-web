@@ -1,17 +1,15 @@
-import TransactionDetail from "@/components/shared/TransactionDetails";
-import Modal from "@/components/ui/Modal";
-import { ModalIds } from "@/types/modals";
-import { Button } from "@/components/ui/Button";
-import { useModal } from "@/lib/hooks/useModalAtom";
-import { whitelistNetworks } from "@/const/whitelist";
-import { NetworkId } from "@/types/utils";
-import TokenSummary from "@/components/shared/TokenSummary";
+import { NetworkId, ModalIds } from "@/enums";
+import { Button } from "@/components/ui";
+import { useModal } from "@/lib/hooks/common/useModalAtom";
+import { whitelistNetworks } from "@/lib/whitelist";
 import LinkOutIcon from "@/assets/icons/link-out.svg";
 import BigNumber from "bignumber.js";
+import { Modal } from "@/components/ui";
+import { TokenSummary, TransactionDetails } from "@/components/shared";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
-export default function TransactionSuccessModal() {
+const TransactionSuccessModal: React.FC = () => {
   // TODO: Remove these
   const tempNetwork = Object.values(whitelistNetworks)[0];
   const tempToken = Object.values(
@@ -48,7 +46,7 @@ export default function TransactionSuccessModal() {
             destinationAddress="0x0000...0000"
           />
         </div>
-        <TransactionDetail
+        <TransactionDetails
           label="Network Cost"
           value={null}
           tooltip="Estimated network cost"
@@ -66,4 +64,6 @@ export default function TransactionSuccessModal() {
       </Button>
     </Modal>
   );
-}
+};
+
+export { TransactionSuccessModal };

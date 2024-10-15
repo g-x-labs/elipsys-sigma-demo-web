@@ -1,16 +1,13 @@
-import Modal from "@/components/ui/Modal";
-import { ModalIds } from "@/types/modals";
-import { Button } from "@/components/ui/Button";
-import { useBridgeTransactionHandler } from "@/lib/hooks/useBridgeTransactionHandler";
-import TransactionDetail from "@/components/shared/TransactionDetails";
-import { whitelistNetworks } from "@/const/whitelist";
-import { NetworkId } from "@/types/utils";
-import TokenSummary from "@/components/shared/TokenSummary";
+import { ModalIds, NetworkId } from "@/enums";
+import { useBridgeTransactionHandler } from "@/lib/hooks/bridge/useBridgeTransactionHandler";
+import { whitelistNetworks } from "@/lib/whitelist";
 import BigNumber from "bignumber.js";
+import { Button, Modal } from "@/components/ui";
+import { TokenSummary, TransactionDetails } from "@/components/shared";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
-export default function TransactionOverviewModal() {
+const TransactionOverviewModal: React.FC = () => {
   // TODO: Remove these
   const tempNetwork = Object.values(whitelistNetworks)[0];
   const tempToken = Object.values(
@@ -34,7 +31,7 @@ export default function TransactionOverviewModal() {
           network={tempNetwork}
           destinationAddress="0x0000...0000"
         />
-        <TransactionDetail
+        <TransactionDetails
           label="Network Cost"
           value={null}
           tooltip="Estimated network cost"
@@ -49,4 +46,6 @@ export default function TransactionOverviewModal() {
       </Button>
     </Modal>
   );
-}
+};
+
+export { TransactionOverviewModal };

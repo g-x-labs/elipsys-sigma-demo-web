@@ -1,14 +1,12 @@
-import TokenSummary from "@/components/shared/TokenSummary";
-import TransactionDetail from "@/components/shared/TransactionDetails";
-import Modal from "@/components/ui/Modal";
-import { whitelistNetworks } from "@/const/whitelist";
-import { ModalIds } from "@/types/modals";
-import { NetworkId } from "@/types/utils";
+import { TokenSummary, TransactionDetails } from "@/components/shared";
+import { Modal } from "@/components/ui";
+import { whitelistNetworks } from "@/lib/whitelist";
+import { ModalIds, NetworkId } from "@/enums";
 import BigNumber from "bignumber.js";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
-export default function TransactionPendingModal() {
+const TransactionPendingModal: React.FC = () => {
   // TODO: Remove these
   const tempNetwork = Object.values(whitelistNetworks)[0];
   const tempToken = Object.values(
@@ -47,7 +45,7 @@ export default function TransactionPendingModal() {
             destinationAddress="0x0000...0000"
           />
         </div>
-        <TransactionDetail
+        <TransactionDetails
           label="Network Cost"
           value={null}
           tooltip="Estimated network cost"
@@ -55,4 +53,6 @@ export default function TransactionPendingModal() {
       </div>
     </Modal>
   );
-}
+};
+
+export { TransactionPendingModal };

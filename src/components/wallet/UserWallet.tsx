@@ -1,11 +1,11 @@
 "use client";
 
 import { Address } from "viem";
-import { formatAddress } from "@/lib/utils/format";
+import { formatAddress } from "@/lib/utils/formats";
 import { useAccountModal } from "@rainbow-me/rainbowkit";
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
-import { getWalletIcon } from "@/lib/utils/iconUtils";
+import { Button } from "@/components/ui";
+import { getWalletIcon } from "@/lib/utils/icons";
 
 interface UserWalletProps {
   address: Address;

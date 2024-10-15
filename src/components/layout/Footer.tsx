@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui";
 
 // TODO: Replace links
 const footerLinks = [
@@ -9,7 +9,7 @@ const footerLinks = [
   { href: "", label: "Docs" },
 ];
 
-export default function Footer() {
+const Footer: React.FC = () => {
   return (
     <footer className="fixed bottom-0 left-0 z-50 flex w-full items-center justify-between px-[60px] py-8">
       <h1 className="text-gray-600 text-sb2">© 2024 - G[X]LABS</h1>
@@ -33,4 +33,6 @@ export default function Footer() {
       </nav>
     </footer>
   );
-}
+};
+
+export { Footer };

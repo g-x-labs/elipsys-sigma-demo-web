@@ -1,13 +1,13 @@
-import { NetworkInfo, TokenInfo } from "@/types/utils";
 import Image from "next/image";
-import { getNetworkIcon, getTokenIcon } from "@/lib/utils/iconUtils";
+import { getNetworkIcon, getTokenIcon } from "@/lib/utils/icons";
 import { Address } from "viem";
 import {
   formatAddress,
   formatAsUsd,
   formatTokenAmount,
-} from "@/lib/utils/format";
+} from "@/lib/utils/formats";
 import BigNumber from "bignumber.js";
+import { NetworkInfo, TokenInfo } from "@/types";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -21,7 +21,7 @@ interface TokenSummaryProps {
   destinationAddress: Address;
 }
 
-export default function TokenSummary(props: TokenSummaryProps) {
+const TokenSummary: React.FC<TokenSummaryProps> = (props) => {
   const { token, tokenAmount, tokenUSDValue, network, destinationAddress } =
     props;
 
@@ -54,4 +54,6 @@ export default function TokenSummary(props: TokenSummaryProps) {
       </div>
     </div>
   );
-}
+};
+
+export { TokenSummary };

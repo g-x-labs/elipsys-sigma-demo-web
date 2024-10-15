@@ -1,17 +1,14 @@
-import TokenSummary from "@/components/shared/TokenSummary";
-import TransactionDetail from "@/components/shared/TransactionDetails";
-import { Button } from "@/components/ui/Button";
-import Modal from "@/components/ui/Modal";
-import { whitelistNetworks } from "@/const/whitelist";
-import { useModal } from "@/lib/hooks/useModalAtom";
-import { ModalIds } from "@/types/modals";
-import { NetworkId } from "@/types/utils";
+import { whitelistNetworks } from "@/lib/whitelist";
+import { useModal } from "@/lib/hooks/common/useModalAtom";
+import { ModalIds, NetworkId } from "@/enums";
 import BigNumber from "bignumber.js";
+import { Button, Modal } from "@/components/ui";
+import { TokenSummary, TransactionDetails } from "@/components/shared";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 // TODO: Confirm what this is suppose to display
-export default function TransactionFailModal() {
+const TransactionFailModal: React.FC = () => {
   // TODO: Remove these
   const tempNetwork = Object.values(whitelistNetworks)[0];
   const tempToken = Object.values(
@@ -32,7 +29,7 @@ export default function TransactionFailModal() {
           network={tempNetwork}
           destinationAddress="0x0000...0000"
         />
-        <TransactionDetail
+        <TransactionDetails
           label="Network Cost"
           value={null}
           tooltip="Estimated network cost"
@@ -43,4 +40,6 @@ export default function TransactionFailModal() {
       </Button>
     </Modal>
   );
-}
+};
+
+export { TransactionFailModal };

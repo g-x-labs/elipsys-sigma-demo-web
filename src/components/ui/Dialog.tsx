@@ -4,7 +4,7 @@ import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import CloseIcon from "@/assets/icons/cross.svg";
 
-import { cn } from "@/lib/utils/cn";
+import { cn } from "@/lib/utils/common/cn";
 
 const Dialog = DialogPrimitive.Root;
 

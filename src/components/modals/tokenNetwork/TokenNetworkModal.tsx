@@ -1,24 +1,22 @@
-import Modal from "@/components/ui/Modal";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui";
 import { useAtom } from "jotai";
-import SearchBar from "@/components/ui/Search";
-import { whitelistNetworks } from "@/const/whitelist";
+import { whitelistNetworks } from "@/lib/whitelist";
 import Image from "next/image";
-import { NetworkInfo, TokenInfo } from "@/types/utils";
-import { getNetworkIcon, getTokenIcon } from "@/lib/utils/iconUtils";
-import { ModalIds } from "@/types/modals";
-import { useModal } from "@/lib/hooks/useModalAtom";
+import { getNetworkIcon, getTokenIcon } from "@/lib/utils/icons";
+import { ModalIds, InputType } from "@/enums";
+import { useModal } from "@/lib/hooks/common/useModalAtom";
 import {
   inputSideAtom,
-  InputType,
   networkFromAtom,
   networkToAtom,
   tokenFromAtom,
   tokenToAtom,
-} from "@/atoms/tokenNetworkAtom";
+} from "@/atoms/modal/tokenNetworkAtom";
 import { useAtomValue } from "jotai";
+import { NetworkInfo, TokenInfo } from "@/types";
+import { Modal, SearchBar } from "@/components/ui";
 
-export default function TokenNetworkModal() {
+const TokenNetworkModal: React.FC = () => {
   const { closeModal } = useModal(ModalIds.TokenNetworkModal);
 
   const inputSide = useAtomValue(inputSideAtom);
@@ -96,7 +94,9 @@ export default function TokenNetworkModal() {
       </div>
     </Modal>
   );
-}
+};
+
+export { TokenNetworkModal };
 
 // NetworkPill component
 interface NetworkPillProps {
