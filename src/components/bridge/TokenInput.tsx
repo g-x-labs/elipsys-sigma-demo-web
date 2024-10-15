@@ -9,14 +9,17 @@ import useGetUserTokenBalance from "@/lib/hooks/wallet/useGetUserTokenBalance";
 import { useAccount } from "wagmi";
 import BigNumber from "bignumber.js";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
-import { networkFromAtom, tokenFromAtom } from "@/atoms/modal/tokenNetworkAtom";
+import {
+  inputNetworkAtom,
+  inputTokenAtom,
+} from "@/atoms/modal/tokenNetworkAtom";
 
 const TokenInput: React.FC = () => {
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
   const { address } = useAccount();
 
-  const tokenAddress = useAtomValue(tokenFromAtom);
-  const networkId = useAtomValue(networkFromAtom);
+  const tokenAddress = useAtomValue(inputTokenAtom);
+  const networkId = useAtomValue(inputNetworkAtom);
 
   const tokenInfo = getTokenInfo(networkId, tokenAddress);
   const networkInfo = getNetworkInfo(networkId);

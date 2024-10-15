@@ -21,7 +21,7 @@ interface TokenSelectorProps {
 const TokenSelector: React.FC<TokenSelectorProps> = (props) => {
   const { isInput = true, tokenInfo } = props;
 
-  const { openModal } = useModal(ModalIds.TokenNetworkModal);
+  const { openModal } = useModal(ModalIds.TokenNetworkSelectorModal);
   const [, setSelectedToken] = useAtom(
     isInput ? inputTokenAtom : outputTokenAtom,
   );

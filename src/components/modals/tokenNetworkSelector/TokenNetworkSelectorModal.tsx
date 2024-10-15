@@ -1,61 +1,43 @@
 import { Button } from "@/components/ui";
-import { useAtom } from "jotai";
 import { whitelistNetworks } from "@/lib/whitelist";
 import Image from "next/image";
 import { getNetworkIcon, getTokenIcon } from "@/lib/utils/icons";
-import { ModalIds, InputType } from "@/enums";
+import { ModalIds } from "@/enums";
 import { useModal } from "@/lib/hooks/common/useModalAtom";
-import {
-  inputSideAtom,
-  networkFromAtom,
-  networkToAtom,
-  tokenFromAtom,
-  tokenToAtom,
-} from "@/atoms/modal/tokenNetworkAtom";
-import { useAtomValue } from "jotai";
 import { NetworkInfo, TokenInfo } from "@/types";
 import { Modal, SearchBar } from "@/components/ui";
+import { useSelectedAtoms } from "@/lib/hooks/common/useSelectedAtom";
 
-const TokenNetworkModal: React.FC = () => {
-  const { closeModal } = useModal(ModalIds.TokenNetworkModal);
+const TokenNetworkSelectorModal: React.FC = () => {
+  const { closeModal } = useModal(ModalIds.TokenNetworkSelectorModal);
+  // Get the relevant network and token atoms (input or output)
+  const {
+    selectedNetwork,
+    setSelectedNetwork,
+    selectedToken,
+    setSelectedToken,
+  } = useSelectedAtoms(true);
 
-  const inputSide = useAtomValue(inputSideAtom);
-
-  const [networkFrom, setNetworkFrom] = useAtom(networkFromAtom);
-  const [tokenFrom, setTokenFrom] = useAtom(tokenFromAtom);
-
-  const [networkTo, setNetworkTo] = useAtom(networkToAtom);
-  const [tokenTo, setTokenTo] = useAtom(tokenToAtom);
-
-  const selectedNetwork =
-    inputSide === InputType.FROM ? networkFrom : networkTo;
-  const selectedToken = inputSide === InputType.FROM ? tokenFrom : tokenTo;
-
+  // Get the list of networks and tokens
   const networkList = Object.values(whitelistNetworks);
-  const tokenList =
-    Object.values(whitelistNetworks[selectedNetwork].tokens) || [];
+  const tokenList = selectedNetwork
+    ? Object.values(whitelistNetworks[selectedNetwork].tokens) || []
+    : [];
 
+  // Select a network and reset token selection
   const onNetworkSelect = (network: NetworkInfo) => {
-    if (inputSide === InputType.FROM) {
-      setNetworkFrom(network.id);
-      setTokenFrom(null);
-    } else {
-      setNetworkTo(network.id);
-      setTokenTo(null);
-    }
+    setSelectedNetwork(network.id);
+    setSelectedToken(null); // Reset token when network changes
   };
 
+  // Select a token
   const onTokenSelect = (token: TokenInfo) => {
-    if (inputSide === InputType.FROM) {
-      setTokenFrom(token.address);
-    } else {
-      setTokenTo(token.address);
-    }
-    closeModal();
+    setSelectedToken(token.address);
+    closeModal(); // Close the modal after token selection
   };
 
   return (
-    <Modal modalId={ModalIds.TokenNetworkModal} title="Select">
+    <Modal modalId={ModalIds.TokenNetworkSelectorModal} title="Select">
       <div className="flex flex-col gap-y-2">
         <SearchBar placeholder="Search for tokens" />
         <div className="flex h-96 w-full border-t border-gray-800">
@@ -96,7 +78,7 @@ const TokenNetworkModal: React.FC = () => {
   );
 };
 
-export { TokenNetworkModal };
+export { TokenNetworkSelectorModal };
 
 // NetworkPill component
 interface NetworkPillProps {

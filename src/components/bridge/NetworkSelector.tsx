@@ -1,5 +1,3 @@
-// components/bridge/NetworkSelector.tsx
-
 "use client";
 
 import { Button } from "@/components/ui";
@@ -22,7 +20,7 @@ const NetworkSelector: React.FC<NetworkSelectorProps> = ({
   isInput = true,
   networkInfo,
 }) => {
-  const { openModal } = useModal(ModalIds.TokenNetworkModal);
+  const { openModal } = useModal(ModalIds.TokenNetworkSelectorModal);
   const [, setSelectedNetwork] = useAtom(
     isInput ? inputNetworkAtom : outputNetworkAtom,
   );
@@ -32,7 +30,9 @@ const NetworkSelector: React.FC<NetworkSelectorProps> = ({
       onClick={() => {
         openModal();
         // Store the selected network (input or output)
-        setSelectedNetwork(networkInfo?.id || null);
+        if (networkInfo?.id) {
+          setSelectedNetwork(networkInfo.id);
+        }
       }}
       variant="networkSelector"
       size="large"
