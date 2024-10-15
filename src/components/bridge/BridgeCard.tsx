@@ -18,7 +18,11 @@ import {
 import { useAtomValue } from "jotai";
 import BigNumber from "bignumber.js";
 import { InputType, ModalIds } from "@/enums";
-import { BridgeWalletConnect, TokenInput } from "@/components/bridge";
+import {
+  BridgeWalletConnect,
+  TokenInput,
+  TokenOutput,
+} from "@/components/bridge";
 import { TransactionDetails } from "@/components/shared";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
@@ -52,11 +56,10 @@ const BridgeCard: React.FC = () => {
         {/* TODO: Wrap button on icon */}
         <SwapIcon className="w-5 fill-gray-200" />
         <div className="flex w-full flex-col gap-y-2">
-          <TokenInput
+          <TokenOutput
             tokenAddress={tokenTo}
             networkId={networkTo}
-            inputType={InputType.TO}
-            isReadOnly
+            inputType={InputType.FROM}
           />
         </div>
       </CardHeader>

@@ -2,11 +2,7 @@
 
 import { Button, Input } from "@/components/ui";
 import { TokenNetworkSelector } from "@/components/bridge";
-import {
-  formatAsUsd,
-  formatTokenAmount,
-  tokenAmountInputFilter,
-} from "@/lib/utils/formats";
+import { formatTokenAmount, tokenAmountInputFilter } from "@/lib/utils/formats";
 import { useAtom } from "jotai";
 import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
 import { Address } from "viem";
@@ -16,26 +12,15 @@ import BigNumber from "bignumber.js";
 import { InputType, NetworkId } from "@/enums";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
 
-BigNumber.config({ EXPONENTIAL_AT: 1e9 });
-
 interface TokenInputProps {
   tokenAddress: Address | null;
   networkId: NetworkId | null;
   inputType: InputType;
-  isReadOnly?: boolean;
   onMaxClick?: (tokenBalance: BigNumber) => void;
 }
 
 const TokenInput: React.FC<TokenInputProps> = (props) => {
-  const usdValue = null;
-
-  const {
-    tokenAddress,
-    networkId,
-    inputType,
-    isReadOnly,
-    onMaxClick = () => {},
-  } = props;
+  const { tokenAddress, networkId, inputType, onMaxClick = () => {} } = props;
 
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
   const { address } = useAccount();
@@ -70,30 +55,23 @@ const TokenInput: React.FC<TokenInputProps> = (props) => {
         />
       </div>
       <div className="flex items-center justify-between p-4">
-        {!isReadOnly && (
-          <Button
-            size={"small"}
-            onClick={() => {
-              onMaxClick(tokenBalance);
-            }}
-          >
-            <span className="text-sb3">Max</span>
-          </Button>
-        )}
+        <Button
+          size={"small"}
+          onClick={() => {
+            onMaxClick(tokenBalance);
+          }}
+        >
+          <span className="text-sb3">Max</span>
+        </Button>
         <Input
-          value={isReadOnly ? "-" : inputValue}
-          disabled={isReadOnly}
+          value={inputValue}
           placeholder="0"
           onChange={handleInputChange}
         />
         <div className="flex flex-col items-end justify-between">
+          <span className="text-gray-400 text-sb3">Balance</span>
           <span className="text-gray-400 text-sb3">
-            {isReadOnly ? "USD" : "Balance"}
-          </span>
-          <span className="text-gray-400 text-sb3">
-            {isReadOnly
-              ? formatAsUsd(usdValue)
-              : formatTokenAmount(tokenBalance)}
+            {formatTokenAmount(tokenBalance)}
           </span>
         </div>
       </div>
