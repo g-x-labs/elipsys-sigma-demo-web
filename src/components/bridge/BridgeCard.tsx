@@ -1,17 +1,8 @@
-"use client";
-
-import {
-  Button,
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui";
 import SwapIcon from "@/assets/icons/swap.svg";
-import { useModal } from "@/lib/hooks/common/useModalAtom";
 import BigNumber from "bignumber.js";
-import { ModalIds } from "@/enums";
 import {
+  BridgeButton,
   BridgeWalletConnect,
   TokenInput,
   TokenOutput,
@@ -21,9 +12,6 @@ import { TransactionDetails } from "@/components/shared";
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const BridgeCard: React.FC = () => {
-  // TDOO: Can create a separate <CardButton /> component and we can remove use client from this file
-  const { openModal } = useModal(ModalIds.TransactionOverviewModal);
-
   return (
     <Card>
       <CardHeader className="items-center gap-y-4">
@@ -47,9 +35,7 @@ const BridgeCard: React.FC = () => {
         <TransactionDetails label="Est. Time to Destination" value={null} />
       </CardContent>
       <CardFooter>
-        <Button variant={"action"} onClick={openModal} className="w-full">
-          Enter Amount
-        </Button>
+        <BridgeButton />
       </CardFooter>
     </Card>
   );

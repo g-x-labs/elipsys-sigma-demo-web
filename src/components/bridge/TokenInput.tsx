@@ -9,17 +9,15 @@ import useGetUserTokenBalance from "@/lib/hooks/wallet/useGetUserTokenBalance";
 import { useAccount } from "wagmi";
 import BigNumber from "bignumber.js";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
-import {
-  inputNetworkAtom,
-  inputTokenAtom,
-} from "@/atoms/modal/tokenNetworkAtom";
+import { fromNetworkAtom, fromTokenAtom } from "@/atoms/modal/tokenNetworkAtom";
+import { SelectionType } from "@/enums";
 
 const TokenInput: React.FC = () => {
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
   const { address } = useAccount();
 
-  const tokenAddress = useAtomValue(inputTokenAtom);
-  const networkId = useAtomValue(inputNetworkAtom);
+  const tokenAddress = useAtomValue(fromTokenAtom);
+  const networkId = useAtomValue(fromNetworkAtom);
 
   const tokenInfo = getTokenInfo(networkId, tokenAddress);
   const networkInfo = getNetworkInfo(networkId);
@@ -44,8 +42,14 @@ const TokenInput: React.FC = () => {
   return (
     <div className="flex w-full flex-col rounded-md border border-gray-700">
       <div className="flex items-center justify-between border-b border-gray-700">
-        <TokenSelector isInput={true} tokenInfo={tokenInfo} />
-        <NetworkSelector isInput={true} networkInfo={networkInfo} />
+        <TokenSelector
+          selectionType={SelectionType.FROM}
+          tokenInfo={tokenInfo}
+        />
+        <NetworkSelector
+          selectionType={SelectionType.FROM}
+          networkInfo={networkInfo}
+        />
       </div>
       <div className="flex items-center justify-between p-4">
         <Button

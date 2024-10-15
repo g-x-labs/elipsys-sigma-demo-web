@@ -1,4 +1,4 @@
-export enum InputType {
+export enum SelectionType {
   FROM = "FROM",
   TO = "TO",
 }

@@ -2,36 +2,41 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui";
-import { useModal } from "@/lib/hooks/common/useModalAtom";
+import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
 import { getTokenIcon } from "@/lib/utils/icons";
 import { useAtom } from "jotai";
 import {
-  inputTokenAtom,
-  outputTokenAtom,
+  fromTokenAtom,
+  selectionTypeAtom,
+  toTokenAtom,
 } from "@/atoms/modal/tokenNetworkAtom";
 import { TokenInfo } from "@/types";
-import { ModalIds } from "@/enums";
+import { ModalIds, SelectionType } from "@/enums";
 
 interface TokenSelectorProps {
-  isInput?: boolean;
+  selectionType: SelectionType;
   tokenInfo?: TokenInfo | null;
 }
 
 const TokenSelector: React.FC<TokenSelectorProps> = (props) => {
-  const { isInput = true, tokenInfo } = props;
+  const { selectionType, tokenInfo } = props;
 
   const { openModal } = useModal(ModalIds.TokenNetworkSelectorModal);
   const [, setSelectedToken] = useAtom(
-    isInput ? inputTokenAtom : outputTokenAtom,
+    selectionType === SelectionType.FROM ? fromTokenAtom : toTokenAtom,
   );
+  const [, setSelectionType] = useAtom(selectionTypeAtom); // Set the selection type atom
+
+  const handleOnClick = () => {
+    setSelectionType(selectionType); // Set the selection type before opening the modal
+    openModal();
+    setSelectedToken(tokenInfo?.address || null);
+  };
 
   return (
     <Button
-      onClick={() => {
-        openModal();
-        setSelectedToken(tokenInfo?.address || null);
-      }}
+      onClick={handleOnClick}
       variant="tokenSelector"
       size="large"
       className="w-full min-w-[120px]"

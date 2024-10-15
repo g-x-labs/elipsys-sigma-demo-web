@@ -3,37 +3,38 @@ import { whitelistNetworks } from "@/lib/whitelist";
 import Image from "next/image";
 import { getNetworkIcon, getTokenIcon } from "@/lib/utils/icons";
 import { ModalIds } from "@/enums";
-import { useModal } from "@/lib/hooks/common/useModalAtom";
+import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import { NetworkInfo, TokenInfo } from "@/types";
 import { Modal, SearchBar } from "@/components/ui";
-import { useSelectedAtoms } from "@/lib/hooks/common/useSelectedAtom";
+import { useAtomValue } from "jotai";
+import { selectionTypeAtom } from "@/atoms/modal/tokenNetworkAtom";
+import { useSelectionAtoms } from "@/lib/hooks/modals/useSelectionAtoms";
 
 const TokenNetworkSelectorModal: React.FC = () => {
   const { closeModal } = useModal(ModalIds.TokenNetworkSelectorModal);
-  // Get the relevant network and token atoms (input or output)
+
+  const selectionType = useAtomValue(selectionTypeAtom);
+
   const {
     selectedNetwork,
     setSelectedNetwork,
     selectedToken,
     setSelectedToken,
-  } = useSelectedAtoms(true);
+  } = useSelectionAtoms(selectionType);
 
-  // Get the list of networks and tokens
   const networkList = Object.values(whitelistNetworks);
-  const tokenList = selectedNetwork
-    ? Object.values(whitelistNetworks[selectedNetwork].tokens) || []
-    : [];
+  const tokenList = Object.values(
+    whitelistNetworks[selectedNetwork]?.tokens || {},
+  );
 
-  // Select a network and reset token selection
   const onNetworkSelect = (network: NetworkInfo) => {
     setSelectedNetwork(network.id);
-    setSelectedToken(null); // Reset token when network changes
+    setSelectedToken(null);
   };
 
-  // Select a token
   const onTokenSelect = (token: TokenInfo) => {
     setSelectedToken(token.address);
-    closeModal(); // Close the modal after token selection
+    closeModal();
   };
 
   return (

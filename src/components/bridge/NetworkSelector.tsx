@@ -1,39 +1,43 @@
 "use client";
 
 import { Button } from "@/components/ui";
-import { useModal } from "@/lib/hooks/common/useModalAtom";
+import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
 import { useAtom } from "jotai";
 import {
-  inputNetworkAtom,
-  outputNetworkAtom,
+  fromNetworkAtom,
+  selectionTypeAtom,
+  toNetworkAtom,
 } from "@/atoms/modal/tokenNetworkAtom";
 import { NetworkInfo } from "@/types";
-import { ModalIds } from "@/enums";
+import { ModalIds, SelectionType } from "@/enums";
 
 interface NetworkSelectorProps {
-  isInput?: boolean;
+  selectionType: SelectionType;
   networkInfo?: NetworkInfo | null;
 }
 
 const NetworkSelector: React.FC<NetworkSelectorProps> = ({
-  isInput = true,
+  selectionType,
   networkInfo,
 }) => {
   const { openModal } = useModal(ModalIds.TokenNetworkSelectorModal);
   const [, setSelectedNetwork] = useAtom(
-    isInput ? inputNetworkAtom : outputNetworkAtom,
+    selectionType === SelectionType.FROM ? fromNetworkAtom : toNetworkAtom,
   );
+  const [, setSelectionType] = useAtom(selectionTypeAtom); // Set the selection type atom
+
+  const handleOnClick = () => {
+    setSelectionType(selectionType); // Set the selection type before opening the modal
+    openModal();
+    if (networkInfo?.id) {
+      setSelectedNetwork(networkInfo.id);
+    }
+  };
 
   return (
     <Button
-      onClick={() => {
-        openModal();
-        // Store the selected network (input or output)
-        if (networkInfo?.id) {
-          setSelectedNetwork(networkInfo.id);
-        }
-      }}
+      onClick={handleOnClick}
       variant="networkSelector"
       size="large"
       className="w-full min-w-[120px]"
