@@ -1,14 +1,13 @@
 "use client";
 
 import { Button, Input } from "@/components/ui";
-import { TokenNetworkSelector } from "@/components/bridge";
+import { NetworkSelector, TokenSelector } from "@/components/bridge";
 import { formatTokenAmount, tokenAmountInputFilter } from "@/lib/utils/formats";
 import { useAtom, useAtomValue } from "jotai";
 import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
 import useGetUserTokenBalance from "@/lib/hooks/wallet/useGetUserTokenBalance";
 import { useAccount } from "wagmi";
 import BigNumber from "bignumber.js";
-import { InputType } from "@/enums";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
 import { networkFromAtom, tokenFromAtom } from "@/atoms/modal/tokenNetworkAtom";
 
@@ -42,16 +41,8 @@ const TokenInput: React.FC = () => {
   return (
     <div className="flex w-full flex-col rounded-md border border-gray-700">
       <div className="flex items-center justify-between border-b border-gray-700">
-        <TokenNetworkSelector
-          variant="token"
-          tokenInfo={tokenInfo}
-          inputType={InputType.TO}
-        />
-        <TokenNetworkSelector
-          variant="network"
-          networkInfo={networkInfo}
-          inputType={InputType.TO}
-        />
+        <TokenSelector isInput={true} tokenInfo={tokenInfo} />
+        <NetworkSelector isInput={true} networkInfo={networkInfo} />
       </div>
       <div className="flex items-center justify-between p-4">
         <Button

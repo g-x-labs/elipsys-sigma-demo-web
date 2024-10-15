@@ -1,11 +1,10 @@
 "use client";
 
 import { Input } from "@/components/ui";
-import { TokenNetworkSelector } from "@/components/bridge";
+import { NetworkSelector, TokenSelector } from "@/components/bridge";
 import { formatAsUsd } from "@/lib/utils/formats";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
 import { networkToAtom, tokenToAtom } from "@/atoms/modal/tokenNetworkAtom";
-import { InputType } from "@/enums";
 import { useAtomValue } from "jotai";
 
 const TokenOutput: React.FC = () => {
@@ -20,16 +19,8 @@ const TokenOutput: React.FC = () => {
   return (
     <div className="flex w-full flex-col rounded-md border border-gray-700">
       <div className="flex items-center justify-between border-b border-gray-700">
-        <TokenNetworkSelector
-          variant="token"
-          tokenInfo={tokenInfo}
-          inputType={InputType.FROM}
-        />
-        <TokenNetworkSelector
-          variant="network"
-          networkInfo={networkInfo}
-          inputType={InputType.FROM}
-        />
+        <TokenSelector isInput={false} tokenInfo={tokenInfo} />
+        <NetworkSelector isInput={false} networkInfo={networkInfo} />
       </div>
       <div className="flex p-4">
         {/* INFO: This no longer needs to be <Input /> but for consistency, we can leave it like this */}
