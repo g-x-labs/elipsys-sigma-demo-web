@@ -1,6 +1,6 @@
 import InfoIcon from "@/assets/icons/info.svg";
 import RightArrowIcon from "@/assets/icons/right-arrow.svg";
-import { formatAsUsd } from "@/lib/utils/formatting/format";
+import { formatAsUsd } from "@/lib/utils/formats";
 import { Tooltip } from "@/components/ui";
 
 // TODO: Change values to type number

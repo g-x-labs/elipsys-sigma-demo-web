@@ -6,7 +6,7 @@ import {
   formatAsUsd,
   formatTokenAmount,
   tokenAmountInputFilter,
-} from "@/lib/utils/formatting/format";
+} from "@/lib/utils/formats";
 import { useAtom } from "jotai";
 import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
 import { Address } from "viem";

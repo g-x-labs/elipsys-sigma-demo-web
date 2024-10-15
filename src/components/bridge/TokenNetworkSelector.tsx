@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui";
 import { useModal } from "@/lib/hooks/common/useModalAtom";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
-import { getTokenIcon } from "@/lib/utils/icons/iconUtils";
+import { getTokenIcon } from "@/lib/utils/icons";
 import { useSetAtom } from "jotai";
 import { InputType, ModalIds } from "@/enums";
 import { inputSideAtom } from "@/atoms/modal/tokenNetworkAtom";

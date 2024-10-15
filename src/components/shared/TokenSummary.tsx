@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { getNetworkIcon, getTokenIcon } from "@/lib/utils/icons/iconUtils";
+import { getNetworkIcon, getTokenIcon } from "@/lib/utils/icons";
 import { Address } from "viem";
 import {
   formatAddress,
   formatAsUsd,
   formatTokenAmount,
-} from "@/lib/utils/formatting/format";
+} from "@/lib/utils/formats";
 import BigNumber from "bignumber.js";
 import { NetworkInfo, TokenInfo } from "@/types";
 
