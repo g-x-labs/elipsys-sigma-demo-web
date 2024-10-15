@@ -1,11 +1,10 @@
-import Modal from "@/components/ui/Modal";
 import { ModalIds, NetworkId } from "@/enums";
-import { Button } from "@/components/ui/Button";
 import { useBridgeTransactionHandler } from "@/lib/hooks/bridge/useBridgeTransactionHandler";
 import TransactionDetail from "@/components/shared/TransactionDetails";
 import { whitelistNetworks } from "@/const/whitelist";
 import TokenSummary from "@/components/shared/TokenSummary";
 import BigNumber from "bignumber.js";
+import { Button, Modal } from "@/components/ui";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 

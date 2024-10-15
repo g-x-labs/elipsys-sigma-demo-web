@@ -12,9 +12,14 @@ export type TooltipProps = {
   contentProps?: TooltipPrimitive.TooltipContentProps;
   arrowProps?: TooltipPrimitive.TooltipArrowProps;
 };
-export default function Tooltip(props: TooltipProps) {
-  const { trigger, content, rootProps, contentProps, arrowProps } = props;
 
+const Tooltip: React.FC<TooltipProps> = ({
+  trigger,
+  content,
+  rootProps,
+  contentProps,
+  arrowProps,
+}) => {
   return (
     <TooltipPrimitive.Provider delayDuration={150}>
       <TooltipPrimitive.Root {...rootProps}>
@@ -43,4 +48,6 @@ export default function Tooltip(props: TooltipProps) {
       </TooltipPrimitive.Root>
     </TooltipPrimitive.Provider>
   );
-}
+};
+
+export { Tooltip };

@@ -1,5 +1,5 @@
 import WormholeLiteIcon from "@/assets/icons/wormhole-lite.svg";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui";
 
 export default function BridgeHeader() {
   return (

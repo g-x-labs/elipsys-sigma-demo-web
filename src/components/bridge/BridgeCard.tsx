@@ -1,12 +1,12 @@
 "use client";
 
 import {
+  Button,
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
+} from "@/components/ui";
 import SwapIcon from "@/assets/icons/swap.svg";
 import TransactionDetail from "@/components/shared/TransactionDetails";
 import TokenInput from "@/components/bridge/TokenInput";

@@ -45,4 +45,4 @@ const SearchBar = React.forwardRef<
 
 SearchBar.displayName = "SearchBar";
 
-export default SearchBar;
+export { SearchBar };

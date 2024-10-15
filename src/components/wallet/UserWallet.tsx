@@ -4,7 +4,7 @@ import { Address } from "viem";
 import { formatAddress } from "@/lib/utils/formatting/format";
 import { useAccountModal } from "@rainbow-me/rainbowkit";
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui";
 import { getWalletIcon } from "@/lib/utils/icons/iconUtils";
 
 interface UserWalletProps {

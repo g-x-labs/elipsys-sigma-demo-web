@@ -1,7 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
+import { Button, Input } from "@/components/ui";
 import TokenNetworkSelector from "@/components/bridge/TokenNetworkSelector";
 import {
   formatAsUsd,
