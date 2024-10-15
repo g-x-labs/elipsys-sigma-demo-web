@@ -1,3 +1,4 @@
+// lib/hooks/useSelectionAtoms.ts
 import { useAtom } from "jotai";
 import {
   fromNetworkAtom,
@@ -8,21 +9,18 @@ import {
 import { SelectionType } from "@/enums";
 
 export const useSelectionAtoms = (selectionType: SelectionType) => {
-  const [networkFrom, setNetworkFrom] = useAtom(fromNetworkAtom);
-  const [tokenFrom, setTokenFrom] = useAtom(fromTokenAtom);
+  const networkAtoms = {
+    [SelectionType.FROM]: useAtom(fromNetworkAtom),
+    [SelectionType.TO]: useAtom(toNetworkAtom),
+  };
 
-  const [networkTo, setNetworkTo] = useAtom(toNetworkAtom);
-  const [tokenTo, setTokenTo] = useAtom(toTokenAtom);
+  const tokenAtoms = {
+    [SelectionType.FROM]: useAtom(fromTokenAtom),
+    [SelectionType.TO]: useAtom(toTokenAtom),
+  };
 
-  const selectedNetwork =
-    selectionType === SelectionType.FROM ? networkFrom : networkTo;
-  const setSelectedNetwork =
-    selectionType === SelectionType.FROM ? setNetworkFrom : setNetworkTo;
-
-  const selectedToken =
-    selectionType === SelectionType.FROM ? tokenFrom : tokenTo;
-  const setSelectedToken =
-    selectionType === SelectionType.FROM ? setTokenFrom : setTokenTo;
+  const [selectedNetwork, setSelectedNetwork] = networkAtoms[selectionType];
+  const [selectedToken, setSelectedToken] = tokenAtoms[selectionType];
 
   return {
     selectedNetwork,
