@@ -3,7 +3,7 @@ import { Address } from "viem";
 import { useBalance, useReadContract } from "wagmi";
 import { ierc20Abi } from "@/contract/abi";
 import BigNumber from "bignumber.js";
-import { NetworkId } from "@/enums/networks";
+import { NetworkId } from "@/enums";
 /**
  * Description: Retrieves the balance of a specified ERC-20 token for a given address.
  *

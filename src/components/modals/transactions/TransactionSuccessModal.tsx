@@ -1,10 +1,9 @@
 import TransactionDetail from "@/components/shared/TransactionDetails";
 import Modal from "@/components/ui/Modal";
-import { ModalIds } from "@/enums/modals";
+import { NetworkId, ModalIds } from "@/enums";
 import { Button } from "@/components/ui/Button";
 import { useModal } from "@/lib/hooks/common/useModalAtom";
 import { whitelistNetworks } from "@/const/whitelist";
-import { NetworkId } from "@/enums/networks";
 import TokenSummary from "@/components/shared/TokenSummary";
 import LinkOutIcon from "@/assets/icons/link-out.svg";
 import BigNumber from "bignumber.js";

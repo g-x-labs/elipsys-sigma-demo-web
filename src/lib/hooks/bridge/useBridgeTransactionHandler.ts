@@ -1,11 +1,10 @@
 import { useAtom } from "jotai";
-import { ModalIds } from "@/enums/modals";
+import { ModalIds, TransactionStatus } from "@/enums";
 import {
   modalAtom,
   transactionHashAtom,
   transactionStatusAtom,
 } from "@/atoms/modal/modalAtom";
-import { TransactionStatus } from "@/enums/transactionStatus";
 
 export function useBridgeTransactionHandler() {
   const [, setTransactionStatus] = useAtom(transactionStatusAtom);

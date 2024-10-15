@@ -1,4 +1,4 @@
-import { NetworkId } from "@/enums/networks";
+import { NetworkId } from "@/enums";
 import { TokenInfo } from "@/types/token";
 import { Address } from "viem";
 

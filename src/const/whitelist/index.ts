@@ -2,7 +2,7 @@ import { optimismSepoliaWhitelist } from "./optimismSepolia";
 import { sepoliaWhitelist } from "./sepolia";
 import { Address } from "viem";
 import { blastSepoliaWhitelist } from "./blastSepolia";
-import { NetworkId } from "@/enums/networks";
+import { NetworkId } from "@/enums";
 import { NetworkInfo } from "@/types/network";
 import { TokenInfo } from "@/types/token";
 

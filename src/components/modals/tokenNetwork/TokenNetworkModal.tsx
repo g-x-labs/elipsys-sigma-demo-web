@@ -5,7 +5,7 @@ import SearchBar from "@/components/ui/Search";
 import { whitelistNetworks } from "@/const/whitelist";
 import Image from "next/image";
 import { getNetworkIcon, getTokenIcon } from "@/lib/utils/icons/iconUtils";
-import { ModalIds } from "@/enums/modals";
+import { ModalIds, InputType } from "@/enums";
 import { useModal } from "@/lib/hooks/common/useModalAtom";
 import {
   inputSideAtom,
@@ -15,7 +15,6 @@ import {
   tokenToAtom,
 } from "@/atoms/modal/tokenNetworkAtom";
 import { useAtomValue } from "jotai";
-import { InputType } from "@/enums/inputs";
 import { NetworkInfo } from "@/types/network";
 import { TokenInfo } from "@/types/token";
 

@@ -2,8 +2,7 @@ import TokenSummary from "@/components/shared/TokenSummary";
 import TransactionDetail from "@/components/shared/TransactionDetails";
 import Modal from "@/components/ui/Modal";
 import { whitelistNetworks } from "@/const/whitelist";
-import { ModalIds } from "@/enums/modals";
-import { NetworkId } from "@/enums/networks";
+import { ModalIds, NetworkId } from "@/enums";
 import BigNumber from "bignumber.js";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });

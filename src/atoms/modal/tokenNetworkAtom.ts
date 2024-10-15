@@ -1,5 +1,4 @@
-import { InputType } from "@/enums/inputs";
-import { NetworkId } from "@/enums/networks";
+import { NetworkId, InputType } from "@/enums";
 import { atom } from "jotai";
 import { Address } from "viem";
 
