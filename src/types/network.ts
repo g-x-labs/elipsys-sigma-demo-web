@@ -1,5 +1,5 @@
 import { NetworkId } from "@/enums";
-import { TokenInfo } from "@/types/token";
+import { TokenInfo } from "@/types";
 import { Address } from "viem";
 
 export type NetworkInfo = {

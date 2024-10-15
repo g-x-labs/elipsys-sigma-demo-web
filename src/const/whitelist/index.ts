@@ -3,8 +3,7 @@ import { sepoliaWhitelist } from "./sepolia";
 import { Address } from "viem";
 import { blastSepoliaWhitelist } from "./blastSepolia";
 import { NetworkId } from "@/enums";
-import { NetworkInfo } from "@/types/network";
-import { TokenInfo } from "@/types/token";
+import { NetworkInfo, TokenInfo } from "@/types";
 
 export const whitelistNetworks: Record<NetworkId, NetworkInfo> = {
   11155111: {

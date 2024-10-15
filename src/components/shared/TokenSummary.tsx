@@ -7,8 +7,7 @@ import {
   formatTokenAmount,
 } from "@/lib/utils/formatting/format";
 import BigNumber from "bignumber.js";
-import { TokenInfo } from "@/types/token";
-import { NetworkInfo } from "@/types/network";
+import { NetworkInfo, TokenInfo } from "@/types";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 

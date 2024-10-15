@@ -8,8 +8,7 @@ import { getTokenIcon } from "@/lib/utils/icons/iconUtils";
 import { useSetAtom } from "jotai";
 import { InputType, ModalIds } from "@/enums";
 import { inputSideAtom } from "@/atoms/modal/tokenNetworkAtom";
-import { NetworkInfo } from "@/types/network";
-import { TokenInfo } from "@/types/token";
+import { NetworkInfo, TokenInfo } from "@/types";
 
 interface TokenNetworkSelectorProps {
   inputType: InputType;

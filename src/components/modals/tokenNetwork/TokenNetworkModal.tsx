@@ -15,8 +15,7 @@ import {
   tokenToAtom,
 } from "@/atoms/modal/tokenNetworkAtom";
 import { useAtomValue } from "jotai";
-import { NetworkInfo } from "@/types/network";
-import { TokenInfo } from "@/types/token";
+import { NetworkInfo, TokenInfo } from "@/types";
 
 export default function TokenNetworkModal() {
   const { closeModal } = useModal(ModalIds.TokenNetworkModal);
