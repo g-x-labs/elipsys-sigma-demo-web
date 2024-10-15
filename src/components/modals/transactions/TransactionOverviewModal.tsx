@@ -8,7 +8,7 @@ import { Button, Modal } from "@/components/ui";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
-export default function TransactionOverviewModal() {
+const TransactionOverviewModal: React.FC = () => {
   // TODO: Remove these
   const tempNetwork = Object.values(whitelistNetworks)[0];
   const tempToken = Object.values(
@@ -47,4 +47,6 @@ export default function TransactionOverviewModal() {
       </Button>
     </Modal>
   );
-}
+};
+
+export { TransactionOverviewModal };

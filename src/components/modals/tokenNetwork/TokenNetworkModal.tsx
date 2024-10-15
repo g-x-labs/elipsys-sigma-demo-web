@@ -16,7 +16,7 @@ import { useAtomValue } from "jotai";
 import { NetworkInfo, TokenInfo } from "@/types";
 import { Modal, SearchBar } from "@/components/ui";
 
-export default function TokenNetworkModal() {
+const TokenNetworkModal: React.FC = () => {
   const { closeModal } = useModal(ModalIds.TokenNetworkModal);
 
   const inputSide = useAtomValue(inputSideAtom);
@@ -94,7 +94,9 @@ export default function TokenNetworkModal() {
       </div>
     </Modal>
   );
-}
+};
+
+export { TokenNetworkModal };
 
 // NetworkPill component
 interface NetworkPillProps {

@@ -7,7 +7,7 @@ import BigNumber from "bignumber.js";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
-export default function TransactionPendingModal() {
+const TransactionPendingModal: React.FC = () => {
   // TODO: Remove these
   const tempNetwork = Object.values(whitelistNetworks)[0];
   const tempToken = Object.values(
@@ -54,4 +54,6 @@ export default function TransactionPendingModal() {
       </div>
     </Modal>
   );
-}
+};
+
+export { TransactionPendingModal };

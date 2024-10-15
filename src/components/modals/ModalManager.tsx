@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
-import TokenNetworkModal from "@/components/modals/tokenNetwork/TokenNetworkModal";
-import TransactionOverviewModal from "@/components/modals/transactions/TransactionOverviewModal";
-import TransactionPendingModal from "@/components/modals/transactions/TransactionPendingModal";
-import TransactionSuccessModal from "@/components/modals/transactions/TransactionSuccessModal";
-import TransactionFailModal from "@/components/modals/transactions/TransactionFailModal";
+import { TokenNetworkModal } from "@/components/modals/tokenNetwork";
+import {
+  TransactionOverviewModal,
+  TransactionPendingModal,
+  TransactionSuccessModal,
+  TransactionFailModal,
+} from "@/components/modals/transactions";
 
 const ModalManager: React.FC = () => {
   return (
@@ -19,4 +21,4 @@ const ModalManager: React.FC = () => {
   );
 };
 
-export default ModalManager;
+export { ModalManager };
