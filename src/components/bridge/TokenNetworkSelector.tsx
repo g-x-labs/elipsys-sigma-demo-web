@@ -17,7 +17,7 @@ interface TokenNetworkSelectorProps {
   variant?: "token" | "network";
 }
 
-export default function TokenNetworkSelector(props: TokenNetworkSelectorProps) {
+const TokenNetworkSelector: React.FC<TokenNetworkSelectorProps> = (props) => {
   const { inputType, networkInfo, tokenInfo, variant = "token" } = props;
 
   const { openModal } = useModal(ModalIds.TokenNetworkModal);
@@ -66,4 +66,6 @@ export default function TokenNetworkSelector(props: TokenNetworkSelectorProps) {
       </div>
     </Button>
   );
-}
+};
+
+export { TokenNetworkSelector };

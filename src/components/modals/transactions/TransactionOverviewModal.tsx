@@ -1,10 +1,9 @@
 import { ModalIds, NetworkId } from "@/enums";
 import { useBridgeTransactionHandler } from "@/lib/hooks/bridge/useBridgeTransactionHandler";
-import TransactionDetail from "@/components/shared/TransactionDetails";
 import { whitelistNetworks } from "@/const/whitelist";
-import TokenSummary from "@/components/shared/TokenSummary";
 import BigNumber from "bignumber.js";
 import { Button, Modal } from "@/components/ui";
+import { TokenSummary, TransactionDetails } from "@/components/shared";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -32,7 +31,7 @@ const TransactionOverviewModal: React.FC = () => {
           network={tempNetwork}
           destinationAddress="0x0000...0000"
         />
-        <TransactionDetail
+        <TransactionDetails
           label="Network Cost"
           value={null}
           tooltip="Estimated network cost"

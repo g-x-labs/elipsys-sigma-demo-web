@@ -1,12 +1,11 @@
-import TransactionDetail from "@/components/shared/TransactionDetails";
 import { NetworkId, ModalIds } from "@/enums";
 import { Button } from "@/components/ui";
 import { useModal } from "@/lib/hooks/common/useModalAtom";
 import { whitelistNetworks } from "@/const/whitelist";
-import TokenSummary from "@/components/shared/TokenSummary";
 import LinkOutIcon from "@/assets/icons/link-out.svg";
 import BigNumber from "bignumber.js";
 import { Modal } from "@/components/ui";
+import { TokenSummary, TransactionDetails } from "@/components/shared";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -47,7 +46,7 @@ const TransactionSuccessModal: React.FC = () => {
             destinationAddress="0x0000...0000"
           />
         </div>
-        <TransactionDetail
+        <TransactionDetails
           label="Network Cost"
           value={null}
           tooltip="Estimated network cost"

@@ -5,11 +5,11 @@ import { isScreenSupportedAtom } from "@/atoms/common/screenSizeAtom";
 import { useEffect } from "react";
 import ElipsysIcon from "@/assets/icons/elipsys-large.svg";
 
-export const ScreenSizeWrapper = ({
-  children,
-}: {
+interface ScreenSizeWrapperProps {
   children: React.ReactNode;
-}) => {
+}
+
+const ScreenSizeWrapper: React.FC<ScreenSizeWrapperProps> = ({ children }) => {
   const [isScreenSupported, setIsScreenSupported] = useAtom(
     isScreenSupportedAtom,
   );
@@ -39,3 +39,5 @@ export const ScreenSizeWrapper = ({
     </div>
   );
 };
+
+export { ScreenSizeWrapper };

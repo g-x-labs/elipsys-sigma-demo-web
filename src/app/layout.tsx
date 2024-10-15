@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Roboto_Mono } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
-import { ScreenSizeWrapper } from "@/components/layout/ScreenSizeWrapper";
 import { Providers } from "./providers";
 import "@rainbow-me/rainbowkit/styles.css";
 import { ModalManager } from "@/components/modals/ModalManager";
+import { Footer, Navbar, ScreenSizeWrapper } from "@/components/layout";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],

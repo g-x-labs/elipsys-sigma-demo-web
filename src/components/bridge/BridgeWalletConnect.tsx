@@ -1,9 +1,10 @@
 "use client";
+
 import { ConnectWalletButton } from "@/components/wallet/ConnectWalletButton";
 import UserWallet from "@/components/wallet/UserWallet";
 import { useAccount } from "wagmi";
 
-export default function BridgeWalletConnect() {
+const BridgeWalletConnect: React.FC = () => {
   const { isConnected, address, connector } = useAccount();
   if (isConnected && address) {
     return (
@@ -22,4 +23,6 @@ export default function BridgeWalletConnect() {
       <ConnectWalletButton />
     </div>
   );
-}
+};
+
+export { BridgeWalletConnect };

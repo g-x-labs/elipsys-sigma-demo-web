@@ -8,9 +8,6 @@ import {
   CardHeader,
 } from "@/components/ui";
 import SwapIcon from "@/assets/icons/swap.svg";
-import TransactionDetail from "@/components/shared/TransactionDetails";
-import TokenInput from "@/components/bridge/TokenInput";
-import BridgeWalletConnect from "./BridgeWalletConnect";
 import { useModal } from "@/lib/hooks/common/useModalAtom";
 import {
   networkFromAtom,
@@ -21,10 +18,12 @@ import {
 import { useAtomValue } from "jotai";
 import BigNumber from "bignumber.js";
 import { InputType, ModalIds } from "@/enums";
+import { BridgeWalletConnect, TokenInput } from "@/components/bridge";
+import { TransactionDetails } from "@/components/shared";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
-export default function BridgeCard() {
+const BridgeCard: React.FC = () => {
   const { openModal } = useModal(ModalIds.TransactionOverviewModal);
 
   const tokenFrom = useAtomValue(tokenFromAtom);
@@ -62,13 +61,13 @@ export default function BridgeCard() {
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-y-2">
-        <TransactionDetail
+        <TransactionDetails
           label="Est. Cost"
           value={null}
           secondaryValue={null}
           tooltip="Estimated cost of transaction"
         />
-        <TransactionDetail label="Est. Time to Destination" value={null} />
+        <TransactionDetails label="Est. Time to Destination" value={null} />
       </CardContent>
       <CardFooter>
         <Button variant={"action"} onClick={openModal} className="w-full">
@@ -77,4 +76,6 @@ export default function BridgeCard() {
       </CardFooter>
     </Card>
   );
-}
+};
+
+export { BridgeCard };

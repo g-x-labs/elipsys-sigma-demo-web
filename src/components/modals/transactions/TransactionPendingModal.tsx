@@ -1,5 +1,4 @@
-import TokenSummary from "@/components/shared/TokenSummary";
-import TransactionDetail from "@/components/shared/TransactionDetails";
+import { TokenSummary, TransactionDetails } from "@/components/shared";
 import { Modal } from "@/components/ui";
 import { whitelistNetworks } from "@/const/whitelist";
 import { ModalIds, NetworkId } from "@/enums";
@@ -46,7 +45,7 @@ const TransactionPendingModal: React.FC = () => {
             destinationAddress="0x0000...0000"
           />
         </div>
-        <TransactionDetail
+        <TransactionDetails
           label="Network Cost"
           value={null}
           tooltip="Estimated network cost"

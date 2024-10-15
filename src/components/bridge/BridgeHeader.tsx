@@ -1,7 +1,7 @@
 import WormholeLiteIcon from "@/assets/icons/wormhole-lite.svg";
 import { Button } from "@/components/ui";
 
-export default function BridgeHeader() {
+const BridgeHeader: React.FC = () => {
   return (
     <div className="flex w-full flex-col items-start justify-center gap-y-5">
       <h2 className="text-gray-200 text-h3">Transfer</h2>
@@ -19,4 +19,6 @@ export default function BridgeHeader() {
       </div>
     </div>
   );
-}
+};
+
+export { BridgeHeader };

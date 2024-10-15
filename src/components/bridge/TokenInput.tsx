@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Input } from "@/components/ui";
-import TokenNetworkSelector from "@/components/bridge/TokenNetworkSelector";
+import { TokenNetworkSelector } from "@/components/bridge";
 import {
   formatAsUsd,
   formatTokenAmount,
@@ -26,7 +26,7 @@ interface TokenInputProps {
   onMaxClick?: (tokenBalance: BigNumber) => void;
 }
 
-export default function TokenInput(props: TokenInputProps) {
+const TokenInput: React.FC<TokenInputProps> = (props) => {
   const usdValue = null;
 
   const {
@@ -99,4 +99,6 @@ export default function TokenInput(props: TokenInputProps) {
       </div>
     </div>
   );
-}
+};
+
+export { TokenInput };

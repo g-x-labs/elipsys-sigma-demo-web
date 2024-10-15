@@ -4,7 +4,7 @@ import { formatAsUsd } from "@/lib/utils/formatting/format";
 import { Tooltip } from "@/components/ui";
 
 // TODO: Change values to type number
-export interface TransactionDetailProps {
+export interface TransactionDetailsProps {
   label: string;
   value: number | null | undefined;
   secondaryValue?: number | null | undefined;
@@ -14,7 +14,8 @@ export interface TransactionDetailProps {
 // TODO: Reconsider where to place this
 // INFO: This is used in the main component and in the transaction modals
 // TODO: Consider edge case where secondaryValue is <0.01 as well. Shouldn't display <0.01 -> <0.01
-export default function TransactionDetail(props: TransactionDetailProps) {
+
+const TransactionDetails: React.FC<TransactionDetailsProps> = (props) => {
   const { label, value, secondaryValue, tooltip } = props;
 
   return (
@@ -42,4 +43,6 @@ export default function TransactionDetail(props: TransactionDetailProps) {
       </p>
     </div>
   );
-}
+};
+
+export { TransactionDetails };

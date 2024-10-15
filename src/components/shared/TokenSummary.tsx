@@ -21,7 +21,7 @@ interface TokenSummaryProps {
   destinationAddress: Address;
 }
 
-export default function TokenSummary(props: TokenSummaryProps) {
+const TokenSummary: React.FC<TokenSummaryProps> = (props) => {
   const { token, tokenAmount, tokenUSDValue, network, destinationAddress } =
     props;
 
@@ -54,4 +54,6 @@ export default function TokenSummary(props: TokenSummaryProps) {
       </div>
     </div>
   );
-}
+};
+
+export { TokenSummary };

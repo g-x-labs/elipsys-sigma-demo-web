@@ -1,5 +1,4 @@
-import BridgeCard from "@/components/bridge/BridgeCard";
-import BridgeHeader from "@/components/bridge/BridgeHeader";
+import { BridgeCard, BridgeHeader } from "@/components/bridge";
 
 export default function Home() {
   return (
