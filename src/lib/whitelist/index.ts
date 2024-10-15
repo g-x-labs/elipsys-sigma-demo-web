@@ -1,9 +1,8 @@
 import { optimismSepoliaWhitelist } from "./optimismSepolia";
 import { sepoliaWhitelist } from "./sepolia";
-import { Address } from "viem";
 import { blastSepoliaWhitelist } from "./blastSepolia";
 import { NetworkId } from "@/enums";
-import { NetworkInfo, TokenInfo } from "@/types";
+import { NetworkInfo } from "@/types";
 
 export const whitelistNetworks: Record<NetworkId, NetworkInfo> = {
   11155111: {
@@ -25,16 +24,3 @@ export const whitelistNetworks: Record<NetworkId, NetworkInfo> = {
     tokens: blastSepoliaWhitelist,
   },
 };
-
-export function getNetworkInfo(id: NetworkId | null): NetworkInfo | null {
-  if (!id) return null;
-  return whitelistNetworks[id];
-}
-
-export function getTokenInfo(
-  id: NetworkId | null,
-  address: Address | null,
-): TokenInfo | null {
-  if (!id || !address) return null;
-  return whitelistNetworks[id].tokens[address];
-}

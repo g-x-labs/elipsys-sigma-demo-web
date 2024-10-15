@@ -10,11 +10,11 @@ import {
 import { useAtom } from "jotai";
 import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
 import { Address } from "viem";
-import { getNetworkInfo, getTokenInfo } from "@/const/whitelist";
 import useGetUserTokenBalance from "@/lib/hooks/wallet/useGetUserTokenBalance";
 import { useAccount } from "wagmi";
 import BigNumber from "bignumber.js";
 import { InputType, NetworkId } from "@/enums";
+import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 

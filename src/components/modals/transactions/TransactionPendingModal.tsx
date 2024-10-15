@@ -1,6 +1,6 @@
 import { TokenSummary, TransactionDetails } from "@/components/shared";
 import { Modal } from "@/components/ui";
-import { whitelistNetworks } from "@/const/whitelist";
+import { whitelistNetworks } from "@/lib/whitelist";
 import { ModalIds, NetworkId } from "@/enums";
 import BigNumber from "bignumber.js";
 

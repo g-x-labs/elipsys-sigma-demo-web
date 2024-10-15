@@ -1,4 +1,4 @@
-import { ZERO_ADDRESS } from "@/const/utills";
+import { ZERO_ADDRESS } from "@/lib/constants/addresses";
 import { Address } from "viem";
 import { useBalance, useReadContract } from "wagmi";
 import { ierc20Abi } from "@/contract/abi";

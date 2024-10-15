@@ -1,4 +1,4 @@
-import { whitelistNetworks } from "@/const/whitelist";
+import { whitelistNetworks } from "@/lib/whitelist";
 import { useModal } from "@/lib/hooks/common/useModalAtom";
 import { ModalIds, NetworkId } from "@/enums";
 import BigNumber from "bignumber.js";

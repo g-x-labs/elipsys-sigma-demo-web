@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui";
 import { useAtom } from "jotai";
-import { whitelistNetworks } from "@/const/whitelist";
+import { whitelistNetworks } from "@/lib/whitelist";
 import Image from "next/image";
 import { getNetworkIcon, getTokenIcon } from "@/lib/utils/icons";
 import { ModalIds, InputType } from "@/enums";
