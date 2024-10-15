@@ -3,27 +3,21 @@
 import { Button, Input } from "@/components/ui";
 import { TokenNetworkSelector } from "@/components/bridge";
 import { formatTokenAmount, tokenAmountInputFilter } from "@/lib/utils/formats";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
-import { Address } from "viem";
 import useGetUserTokenBalance from "@/lib/hooks/wallet/useGetUserTokenBalance";
 import { useAccount } from "wagmi";
 import BigNumber from "bignumber.js";
-import { InputType, NetworkId } from "@/enums";
+import { InputType } from "@/enums";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
+import { networkFromAtom, tokenFromAtom } from "@/atoms/modal/tokenNetworkAtom";
 
-interface TokenInputProps {
-  tokenAddress: Address | null;
-  networkId: NetworkId | null;
-  inputType: InputType;
-  onMaxClick?: (tokenBalance: BigNumber) => void;
-}
-
-const TokenInput: React.FC<TokenInputProps> = (props) => {
-  const { tokenAddress, networkId, inputType, onMaxClick = () => {} } = props;
-
+const TokenInput: React.FC = () => {
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
   const { address } = useAccount();
+
+  const tokenAddress = useAtomValue(tokenFromAtom);
+  const networkId = useAtomValue(networkFromAtom);
 
   const tokenInfo = getTokenInfo(networkId, tokenAddress);
   const networkInfo = getNetworkInfo(networkId);
@@ -40,25 +34,30 @@ const TokenInput: React.FC<TokenInputProps> = (props) => {
     setInputValue(tokenAmountInputFilter(value));
   };
 
+  const onSetInputValue = (tokenBalance: BigNumber) => {
+    //TODO: Implement this
+    console.log("Set input value here", tokenBalance.toString());
+  };
+
   return (
     <div className="flex w-full flex-col rounded-md border border-gray-700">
       <div className="flex items-center justify-between border-b border-gray-700">
         <TokenNetworkSelector
           variant="token"
           tokenInfo={tokenInfo}
-          inputType={inputType}
+          inputType={InputType.TO}
         />
         <TokenNetworkSelector
           variant="network"
           networkInfo={networkInfo}
-          inputType={inputType}
+          inputType={InputType.TO}
         />
       </div>
       <div className="flex items-center justify-between p-4">
         <Button
           size={"small"}
           onClick={() => {
-            onMaxClick(tokenBalance);
+            onSetInputValue(BigNumber(tokenBalance));
           }}
         >
           <span className="text-sb3">Max</span>

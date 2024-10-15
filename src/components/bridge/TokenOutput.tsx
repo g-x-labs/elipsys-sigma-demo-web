@@ -3,20 +3,16 @@
 import { Input } from "@/components/ui";
 import { TokenNetworkSelector } from "@/components/bridge";
 import { formatAsUsd } from "@/lib/utils/formats";
-import { Address } from "viem";
-import { InputType, NetworkId } from "@/enums";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
+import { networkToAtom, tokenToAtom } from "@/atoms/modal/tokenNetworkAtom";
+import { InputType } from "@/enums";
+import { useAtomValue } from "jotai";
 
-interface TokenOutputProps {
-  tokenAddress: Address | null;
-  networkId: NetworkId | null;
-  inputType: InputType;
-}
-
-const TokenOutput: React.FC<TokenOutputProps> = (props) => {
-  const { tokenAddress, networkId, inputType } = props;
-
+const TokenOutput: React.FC = () => {
   const usdValue = null;
+
+  const tokenAddress = useAtomValue(tokenToAtom);
+  const networkId = useAtomValue(networkToAtom);
 
   const tokenInfo = getTokenInfo(networkId, tokenAddress);
   const networkInfo = getNetworkInfo(networkId);
@@ -27,15 +23,16 @@ const TokenOutput: React.FC<TokenOutputProps> = (props) => {
         <TokenNetworkSelector
           variant="token"
           tokenInfo={tokenInfo}
-          inputType={inputType}
+          inputType={InputType.FROM}
         />
         <TokenNetworkSelector
           variant="network"
           networkInfo={networkInfo}
-          inputType={inputType}
+          inputType={InputType.FROM}
         />
       </div>
-      <div className="flex items-center justify-between p-4">
+      <div className="flex p-4">
+        {/* INFO: This no longer needs to be <Input /> but for consistency, we can leave it like this */}
         <Input value="-" disabled />
         <div className="flex flex-col items-end justify-between">
           <span className="text-gray-400 text-sb3">USD</span>
