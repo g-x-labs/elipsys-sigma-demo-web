@@ -6,13 +6,10 @@ import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
 import { getTokenIcon } from "@/lib/utils/icons";
 import { useAtom } from "jotai";
-import {
-  fromTokenAtom,
-  selectionTypeAtom,
-  toTokenAtom,
-} from "@/atoms/modal/tokenNetworkAtom";
+import { selectionTypeAtom } from "@/atoms/modal/tokenNetworkAtom";
 import { TokenInfo } from "@/types";
 import { ModalIds, SelectionType } from "@/enums";
+import { useSelectionAtoms } from "@/lib/hooks/modals/useSelectionAtoms";
 
 interface TokenSelectorProps {
   selectionType: SelectionType;
@@ -23,13 +20,13 @@ const TokenSelector: React.FC<TokenSelectorProps> = (props) => {
   const { selectionType, tokenInfo } = props;
 
   const { openModal } = useModal(ModalIds.TokenNetworkSelectorModal);
-  const [, setSelectedToken] = useAtom(
-    selectionType === SelectionType.FROM ? fromTokenAtom : toTokenAtom,
-  );
-  const [, setSelectionType] = useAtom(selectionTypeAtom); // Set the selection type atom
+
+  const [, setSelectionType] = useAtom(selectionTypeAtom);
+
+  const { setSelectedToken } = useSelectionAtoms(selectionType);
 
   const handleOnClick = () => {
-    setSelectionType(selectionType); // Set the selection type before opening the modal
+    setSelectionType(selectionType);
     openModal();
     setSelectedToken(tokenInfo?.address || null);
   };
