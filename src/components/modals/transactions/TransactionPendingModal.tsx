@@ -7,7 +7,7 @@ import { Modal } from "@/components/ui";
 import { ModalIds, SelectionType } from "@/enums";
 import BigNumber from "bignumber.js";
 import { useAccount } from "wagmi";
-import { useTransactionInfo } from "@/lib/hooks/bridge/useTransactionInfo";
+import { useTransactionInfo } from "@/lib/hooks/bridge";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -21,6 +21,7 @@ const TransactionPendingModal: React.FC = () => {
   const { token: fromToken, network: fromNetwork } = useTransactionInfo(
     SelectionType.FROM,
   );
+
   const { token: toToken, network: toNetwork } = useTransactionInfo(
     SelectionType.TO,
   );

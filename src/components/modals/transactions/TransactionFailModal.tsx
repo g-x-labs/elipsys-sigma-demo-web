@@ -4,7 +4,7 @@ import BigNumber from "bignumber.js";
 import { Button, Modal } from "@/components/ui";
 import { TokenSummary, TransactionDetails } from "@/components/shared";
 import { useAccount } from "wagmi";
-import { useTransactionInfo } from "@/lib/hooks/bridge/useTransactionInfo";
+import { useTransactionInfo } from "@/lib/hooks/bridge";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 

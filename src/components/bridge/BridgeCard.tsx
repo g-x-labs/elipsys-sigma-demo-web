@@ -17,7 +17,7 @@ import {
 import { TransactionDetails } from "@/components/shared";
 import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import { ModalIds } from "@/enums";
-import { useSwapSelection } from "@/lib/hooks/bridge/useSwapSelection";
+import { useSwapSelection } from "@/lib/hooks/bridge";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 

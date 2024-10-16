@@ -7,7 +7,7 @@ import { useAtom } from "jotai";
 import { selectionTypeAtom } from "@/atoms/bridge/tokenNetworkAtom";
 import { NetworkInfo } from "@/types";
 import { ModalIds, SelectionType } from "@/enums";
-import { useSelectionAtoms } from "@/lib/hooks/bridge/useSelectionAtoms";
+import { useSelectionAtoms } from "@/lib/hooks/bridge";
 
 interface NetworkSelectorProps {
   selectionType: SelectionType;
