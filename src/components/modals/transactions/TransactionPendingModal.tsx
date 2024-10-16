@@ -1,10 +1,13 @@
-import { TokenSummary, TransactionDetails } from "@/components/shared";
+import {
+  TokenSummary,
+  TransactionDetails,
+  TransactionDivider,
+} from "@/components/shared";
 import { Modal } from "@/components/ui";
 import { ModalIds, SelectionType } from "@/enums";
 import BigNumber from "bignumber.js";
-import { useSelectionAtoms } from "@/lib/hooks/bridge/useSelectionAtoms";
-import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
 import { useAccount } from "wagmi";
+import { useTransactionInfo } from "@/lib/hooks/bridge/useTransactionInfo";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -15,17 +18,13 @@ const TransactionPendingModal: React.FC = () => {
 
   const { address } = useAccount();
 
-  const { selectedToken: fromToken, selectedNetwork: fromNetwork } =
-    useSelectionAtoms(SelectionType.FROM);
+  const { token: inputToken, network: inputNetwork } = useTransactionInfo(
+    SelectionType.FROM,
+  );
 
-  const { selectedToken: toToken, selectedNetwork: toNetwork } =
-    useSelectionAtoms(SelectionType.TO);
-
-  const tokenFrom = getTokenInfo(fromNetwork, fromToken);
-  const networkFrom = getNetworkInfo(fromNetwork);
-
-  const tokenTo = getTokenInfo(toNetwork, toToken);
-  const networkTo = getNetworkInfo(toNetwork);
+  const { token: outputToken, network: outputNetwork } = useTransactionInfo(
+    SelectionType.TO,
+  );
 
   return (
     <Modal
@@ -37,23 +36,18 @@ const TransactionPendingModal: React.FC = () => {
         <h2 className="text-gray-400 text-sb3">Entering the Portal</h2>
         <div className="flex w-full flex-col">
           <TokenSummary
-            token={tokenFrom}
+            token={inputToken}
             tokenAmount={tempTokenAmount}
             tokenUSDValue={tempTokenUsdValue}
-            network={networkTo}
+            network={inputNetwork}
             destinationAddress={address}
           />
-          <div className="flex h-[60px] flex-row items-center gap-x-1">
-            <div className="mx-4 h-full w-[1px] bg-gray-600" />
-            <span className="text-gray-400 text-sb3">
-              Wormhole (ZK-Threshold)
-            </span>
-          </div>
+          <TransactionDivider label="Wormhole (ZK-Threshold)" height="60px" />
           <TokenSummary
-            token={tokenTo}
+            token={outputToken}
             tokenAmount={tempTokenAmount}
             tokenUSDValue={tempTokenUsdValue}
-            network={networkFrom}
+            network={outputNetwork}
             destinationAddress={address}
           />
         </div>

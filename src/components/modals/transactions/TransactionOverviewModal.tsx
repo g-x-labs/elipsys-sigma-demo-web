@@ -3,9 +3,8 @@ import { useBridgeTransactionHandler } from "@/lib/hooks/bridge/useBridgeTransac
 import BigNumber from "bignumber.js";
 import { Button, Modal } from "@/components/ui";
 import { TokenSummary, TransactionDetails } from "@/components/shared";
-import { useSelectionAtoms } from "@/lib/hooks/bridge/useSelectionAtoms";
-import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
 import { useAccount } from "wagmi";
+import { useTransactionInfo } from "@/lib/hooks/bridge/useTransactionInfo";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -18,12 +17,9 @@ const TransactionOverviewModal: React.FC = () => {
 
   const { address } = useAccount();
 
-  const { selectedToken, selectedNetwork } = useSelectionAtoms(
+  const { token: inputToken, network: inputNetwork } = useTransactionInfo(
     SelectionType.FROM,
   );
-
-  const token = getTokenInfo(selectedNetwork, selectedToken);
-  const network = getNetworkInfo(selectedNetwork);
 
   return (
     <Modal
@@ -32,10 +28,10 @@ const TransactionOverviewModal: React.FC = () => {
     >
       <div className="flex w-full flex-col gap-y-3 rounded-lg border border-gray-800 p-4">
         <TokenSummary
-          token={token}
+          token={inputToken}
           tokenAmount={tempTokenAmount}
           tokenUSDValue={tempTokenUsdValue}
-          network={network}
+          network={inputNetwork}
           destinationAddress={address}
         />
         <TransactionDetails
