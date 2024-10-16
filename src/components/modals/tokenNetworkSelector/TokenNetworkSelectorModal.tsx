@@ -8,7 +8,7 @@ import { NetworkInfo, TokenInfo } from "@/types";
 import { Modal, SearchBar } from "@/components/ui";
 import { useAtomValue } from "jotai";
 import { selectionTypeAtom } from "@/atoms/bridge/tokenNetworkAtom";
-import { useSelectionAtoms } from "@/lib/hooks/bridge/useSelectionAtoms";
+import { useSelectionAtoms } from "@/lib/hooks/bridge";
 
 const TokenNetworkSelectorModal: React.FC = () => {
   const { closeModal } = useModal(ModalIds.TokenNetworkSelectorModal);

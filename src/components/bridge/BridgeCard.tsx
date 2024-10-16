@@ -15,16 +15,15 @@ import {
   TokenOutput,
 } from "@/components/bridge";
 import { TransactionDetails } from "@/components/shared";
-import { useSelectionAtoms } from "@/lib/hooks/bridge/useSelectionAtoms";
 import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import { ModalIds } from "@/enums";
+import { useSwapSelection } from "@/lib/hooks/bridge";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const BridgeCard: React.FC = () => {
-  const { swapSelection } = useSelectionAtoms();
-
-  const { openModal } = useModal(ModalIds.TokenNetworkSelectorModal);
+  const { swapSelection } = useSwapSelection();
+  const { openModal } = useModal(ModalIds.TransactionOverviewModal);
 
   return (
     <Card>

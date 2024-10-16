@@ -6,7 +6,7 @@ import { formatAsUsd } from "@/lib/utils/formats";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
 
 import { SelectionType } from "@/enums";
-import { useSelectionAtoms } from "@/lib/hooks/bridge/useSelectionAtoms";
+import { useSelectionAtoms } from "@/lib/hooks/bridge";
 
 const TokenOutput: React.FC = () => {
   const usdValue = null;

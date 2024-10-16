@@ -1,22 +1,25 @@
-import { ModalIds, NetworkId } from "@/enums";
+import { ModalIds, SelectionType } from "@/enums";
 import { useBridgeTransactionHandler } from "@/lib/hooks/bridge/useBridgeTransactionHandler";
-import { whitelistNetworks } from "@/lib/whitelist";
 import BigNumber from "bignumber.js";
 import { Button, Modal } from "@/components/ui";
 import { TokenSummary, TransactionDetails } from "@/components/shared";
+import { useAccount } from "wagmi";
+import { useTransactionInfo } from "@/lib/hooks/bridge";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const TransactionOverviewModal: React.FC = () => {
   // TODO: Remove these
-  const tempNetwork = Object.values(whitelistNetworks)[0];
-  const tempToken = Object.values(
-    whitelistNetworks[NetworkId.Sepolia].tokens,
-  )[0];
   const tempTokenUsdValue = 1;
   const tempTokenAmount = BigNumber(10000000000000000);
 
   const { startBridgeTransaction } = useBridgeTransactionHandler();
+
+  const { address } = useAccount();
+
+  const { token: fromToken, network: fromNetwork } = useTransactionInfo(
+    SelectionType.FROM,
+  );
 
   return (
     <Modal
@@ -25,11 +28,11 @@ const TransactionOverviewModal: React.FC = () => {
     >
       <div className="flex w-full flex-col gap-y-3 rounded-lg border border-gray-800 p-4">
         <TokenSummary
-          token={tempToken}
+          token={fromToken}
           tokenAmount={tempTokenAmount}
           tokenUSDValue={tempTokenUsdValue}
-          network={tempNetwork}
-          destinationAddress="0x0000...0000"
+          network={fromNetwork}
+          destinationAddress={address}
         />
         <TransactionDetails
           label="Network Cost"
