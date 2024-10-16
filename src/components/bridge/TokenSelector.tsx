@@ -6,10 +6,10 @@ import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
 import { getTokenIcon } from "@/lib/utils/icons";
 import { useAtom } from "jotai";
-import { selectionTypeAtom } from "@/atoms/modal/tokenNetworkAtom";
+import { selectionTypeAtom } from "@/atoms/bridge/tokenNetworkAtom";
 import { TokenInfo } from "@/types";
 import { ModalIds, SelectionType } from "@/enums";
-import { useSelectionAtoms } from "@/lib/hooks/modals/useSelectionAtoms";
+import { useSelectionAtoms } from "@/lib/hooks/bridge/useSelectionAtoms";
 
 interface TokenSelectorProps {
   selectionType: SelectionType;

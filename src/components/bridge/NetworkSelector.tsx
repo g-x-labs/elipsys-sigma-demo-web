@@ -4,10 +4,10 @@ import { Button } from "@/components/ui";
 import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
 import { useAtom } from "jotai";
-import { selectionTypeAtom } from "@/atoms/modal/tokenNetworkAtom";
+import { selectionTypeAtom } from "@/atoms/bridge/tokenNetworkAtom";
 import { NetworkInfo } from "@/types";
 import { ModalIds, SelectionType } from "@/enums";
-import { useSelectionAtoms } from "@/lib/hooks/modals/useSelectionAtoms";
+import { useSelectionAtoms } from "@/lib/hooks/bridge/useSelectionAtoms";
 
 interface NetworkSelectorProps {
   selectionType: SelectionType;

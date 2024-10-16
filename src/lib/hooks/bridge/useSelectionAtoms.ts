@@ -5,7 +5,7 @@ import {
   fromTokenAtom,
   toNetworkAtom,
   toTokenAtom,
-} from "@/atoms/modal/tokenNetworkAtom";
+} from "@/atoms/bridge/tokenNetworkAtom";
 import { SelectionType } from "@/enums";
 
 export const useSelectionAtoms = (selectionType = SelectionType.FROM) => {

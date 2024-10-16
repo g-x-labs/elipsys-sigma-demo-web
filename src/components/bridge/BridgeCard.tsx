@@ -16,7 +16,7 @@ import {
   TokenOutput,
 } from "@/components/bridge";
 import { TransactionDetails } from "@/components/shared";
-import { useSelectionAtoms } from "@/lib/hooks/modals/useSelectionAtoms";
+import { useSelectionAtoms } from "@/lib/hooks/bridge/useSelectionAtoms";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 

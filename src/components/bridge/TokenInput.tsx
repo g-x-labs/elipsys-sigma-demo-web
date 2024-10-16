@@ -10,7 +10,7 @@ import { useAccount } from "wagmi";
 import BigNumber from "bignumber.js";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
 import { SelectionType } from "@/enums";
-import { useSelectionAtoms } from "@/lib/hooks/modals/useSelectionAtoms";
+import { useSelectionAtoms } from "@/lib/hooks/bridge/useSelectionAtoms";
 
 const TokenInput: React.FC = () => {
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
