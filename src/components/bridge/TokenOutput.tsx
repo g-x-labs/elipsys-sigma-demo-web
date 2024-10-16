@@ -7,9 +7,12 @@ import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
 
 import { SelectionType } from "@/enums";
 import { useSelectionAtoms } from "@/lib/hooks/bridge";
+import { useAtomValue } from "jotai";
+import { outputTokenAmountAtom } from "@/atoms/bridge/inputAtom";
 
 const TokenOutput: React.FC = () => {
   const usdValue = null;
+  const quoteValue = useAtomValue(outputTokenAmountAtom);
 
   const { selectedNetwork, selectedToken } = useSelectionAtoms(
     SelectionType.TO,
@@ -28,7 +31,7 @@ const TokenOutput: React.FC = () => {
         />
       </div>
       <div className="flex p-4">
-        <Input value="-" disabled />
+        <Input value={quoteValue?.toString() ?? "-"} disabled />
         <div className="flex flex-col items-end justify-between">
           <span className="text-gray-400 text-sb3">USD</span>
           <span className="text-gray-400 text-sb3">
