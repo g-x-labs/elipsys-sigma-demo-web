@@ -23,11 +23,11 @@ const TransactionSuccessModal: React.FC = () => {
 
   const { address } = useAccount();
 
-  const { token: inputToken, network: inputNetwork } = useTransactionInfo(
+  const { token: fromToken, network: fromNetwork } = useTransactionInfo(
     SelectionType.FROM,
   );
 
-  const { token: outputToken, network: outputNetwork } = useTransactionInfo(
+  const { token: toToken, network: toNetwork } = useTransactionInfo(
     SelectionType.TO,
   );
 
@@ -40,18 +40,18 @@ const TransactionSuccessModal: React.FC = () => {
         <h2 className="text-gray-400 text-sb3">Transaction # 0x0000...0000</h2>
         <div className="flex w-full flex-col">
           <TokenSummary
-            token={inputToken}
+            token={fromToken}
             tokenAmount={tempTokenAmount}
             tokenUSDValue={tempTokenUsdValue}
-            network={inputNetwork}
+            network={fromNetwork}
             destinationAddress={address}
           />
           <TransactionDivider />
           <TokenSummary
-            token={outputToken}
+            token={toToken}
             tokenAmount={tempTokenAmount}
             tokenUSDValue={tempTokenUsdValue}
-            network={outputNetwork}
+            network={toNetwork}
             destinationAddress={address}
           />
         </div>

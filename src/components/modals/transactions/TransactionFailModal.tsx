@@ -18,7 +18,7 @@ const TransactionFailModal: React.FC = () => {
 
   const { address } = useAccount();
 
-  const { token: inputToken, network: inputNetwork } = useTransactionInfo(
+  const { token: fromToken, network: fromNetwork } = useTransactionInfo(
     SelectionType.FROM,
   );
 
@@ -26,10 +26,10 @@ const TransactionFailModal: React.FC = () => {
     <Modal modalId={ModalIds.TransactionFailModal} title="Transaction Fail">
       <div className="flex w-full flex-col gap-y-3 rounded-lg border border-gray-700 p-4">
         <TokenSummary
-          token={inputToken}
+          token={fromToken}
           tokenAmount={tempTokenAmount}
           tokenUSDValue={tempTokenUsdValue}
-          network={inputNetwork}
+          network={fromNetwork}
           destinationAddress={address}
         />
         <TransactionDetails

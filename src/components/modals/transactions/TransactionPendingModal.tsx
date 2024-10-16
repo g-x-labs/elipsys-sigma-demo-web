@@ -18,11 +18,10 @@ const TransactionPendingModal: React.FC = () => {
 
   const { address } = useAccount();
 
-  const { token: inputToken, network: inputNetwork } = useTransactionInfo(
+  const { token: fromToken, network: fromNetwork } = useTransactionInfo(
     SelectionType.FROM,
   );
-
-  const { token: outputToken, network: outputNetwork } = useTransactionInfo(
+  const { token: toToken, network: toNetwork } = useTransactionInfo(
     SelectionType.TO,
   );
 
@@ -36,18 +35,18 @@ const TransactionPendingModal: React.FC = () => {
         <h2 className="text-gray-400 text-sb3">Entering the Portal</h2>
         <div className="flex w-full flex-col">
           <TokenSummary
-            token={inputToken}
+            token={fromToken}
             tokenAmount={tempTokenAmount}
             tokenUSDValue={tempTokenUsdValue}
-            network={inputNetwork}
+            network={fromNetwork}
             destinationAddress={address}
           />
           <TransactionDivider label="Wormhole (ZK-Threshold)" height="60px" />
           <TokenSummary
-            token={outputToken}
+            token={toToken}
             tokenAmount={tempTokenAmount}
             tokenUSDValue={tempTokenUsdValue}
-            network={outputNetwork}
+            network={toNetwork}
             destinationAddress={address}
           />
         </div>
