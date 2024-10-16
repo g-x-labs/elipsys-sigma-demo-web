@@ -24,7 +24,7 @@ BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 const BridgeCard: React.FC = () => {
   const { swapSelection } = useSelectionAtoms();
 
-  const { openModal } = useModal(ModalIds.TokenNetworkSelectorModal);
+  const { openModal } = useModal(ModalIds.TransactionOverviewModal);
 
   return (
     <Card>

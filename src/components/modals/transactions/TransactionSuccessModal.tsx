@@ -1,24 +1,36 @@
-import { NetworkId, ModalIds } from "@/enums";
+import { ModalIds, SelectionType } from "@/enums";
 import { Button } from "@/components/ui";
 import { useModal } from "@/lib/hooks/modals/useModalAtom";
-import { whitelistNetworks } from "@/lib/whitelist";
 import LinkOutIcon from "@/assets/icons/link-out.svg";
 import BigNumber from "bignumber.js";
 import { Modal } from "@/components/ui";
 import { TokenSummary, TransactionDetails } from "@/components/shared";
+import { useSelectionAtoms } from "@/lib/hooks/bridge/useSelectionAtoms";
+import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
+import { useAccount } from "wagmi";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const TransactionSuccessModal: React.FC = () => {
   // TODO: Remove these
-  const tempNetwork = Object.values(whitelistNetworks)[0];
-  const tempToken = Object.values(
-    whitelistNetworks[NetworkId.Sepolia].tokens,
-  )[0];
   const tempTokenUsdValue = 1;
   const tempTokenAmount = BigNumber(10000000000000000);
 
   const { closeModal } = useModal(ModalIds.TransactionSuccessModal);
+
+  const { address } = useAccount();
+
+  const { selectedToken: fromToken, selectedNetwork: fromNetwork } =
+    useSelectionAtoms(SelectionType.FROM);
+
+  const { selectedToken: toToken, selectedNetwork: toNetwork } =
+    useSelectionAtoms(SelectionType.TO);
+
+  const tokenFrom = getTokenInfo(fromNetwork, fromToken);
+  const networkFrom = getNetworkInfo(fromNetwork);
+
+  const tokenTo = getTokenInfo(toNetwork, toToken);
+  const networkTo = getNetworkInfo(toNetwork);
 
   return (
     <Modal
@@ -29,21 +41,21 @@ const TransactionSuccessModal: React.FC = () => {
         <h2 className="text-gray-400 text-sb3">Transaction # 0x0000...0000</h2>
         <div className="flex w-full flex-col">
           <TokenSummary
-            token={tempToken}
+            token={tokenFrom}
             tokenAmount={tempTokenAmount}
             tokenUSDValue={tempTokenUsdValue}
-            network={tempNetwork}
-            destinationAddress="0x0000...0000"
+            network={networkTo}
+            destinationAddress={address}
           />
           <div className="flex h-[40px] flex-row items-center gap-x-1">
             <div className="mx-4 h-full w-[1px] bg-gray-600" />
           </div>
           <TokenSummary
-            token={tempToken}
+            token={tokenTo}
             tokenAmount={tempTokenAmount}
             tokenUSDValue={tempTokenUsdValue}
-            network={tempNetwork}
-            destinationAddress="0x0000...0000"
+            network={networkFrom}
+            destinationAddress={address}
           />
         </div>
         <TransactionDetails

@@ -1,19 +1,31 @@
 import { TokenSummary, TransactionDetails } from "@/components/shared";
 import { Modal } from "@/components/ui";
-import { whitelistNetworks } from "@/lib/whitelist";
-import { ModalIds, NetworkId } from "@/enums";
+import { ModalIds, SelectionType } from "@/enums";
 import BigNumber from "bignumber.js";
+import { useSelectionAtoms } from "@/lib/hooks/bridge/useSelectionAtoms";
+import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
+import { useAccount } from "wagmi";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const TransactionPendingModal: React.FC = () => {
   // TODO: Remove these
-  const tempNetwork = Object.values(whitelistNetworks)[0];
-  const tempToken = Object.values(
-    whitelistNetworks[NetworkId.Sepolia].tokens,
-  )[0];
   const tempTokenUsdValue = 1;
   const tempTokenAmount = BigNumber(10000000000000000);
+
+  const { address } = useAccount();
+
+  const { selectedToken: fromToken, selectedNetwork: fromNetwork } =
+    useSelectionAtoms(SelectionType.FROM);
+
+  const { selectedToken: toToken, selectedNetwork: toNetwork } =
+    useSelectionAtoms(SelectionType.TO);
+
+  const tokenFrom = getTokenInfo(fromNetwork, fromToken);
+  const networkFrom = getNetworkInfo(fromNetwork);
+
+  const tokenTo = getTokenInfo(toNetwork, toToken);
+  const networkTo = getNetworkInfo(toNetwork);
 
   return (
     <Modal
@@ -25,11 +37,11 @@ const TransactionPendingModal: React.FC = () => {
         <h2 className="text-gray-400 text-sb3">Entering the Portal</h2>
         <div className="flex w-full flex-col">
           <TokenSummary
-            token={tempToken}
+            token={tokenFrom}
             tokenAmount={tempTokenAmount}
             tokenUSDValue={tempTokenUsdValue}
-            network={tempNetwork}
-            destinationAddress="0x0000...0000"
+            network={networkTo}
+            destinationAddress={address}
           />
           <div className="flex h-[60px] flex-row items-center gap-x-1">
             <div className="mx-4 h-full w-[1px] bg-gray-600" />
@@ -38,11 +50,11 @@ const TransactionPendingModal: React.FC = () => {
             </span>
           </div>
           <TokenSummary
-            token={tempToken}
+            token={tokenTo}
             tokenAmount={tempTokenAmount}
             tokenUSDValue={tempTokenUsdValue}
-            network={tempNetwork}
-            destinationAddress="0x0000...0000"
+            network={networkFrom}
+            destinationAddress={address}
           />
         </div>
         <TransactionDetails

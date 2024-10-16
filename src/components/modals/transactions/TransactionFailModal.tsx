@@ -1,33 +1,40 @@
-import { whitelistNetworks } from "@/lib/whitelist";
 import { useModal } from "@/lib/hooks/modals/useModalAtom";
-import { ModalIds, NetworkId } from "@/enums";
+import { ModalIds, SelectionType } from "@/enums";
 import BigNumber from "bignumber.js";
 import { Button, Modal } from "@/components/ui";
 import { TokenSummary, TransactionDetails } from "@/components/shared";
+import { useSelectionAtoms } from "@/lib/hooks/bridge/useSelectionAtoms";
+import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
+import { useAccount } from "wagmi";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 // TODO: Confirm what this is suppose to display
 const TransactionFailModal: React.FC = () => {
   // TODO: Remove these
-  const tempNetwork = Object.values(whitelistNetworks)[0];
-  const tempToken = Object.values(
-    whitelistNetworks[NetworkId.Sepolia].tokens,
-  )[0];
   const tempTokenUsdValue = 1;
   const tempTokenAmount = BigNumber(10000000000000000);
 
   const { closeModal } = useModal(ModalIds.TransactionSuccessModal);
 
+  const { address } = useAccount();
+
+  const { selectedToken, selectedNetwork } = useSelectionAtoms(
+    SelectionType.FROM,
+  );
+
+  const token = getTokenInfo(selectedNetwork, selectedToken);
+  const network = getNetworkInfo(selectedNetwork);
+
   return (
     <Modal modalId={ModalIds.TransactionFailModal} title="Transaction Fail">
       <div className="flex w-full flex-col gap-y-3 rounded-lg border border-gray-700 p-4">
         <TokenSummary
-          token={tempToken}
+          token={token}
           tokenAmount={tempTokenAmount}
           tokenUSDValue={tempTokenUsdValue}
-          network={tempNetwork}
-          destinationAddress="0x0000...0000"
+          network={network}
+          destinationAddress={address}
         />
         <TransactionDetails
           label="Network Cost"
