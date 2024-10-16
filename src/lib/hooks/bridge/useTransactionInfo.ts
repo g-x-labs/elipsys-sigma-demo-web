@@ -1,26 +1,13 @@
 import { useAtom } from "jotai";
-import {
-  fromNetworkAtom,
-  fromTokenAtom,
-  toNetworkAtom,
-  toTokenAtom,
-} from "@/atoms/bridge/tokenNetworkAtom";
 import { SelectionType } from "@/enums";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
+import { getSelectionAtoms } from "@/lib/utils/atoms";
 
 export const useTransactionInfo = (selectionType = SelectionType.FROM) => {
-  const networkAtoms = {
-    [SelectionType.FROM]: useAtom(fromNetworkAtom),
-    [SelectionType.TO]: useAtom(toNetworkAtom),
-  };
+  const { networkAtom, tokenAtom } = getSelectionAtoms(selectionType);
 
-  const tokenAtoms = {
-    [SelectionType.FROM]: useAtom(fromTokenAtom),
-    [SelectionType.TO]: useAtom(toTokenAtom),
-  };
-
-  const [selectedNetwork] = networkAtoms[selectionType];
-  const [selectedToken] = tokenAtoms[selectionType];
+  const [selectedNetwork] = useAtom(networkAtom);
+  const [selectedToken] = useAtom(tokenAtom);
 
   const token = getTokenInfo(selectedNetwork, selectedToken);
   const network = getNetworkInfo(selectedNetwork);
