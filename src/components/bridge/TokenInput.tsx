@@ -23,6 +23,7 @@ const TokenInput: React.FC = () => {
   const tokenInfo = getTokenInfo(selectedNetwork, selectedToken);
   const networkInfo = getNetworkInfo(selectedNetwork);
 
+  // REFACTOR: move this to atom
   const tokenBalance =
     useGetUserTokenBalance({
       tokenAddress: selectedToken,

@@ -12,7 +12,7 @@ export const tokenInputAtom = atom<string>("");
 
 export const outputTokenAmountAtom = atom(async (get) => {
   const inputString = get(tokenInputAtom);
-  const inputValue = inputString !== "" ? BigNumber(inputString) : null;
+  const inputValue = !!inputString ? BigNumber(inputString ?? 0) : null;
 
   // TODO: replace with real value
   const quote = useBridgeQuote({
