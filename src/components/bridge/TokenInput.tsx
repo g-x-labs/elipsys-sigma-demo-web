@@ -3,30 +3,31 @@
 import { Button, Input } from "@/components/ui";
 import { NetworkSelector, TokenSelector } from "@/components/bridge";
 import { formatTokenAmount, tokenAmountInputFilter } from "@/lib/utils/formats";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
 import useGetUserTokenBalance from "@/lib/hooks/wallet/useGetUserTokenBalance";
 import { useAccount } from "wagmi";
 import BigNumber from "bignumber.js";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
-import { fromNetworkAtom, fromTokenAtom } from "@/atoms/modal/tokenNetworkAtom";
 import { SelectionType } from "@/enums";
+import { useSelectionAtoms } from "@/lib/hooks/modals/useSelectionAtoms";
 
 const TokenInput: React.FC = () => {
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
   const { address } = useAccount();
 
-  const tokenAddress = useAtomValue(fromTokenAtom);
-  const networkId = useAtomValue(fromNetworkAtom);
+  const { selectedNetwork, selectedToken } = useSelectionAtoms(
+    SelectionType.FROM,
+  );
 
-  const tokenInfo = getTokenInfo(networkId, tokenAddress);
-  const networkInfo = getNetworkInfo(networkId);
+  const tokenInfo = getTokenInfo(selectedNetwork, selectedToken);
+  const networkInfo = getNetworkInfo(selectedNetwork);
 
   const tokenBalance =
     useGetUserTokenBalance({
-      tokenAddress,
-      address,
-      chainId: networkId,
+      tokenAddress: selectedToken,
+      address: address,
+      chainId: selectedNetwork,
     }) ?? BigNumber(0);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -4,18 +4,19 @@ import { Input } from "@/components/ui";
 import { NetworkSelector, TokenSelector } from "@/components/bridge";
 import { formatAsUsd } from "@/lib/utils/formats";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
-import { toNetworkAtom, toTokenAtom } from "@/atoms/modal/tokenNetworkAtom";
-import { useAtomValue } from "jotai";
+
 import { SelectionType } from "@/enums";
+import { useSelectionAtoms } from "@/lib/hooks/modals/useSelectionAtoms";
 
 const TokenOutput: React.FC = () => {
   const usdValue = null;
 
-  const tokenAddress = useAtomValue(toTokenAtom);
-  const networkId = useAtomValue(toNetworkAtom);
+  const { selectedNetwork, selectedToken } = useSelectionAtoms(
+    SelectionType.TO,
+  );
 
-  const tokenInfo = getTokenInfo(networkId, tokenAddress);
-  const networkInfo = getNetworkInfo(networkId);
+  const tokenInfo = getTokenInfo(selectedNetwork, selectedToken);
+  const networkInfo = getNetworkInfo(selectedNetwork);
 
   return (
     <div className="flex w-full flex-col rounded-md border border-gray-700">
