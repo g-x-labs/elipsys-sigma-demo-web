@@ -9,10 +9,15 @@ import { SelectionType } from "@/enums";
 import { useSelectionAtoms } from "@/lib/hooks/bridge";
 import { useAtomValue } from "jotai";
 import { outputTokenAmountAtom } from "@/atoms/bridge/inputAtom";
+import BigNumber from "bignumber.js";
+
+BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const TokenOutput: React.FC = () => {
-  const usdValue = null;
+  const tokenPrice = 0.01; //INFO: hardcoded value just for demo
   const quoteValue = useAtomValue(outputTokenAmountAtom);
+
+  const usdValue = quoteValue?.times(tokenPrice).toNumber() ?? 0;
 
   const { selectedNetwork, selectedToken } = useSelectionAtoms(
     SelectionType.TO,
