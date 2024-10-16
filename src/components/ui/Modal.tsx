@@ -1,4 +1,4 @@
-import { useModal } from "@/lib/hooks/common/useModalAtom";
+import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import {
   Dialog,
   DialogContent,

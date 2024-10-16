@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { TokenNetworkModal } from "@/components/modals/tokenNetwork";
+import { TokenNetworkSelectorModal } from "@/components/modals/tokenNetworkSelector";
 import {
   TransactionOverviewModal,
   TransactionPendingModal,
@@ -12,7 +12,7 @@ import {
 const ModalManager: React.FC = () => {
   return (
     <>
-      <TokenNetworkModal />
+      <TokenNetworkSelectorModal />
       <TransactionOverviewModal />
       <TransactionPendingModal />
       <TransactionSuccessModal />

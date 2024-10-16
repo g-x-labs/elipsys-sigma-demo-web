@@ -1,6 +1,6 @@
 import { NetworkId, ModalIds } from "@/enums";
 import { Button } from "@/components/ui";
-import { useModal } from "@/lib/hooks/common/useModalAtom";
+import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import { whitelistNetworks } from "@/lib/whitelist";
 import LinkOutIcon from "@/assets/icons/link-out.svg";
 import BigNumber from "bignumber.js";

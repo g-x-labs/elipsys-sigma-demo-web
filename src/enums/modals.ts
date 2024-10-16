@@ -1,6 +1,6 @@
 export enum ModalIds {
   // Token network modals
-  TokenNetworkModal = "tokenNetworkModal",
+  TokenNetworkSelectorModal = "tokenNetworkModal",
 
   // Transaction modals
   TransactionOverviewModal = "transactionOverviewModal",
