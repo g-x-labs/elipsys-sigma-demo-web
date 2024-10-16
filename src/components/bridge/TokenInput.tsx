@@ -36,8 +36,7 @@ const TokenInput: React.FC = () => {
   };
 
   const onSetInputValue = (tokenBalance: BigNumber) => {
-    //TODO: Implement this
-    console.log("Set input value here", tokenBalance.toString());
+    setInputValue(tokenAmountInputFilter(tokenBalance.toString()));
   };
 
   return (
