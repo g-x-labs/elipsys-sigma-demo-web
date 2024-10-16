@@ -1,4 +1,12 @@
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui";
+"use client";
+
+import {
+  Button,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui";
 import SwapIcon from "@/assets/icons/swap.svg";
 import BigNumber from "bignumber.js";
 import {
@@ -8,10 +16,12 @@ import {
   TokenOutput,
 } from "@/components/bridge";
 import { TransactionDetails } from "@/components/shared";
+import { useSelectionAtoms } from "@/lib/hooks/modals/useSelectionAtoms";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const BridgeCard: React.FC = () => {
+  const { swapSelection } = useSelectionAtoms();
   return (
     <Card>
       <CardHeader className="items-center gap-y-4">
@@ -19,8 +29,9 @@ const BridgeCard: React.FC = () => {
           <BridgeWalletConnect />
           <TokenInput />
         </div>
-        {/* TODO: Wrap button on icon */}
-        <SwapIcon className="w-5 fill-gray-200" />
+        <Button variant="transparent" size="fit" onClick={swapSelection}>
+          <SwapIcon className="w-5 fill-gray-200" />
+        </Button>
         <div className="flex w-full flex-col gap-y-2">
           <TokenOutput />
         </div>
