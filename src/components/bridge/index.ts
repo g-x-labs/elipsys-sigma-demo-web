@@ -5,4 +5,3 @@ export { TokenInput } from "./TokenInput";
 export { TokenOutput } from "./TokenOutput";
 export { TokenSelector } from "./TokenSelector";
 export { NetworkSelector } from "./NetworkSelector";
-export { BridgeButton } from "./BridgeButton";

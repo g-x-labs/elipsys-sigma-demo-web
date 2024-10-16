@@ -10,18 +10,22 @@ import {
 import SwapIcon from "@/assets/icons/swap.svg";
 import BigNumber from "bignumber.js";
 import {
-  BridgeButton,
   BridgeWalletConnect,
   TokenInput,
   TokenOutput,
 } from "@/components/bridge";
 import { TransactionDetails } from "@/components/shared";
 import { useSelectionAtoms } from "@/lib/hooks/bridge/useSelectionAtoms";
+import { useModal } from "@/lib/hooks/modals/useModalAtom";
+import { ModalIds } from "@/enums";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const BridgeCard: React.FC = () => {
   const { swapSelection } = useSelectionAtoms();
+
+  const { openModal } = useModal(ModalIds.TokenNetworkSelectorModal);
+
   return (
     <Card>
       <CardHeader className="items-center gap-y-4">
@@ -46,7 +50,9 @@ const BridgeCard: React.FC = () => {
         <TransactionDetails label="Est. Time to Destination" value={null} />
       </CardContent>
       <CardFooter>
-        <BridgeButton />
+        <Button variant={"action"} onClick={openModal} className="w-full">
+          Enter Amount
+        </Button>
       </CardFooter>
     </Card>
   );
