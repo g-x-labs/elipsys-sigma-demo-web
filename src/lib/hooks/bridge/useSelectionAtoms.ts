@@ -5,10 +5,10 @@ import {
   fromTokenAtom,
   toNetworkAtom,
   toTokenAtom,
-} from "@/atoms/modal/tokenNetworkAtom";
+} from "@/atoms/bridge/tokenNetworkAtom";
 import { SelectionType } from "@/enums";
 
-export const useSelectionAtoms = (selectionType: SelectionType) => {
+export const useSelectionAtoms = (selectionType = SelectionType.FROM) => {
   const networkAtoms = {
     [SelectionType.FROM]: useAtom(fromNetworkAtom),
     [SelectionType.TO]: useAtom(toNetworkAtom),
@@ -22,10 +22,25 @@ export const useSelectionAtoms = (selectionType: SelectionType) => {
   const [selectedNetwork, setSelectedNetwork] = networkAtoms[selectionType];
   const [selectedToken, setSelectedToken] = tokenAtoms[selectionType];
 
+  const swapSelection = () => {
+    const [networkFrom, setNetworkFrom] = networkAtoms[SelectionType.FROM];
+    const [networkTo, setNetworkTo] = networkAtoms[SelectionType.TO];
+
+    const [tokenFrom, setTokenFrom] = tokenAtoms[SelectionType.FROM];
+    const [tokenTo, setTokenTo] = tokenAtoms[SelectionType.TO];
+
+    setNetworkFrom(networkTo);
+    setNetworkTo(networkFrom);
+
+    setTokenFrom(tokenTo);
+    setTokenTo(tokenFrom);
+  };
+
   return {
     selectedNetwork,
     setSelectedNetwork,
     selectedToken,
     setSelectedToken,
+    swapSelection,
   };
 };
