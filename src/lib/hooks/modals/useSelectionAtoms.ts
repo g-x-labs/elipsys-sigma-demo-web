@@ -23,20 +23,13 @@ export const useSelectionAtoms = (selectionType = SelectionType.FROM) => {
   const [selectedToken, setSelectedToken] = tokenAtoms[selectionType];
 
   const swapSelection = () => {
-    const [selectedNetworkFrom, setSelectedNetworkFrom] =
-      networkAtoms[SelectionType.FROM];
-    const [selectedNetworkTo, setSelectedNetworkTo] =
-      networkAtoms[SelectionType.TO];
+    //INFO: swap network values
+    networkAtoms[SelectionType.FROM][1](networkAtoms[SelectionType.TO][0]);
+    networkAtoms[SelectionType.TO][1](networkAtoms[SelectionType.FROM][0]);
 
-    setSelectedNetworkFrom(selectedNetworkTo);
-    setSelectedNetworkTo(selectedNetworkFrom);
-
-    const [selectedTokenFrom, setSelectedTokenFrom] =
-      tokenAtoms[SelectionType.FROM];
-    const [selectedTokenTo, setSelectedTokenTo] = tokenAtoms[SelectionType.TO];
-
-    setSelectedTokenFrom(selectedTokenTo);
-    setSelectedTokenTo(selectedTokenFrom);
+    //INFO: swap token values
+    tokenAtoms[SelectionType.FROM][1](tokenAtoms[SelectionType.TO][0]);
+    tokenAtoms[SelectionType.TO][1](tokenAtoms[SelectionType.FROM][0]);
   };
 
   return {
