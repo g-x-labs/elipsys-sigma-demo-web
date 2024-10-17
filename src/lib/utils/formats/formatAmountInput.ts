@@ -1,4 +1,4 @@
-export const tokenAmountInputFilter = (input: string): string => {
+export const formatAmountInput = (input: string): string => {
   // Remove any invalid characters (anything that is not a digit or a decimal point)
   input = input.replace(/[^0-9.]/g, "");
 

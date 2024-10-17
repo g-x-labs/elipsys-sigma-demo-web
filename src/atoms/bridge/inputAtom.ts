@@ -6,7 +6,7 @@ import { atom } from "jotai";
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 // Jotai atom to store the token input value globally
-// REFACTOR: might consider implement the custom setter/getter function so that we can clean the input with `tokenAmountInputFilter` when setting
+// REFACTOR: might consider implement the custom setter/getter function so that we can clean the input with `formatAmountInput` when setting
 //  and return BigNumber when getting
 export const tokenInputAtom = atom<string>("");
 

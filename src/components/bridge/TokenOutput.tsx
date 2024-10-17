@@ -36,7 +36,7 @@ const TokenOutput: React.FC = () => {
         />
       </div>
       <div className="flex p-4">
-        <div className="flex h-10 w-full items-center bg-transparent px-3 py-2 text-left">
+        <div className="flex h-10 w-full items-center overflow-x-hidden bg-transparent px-3 py-2 text-left">
           <span
             className={cn(
               quoteValue?.toString() === "" ? "text-gray-700" : "text-gray-200",

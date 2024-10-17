@@ -2,7 +2,11 @@
 
 import { Button, Input } from "@/components/ui";
 import { NetworkSelector, TokenSelector } from "@/components/bridge";
-import { formatTokenAmount, tokenAmountInputFilter } from "@/lib/utils/formats";
+import {
+  formatTokenAmount,
+  normalizeBigNumber,
+  formatAmountInput,
+} from "@/lib/utils/formats";
 import { useAtom } from "jotai";
 import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
 import useGetUserTokenBalance from "@/lib/hooks/wallet/useGetUserTokenBalance";
@@ -38,11 +42,14 @@ const TokenInput: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setInputValue(tokenAmountInputFilter(value));
+    setInputValue(formatAmountInput(value));
   };
 
   const onSetInputValue = (tokenBalance: BigNumber) => {
-    setInputValue(tokenAmountInputFilter(tokenBalance.toString()));
+    setInputValue(
+      // TODO: Not sure if its possible to put normalizeBigNumber in formatAmountInput
+      formatAmountInput(normalizeBigNumber(tokenBalance).toString()),
+    );
   };
 
   return (
