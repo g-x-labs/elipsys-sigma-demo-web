@@ -30,7 +30,7 @@ export function useBridgeTransactionHandler() {
         setTransactionStatus(TransactionStatus.Fail);
         setModal(ModalIds.TransactionFailModal);
       }
-    }, 10000); // Fake 3 seconds for pending transaction
+    }, 3000); // Fake 3 seconds for pending transaction
   };
 
   return { startBridgeTransaction };

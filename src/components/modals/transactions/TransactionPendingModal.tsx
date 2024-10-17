@@ -46,7 +46,7 @@ const TransactionPendingModal: React.FC = () => {
             network={fromNetwork}
             destinationAddress={address}
           />
-          <TransactionDivider label="Wormhole (ZK-Threshold)" height="60px" />
+          <TransactionDivider label="Wormhole (ZK-Threshold)" height={60} />
           <TokenSummary
             token={toToken}
             tokenAmount={tempTokenAmount}
