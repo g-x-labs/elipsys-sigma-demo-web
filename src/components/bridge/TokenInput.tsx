@@ -42,6 +42,7 @@ const TokenInput: React.FC = () => {
 
   const onSetInputValue = (tokenBalance: BigNumber) => {
     setInputValue(
+      // TODO: Not sure if its possible to put normalizeBigNumber in tokenAmountInputFilter
       tokenAmountInputFilter(normalizeBigNumber(tokenBalance).toString()),
     );
   };

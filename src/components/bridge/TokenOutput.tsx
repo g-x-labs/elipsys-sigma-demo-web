@@ -1,6 +1,5 @@
 "use client";
 
-import { Input } from "@/components/ui";
 import { NetworkSelector, TokenSelector } from "@/components/bridge";
 import { formatAsUsd } from "@/lib/utils/formats";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
@@ -10,6 +9,7 @@ import { useSelectionAtoms } from "@/lib/hooks/bridge";
 import { useAtomValue } from "jotai";
 import { outputTokenAmountAtom } from "@/atoms/bridge/inputAtom";
 import BigNumber from "bignumber.js";
+import { cn } from "@/lib/utils/common/cn";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -36,7 +36,16 @@ const TokenOutput: React.FC = () => {
         />
       </div>
       <div className="flex p-4">
-        <Input value={quoteValue?.toString() ?? "-"} disabled />
+        <div className="flex h-10 w-full items-center bg-transparent px-3 py-2 text-left">
+          <span
+            className={cn(
+              quoteValue?.toString() === "" ? "text-gray-700" : "text-gray-200",
+              "text-b1",
+            )}
+          >
+            {quoteValue?.toString() ?? "-"}
+          </span>
+        </div>
         <div className="flex flex-col items-end justify-center">
           <span className="text-gray-400 text-sb3">USD</span>
           <span className="text-gray-400 text-sb3">
