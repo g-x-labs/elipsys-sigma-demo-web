@@ -1,7 +1,7 @@
 "use client";
 
 import { NetworkSelector, TokenSelector } from "@/components/bridge";
-import { formatAsUsd } from "@/lib/utils/formats";
+import { formatAsUsd, formatAmountOutput } from "@/lib/utils/formats";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
 
 import { SelectionType } from "@/enums";
@@ -43,7 +43,7 @@ const TokenOutput: React.FC = () => {
               "text-b1",
             )}
           >
-            {quoteValue?.toString() ?? "-"}
+            {formatAmountOutput(quoteValue?.toString())}
           </span>
         </div>
         <div className="flex flex-col items-end justify-center">

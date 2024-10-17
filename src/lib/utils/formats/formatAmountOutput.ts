@@ -1,9 +1,9 @@
 export const formatAmountOutput = (
   value: string | number | undefined | null,
-  precision = 2,
+  precision = 6,
 ): string => {
   if (value === undefined || value === null) {
-    return "--";
+    return "-";
   }
 
   return Number(value)
