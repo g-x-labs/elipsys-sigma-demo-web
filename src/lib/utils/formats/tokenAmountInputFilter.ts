@@ -24,5 +24,7 @@ export const tokenAmountInputFilter = (input: string): string => {
     return "0.000000000000000001"; // Force minimum value of 1e-18
   }
 
+  console.log("input", input);
+
   return input;
 };

@@ -37,7 +37,7 @@ const TokenOutput: React.FC = () => {
       </div>
       <div className="flex p-4">
         <Input value={quoteValue?.toString() ?? "-"} disabled />
-        <div className="flex flex-col items-end justify-between">
+        <div className="flex flex-col items-end justify-center">
           <span className="text-gray-400 text-sb3">USD</span>
           <span className="text-gray-400 text-sb3">
             {formatAsUsd(usdValue)}
