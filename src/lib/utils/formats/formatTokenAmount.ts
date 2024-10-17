@@ -1,5 +1,5 @@
 import BigNumber from "bignumber.js";
-import { abbreviateNumber } from "@/lib/utils/formats";
+import { abbreviateNumber, normalizeBigNumber } from "@/lib/utils/formats";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -8,11 +8,9 @@ export function formatTokenAmount(value: BigNumber | undefined | null): string {
     return "--";
   }
 
-  const decimals = 18;
   const precision = 8;
-  const divisor = BigNumber(10).pow(decimals);
 
-  const formattedValue = Number(value.div(divisor));
+  const formattedValue = Number(normalizeBigNumber(value));
 
   if (formattedValue >= 1e3) {
     return abbreviateNumber(formattedValue, 2);
