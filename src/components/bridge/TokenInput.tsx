@@ -2,11 +2,7 @@
 
 import { Button, Input } from "@/components/ui";
 import { NetworkSelector, TokenSelector } from "@/components/bridge";
-import {
-  formatTokenAmount,
-  normalizeBigNumber,
-  tokenAmountInputFilter,
-} from "@/lib/utils/formats";
+import { formatTokenAmount, tokenAmountInputFilter } from "@/lib/utils/formats";
 import { useAtom } from "jotai";
 import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
 import useGetUserTokenBalance from "@/lib/hooks/wallet/useGetUserTokenBalance";
@@ -15,6 +11,7 @@ import BigNumber from "bignumber.js";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
 import { SelectionType } from "@/enums";
 import { useSelectionAtoms } from "@/lib/hooks/bridge";
+import { normalizeTokenAmount } from "@/lib/utils/token/normalizeTokenAmount";
 
 const TokenInput: React.FC = () => {
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
@@ -28,12 +25,16 @@ const TokenInput: React.FC = () => {
   const networkInfo = getNetworkInfo(selectedNetwork);
 
   // REFACTOR: move this to atom
-  const tokenBalance =
+  const rawTokenBalance =
     useGetUserTokenBalance({
       tokenAddress: selectedToken,
       address: address,
       chainId: selectedNetwork,
     }) ?? BigNumber(0);
+
+  // REFACTOR: might move this to some where else
+  const tokenBalance =
+    normalizeTokenAmount(rawTokenBalance, tokenInfo?.decimals) ?? BigNumber(0);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -41,10 +42,7 @@ const TokenInput: React.FC = () => {
   };
 
   const onSetInputValue = (tokenBalance: BigNumber) => {
-    setInputValue(
-      // TODO: Not sure if its possible to put normalizeBigNumber in tokenAmountInputFilter
-      tokenAmountInputFilter(normalizeBigNumber(tokenBalance).toString()),
-    );
+    setInputValue(tokenAmountInputFilter(tokenBalance.toString()));
   };
 
   return (
