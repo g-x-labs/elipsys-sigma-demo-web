@@ -18,12 +18,22 @@ import { TransactionDetails } from "@/components/shared";
 import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import { ModalIds } from "@/enums";
 import { useSwapSelection } from "@/lib/hooks/bridge";
+import { useCallback } from "react";
+import { useAtomValue } from "jotai";
+import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const BridgeCard: React.FC = () => {
   const { swapSelection } = useSwapSelection();
   const { openModal } = useModal(ModalIds.TransactionOverviewModal);
+
+  const inputTokenAmount = useAtomValue(tokenInputAtom);
+
+  const ctaText = useCallback(() => {
+    if (!inputTokenAmount) return "Enter Amount";
+    return "Transfer";
+  }, [inputTokenAmount]);
 
   return (
     <Card>
@@ -50,7 +60,7 @@ const BridgeCard: React.FC = () => {
       </CardContent>
       <CardFooter>
         <Button variant={"action"} onClick={openModal} className="w-full">
-          Enter Amount
+          {ctaText()}
         </Button>
       </CardFooter>
     </Card>

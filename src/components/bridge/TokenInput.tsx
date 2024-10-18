@@ -2,7 +2,7 @@
 
 import { Button, Input } from "@/components/ui";
 import { NetworkSelector, TokenSelector } from "@/components/bridge";
-import { formatTokenAmount, tokenAmountInputFilter } from "@/lib/utils/formats";
+import { formatTokenAmount, formatAmountInput } from "@/lib/utils/formats";
 import { useAtom } from "jotai";
 import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
 import useGetUserTokenBalance from "@/lib/hooks/wallet/useGetUserTokenBalance";
@@ -11,6 +11,7 @@ import BigNumber from "bignumber.js";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
 import { SelectionType } from "@/enums";
 import { useSelectionAtoms } from "@/lib/hooks/bridge";
+import { normalizeTokenAmount } from "@/lib/utils/token/normalizeTokenAmount";
 
 const TokenInput: React.FC = () => {
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
@@ -23,20 +24,25 @@ const TokenInput: React.FC = () => {
   const tokenInfo = getTokenInfo(selectedNetwork, selectedToken);
   const networkInfo = getNetworkInfo(selectedNetwork);
 
-  const tokenBalance =
+  // REFACTOR: move this to atom
+  const rawTokenBalance =
     useGetUserTokenBalance({
       tokenAddress: selectedToken,
       address: address,
       chainId: selectedNetwork,
     }) ?? BigNumber(0);
 
+  // REFACTOR: might move this to some where else
+  const tokenBalance =
+    normalizeTokenAmount(rawTokenBalance, tokenInfo?.decimals) ?? BigNumber(0);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setInputValue(tokenAmountInputFilter(value));
+    setInputValue(formatAmountInput(value));
   };
 
   const onSetInputValue = (tokenBalance: BigNumber) => {
-    setInputValue(tokenAmountInputFilter(tokenBalance.toString()));
+    setInputValue(formatAmountInput(tokenBalance.toString()));
   };
 
   return (
@@ -55,7 +61,7 @@ const TokenInput: React.FC = () => {
         <Button
           size={"small"}
           onClick={() => {
-            onSetInputValue(BigNumber(tokenBalance));
+            onSetInputValue(tokenBalance);
           }}
         >
           <span className="text-sb3">Max</span>
@@ -65,7 +71,7 @@ const TokenInput: React.FC = () => {
           placeholder="0"
           onChange={handleInputChange}
         />
-        <div className="flex flex-col items-end justify-between">
+        <div className="flex flex-col items-end justify-center">
           <span className="text-gray-400 text-sb3">Balance</span>
           <span className="text-gray-400 text-sb3">
             {formatTokenAmount(tokenBalance)}
