@@ -46,7 +46,7 @@ const TransactionSuccessModal: React.FC = () => {
             network={fromNetwork}
             destinationAddress={address}
           />
-          <TransactionDivider />
+          <TransactionDivider className="h-[40px]" />
           <TokenSummary
             token={toToken}
             tokenAmount={tempTokenAmount}

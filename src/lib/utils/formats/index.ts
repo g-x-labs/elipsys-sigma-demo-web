@@ -5,3 +5,4 @@ export { formatTokenAmount } from "./formatTokenAmount";
 export { formatAmountInput } from "./formatAmountInput";
 export { formatAmountOutput } from "./formatAmountOutput";
 export { abbreviateNumber } from "./abbreviateNumber";
+export { formatTime } from "./formatTime";
