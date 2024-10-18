@@ -32,7 +32,6 @@ const TransactionPendingModal: React.FC = () => {
       modalId={ModalIds.TransactionPendingModal}
       title="Transaction Pending"
     >
-      {/* TODO: Spinner animation */}
       <div className="flex items-center justify-center py-1">
         <PerpetualCircularLoader /> {/* Pass duration as needed */}
       </div>
