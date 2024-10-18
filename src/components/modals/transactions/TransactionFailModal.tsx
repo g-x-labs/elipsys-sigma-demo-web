@@ -14,7 +14,7 @@ const TransactionFailModal: React.FC = () => {
   const tempTokenUsdValue = 1;
   const tempTokenAmount = BigNumber(10000000000000000);
 
-  const { closeModal } = useModal(ModalIds.TransactionSuccessModal);
+  const { closeModal } = useModal(ModalIds.TransactionFailModal);
 
   const { address } = useAccount();
 

@@ -1,4 +1,4 @@
-export const tokenAmountInputFilter = (input: string): string => {
+export const formatAmountInput = (input: string): string => {
   // Remove any invalid characters (anything that is not a digit or a decimal point)
   input = input.replace(/[^0-9.]/g, "");
 
@@ -23,6 +23,8 @@ export const tokenAmountInputFilter = (input: string): string => {
   if (inputNum !== 0 && inputNum < 1e-18) {
     return "0.000000000000000001"; // Force minimum value of 1e-18
   }
+
+  console.log("input", input);
 
   return input;
 };
