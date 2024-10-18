@@ -11,10 +11,10 @@ import {
 import WormholeLiteIcon from "@/assets/icons/wormhole-lite.svg";
 import WormholeIcon from "@/assets/icons/wormhole.svg";
 import { useAtom } from "jotai";
-import { bridgeSelectAtom } from "@/atoms/bridge/bridgeSelectAtom"; // Import the atom
+import { bridgeSelectAtom } from "@/atoms/bridge/bridgeSelectAtom";
 
 const BridgeSelect: React.FC = () => {
-  const [selectedBridge, setSelectedBridge] = useAtom(bridgeSelectAtom); // Use the atom to manage state
+  const [selectedBridge, setSelectedBridge] = useAtom(bridgeSelectAtom);
 
   return (
     <Select
@@ -24,7 +24,7 @@ const BridgeSelect: React.FC = () => {
       <SelectTrigger>
         <SelectValue />
       </SelectTrigger>
-      <SelectContent className="bg-black-700">
+      <SelectContent className="rounded-lg border border-gray-400 bg-black-700">
         <SelectGroup className="flex flex-col gap-y-1">
           <SelectItem value="wormhole">
             <WormholeIcon className="w-[86px]" />
