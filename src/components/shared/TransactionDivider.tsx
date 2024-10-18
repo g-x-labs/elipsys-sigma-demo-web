@@ -9,7 +9,7 @@ const TransactionDivider: React.FC<TransactionDividerProps> = (props) => {
   const { label, className } = props;
 
   return (
-    <div className={cn(className, "flex w-full flex-row items-center")}>
+    <div className={cn("flex w-full flex-row items-center", className)}>
       <div className="mx-4 h-full w-[1px] bg-gray-600" />
       {label && <span className="text-gray-400 text-sb3">{label}</span>}
     </div>
