@@ -1,16 +1,17 @@
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import { SelectionType } from "@/enums";
 import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
-import { getSelectionAtoms } from "@/lib/utils/atoms";
+import {
+  bridgeNetworkAtom,
+  bridgeTokenAtom,
+} from "@/atoms/bridge/tokenNetworkAtom";
 
 export const useTransactionInfo = (selectionType = SelectionType.FROM) => {
-  const { networkAtom, tokenAtom } = getSelectionAtoms(selectionType);
+  const selectedNetwork = useAtomValue(bridgeNetworkAtom);
+  const selectedToken = useAtomValue(bridgeTokenAtom);
 
-  const [selectedNetwork] = useAtom(networkAtom);
-  const [selectedToken] = useAtom(tokenAtom);
-
-  const token = getTokenInfo(selectedNetwork, selectedToken);
-  const network = getNetworkInfo(selectedNetwork);
+  const token = getTokenInfo(selectedNetwork[selectionType], selectedToken);
+  const network = getNetworkInfo(selectedNetwork[selectionType]);
 
   return {
     token,

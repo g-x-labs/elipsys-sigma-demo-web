@@ -6,21 +6,19 @@ import { ModalIds } from "@/enums";
 import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import { NetworkInfo, TokenInfo } from "@/types";
 import { Modal, SearchBar } from "@/components/ui";
-import { useAtomValue } from "jotai";
-import { selectionTypeAtom } from "@/atoms/bridge/tokenNetworkAtom";
-import { useSelectionAtoms } from "@/lib/hooks/bridge";
+import { useAtom } from "jotai";
+import {
+  bridgeTokenAtom,
+  selectingBridgeNetworkAtom,
+} from "@/atoms/bridge/tokenNetworkAtom";
 
 const TokenNetworkSelectorModal: React.FC = () => {
   const { closeModal } = useModal(ModalIds.TokenNetworkSelectorModal);
 
-  const selectionType = useAtomValue(selectionTypeAtom);
-
-  const {
-    selectedNetwork,
-    setSelectedNetwork,
-    selectedToken,
-    setSelectedToken,
-  } = useSelectionAtoms(selectionType);
+  const [bridgeToken, setBridgeToken] = useAtom(bridgeTokenAtom);
+  const [selectedNetwork, setSelectedNetwork] = useAtom(
+    selectingBridgeNetworkAtom,
+  );
 
   const networkList = Object.values(whitelistNetworks);
   const tokenList = Object.values(
@@ -29,11 +27,11 @@ const TokenNetworkSelectorModal: React.FC = () => {
 
   const onNetworkSelect = (network: NetworkInfo) => {
     setSelectedNetwork(network.id);
-    setSelectedToken(null);
+    setBridgeToken(null);
   };
 
   const onTokenSelect = (token: TokenInfo) => {
-    setSelectedToken(token.address);
+    setBridgeToken(token.address);
     closeModal();
   };
 
@@ -65,7 +63,7 @@ const TokenNetworkSelectorModal: React.FC = () => {
                   key={token.address}
                   token={token}
                   network={whitelistNetworks[selectedNetwork]}
-                  isSelected={token.address === selectedToken}
+                  isSelected={token.address === bridgeToken}
                   onSelect={() => {
                     onTokenSelect(token);
                   }}

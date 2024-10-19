@@ -2,14 +2,17 @@
 
 import { NetworkSelector, TokenSelector } from "@/components/bridge";
 import { formatAsUsd, formatAmountOutput } from "@/lib/utils/formats";
-import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
+import { getNetworkInfo } from "@/lib/networks";
 
 import { SelectionType } from "@/enums";
-import { useSelectionAtoms } from "@/lib/hooks/bridge";
 import { useAtomValue } from "jotai";
 import { outputTokenAmountAtom } from "@/atoms/bridge/inputAtom";
 import BigNumber from "bignumber.js";
 import { cn } from "@/lib/utils/common/cn";
+import {
+  bridgeNetworkAtom,
+  bridgeTokenInfoAtom,
+} from "@/atoms/bridge/tokenNetworkAtom";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -19,11 +22,9 @@ const TokenOutput: React.FC = () => {
 
   const usdValue = quoteValue?.times(tokenPrice).toNumber() ?? 0;
 
-  const { selectedNetwork, selectedToken } = useSelectionAtoms(
-    SelectionType.TO,
-  );
+  const tokenInfo = useAtomValue(bridgeTokenInfoAtom);
 
-  const tokenInfo = getTokenInfo(selectedNetwork, selectedToken);
+  const selectedNetwork = useAtomValue(bridgeNetworkAtom)[SelectionType.TO];
   const networkInfo = getNetworkInfo(selectedNetwork);
 
   return (

@@ -3,25 +3,28 @@
 import { Button, Input } from "@/components/ui";
 import { NetworkSelector, TokenSelector } from "@/components/bridge";
 import { formatTokenAmount, formatAmountInput } from "@/lib/utils/formats";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
 import useGetUserTokenBalance from "@/lib/hooks/wallet/useGetUserTokenBalance";
 import { useAccount } from "wagmi";
 import BigNumber from "bignumber.js";
-import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
+import { getNetworkInfo } from "@/lib/networks";
 import { SelectionType } from "@/enums";
-import { useSelectionAtoms } from "@/lib/hooks/bridge";
 import { normalizeTokenAmount } from "@/lib/utils/token/normalizeTokenAmount";
+import {
+  bridgeNetworkAtom,
+  bridgeTokenAtom,
+  bridgeTokenInfoAtom,
+} from "@/atoms/bridge/tokenNetworkAtom";
 
 const TokenInput: React.FC = () => {
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
   const { address } = useAccount();
 
-  const { selectedNetwork, selectedToken } = useSelectionAtoms(
-    SelectionType.FROM,
-  );
+  const selectedToken = useAtomValue(bridgeTokenAtom);
+  const selectedNetwork = useAtomValue(bridgeNetworkAtom)[SelectionType.FROM];
 
-  const tokenInfo = getTokenInfo(selectedNetwork, selectedToken);
+  const tokenInfo = useAtomValue(bridgeTokenInfoAtom);
   const networkInfo = getNetworkInfo(selectedNetwork);
 
   // REFACTOR: move this to atom
