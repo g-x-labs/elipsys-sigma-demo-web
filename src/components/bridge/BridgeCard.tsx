@@ -20,20 +20,29 @@ import { ModalIds } from "@/enums";
 import { useCallback } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
-import { swapBridgeNetworkAtom } from "@/atoms/bridge/tokenNetworkAtom";
+import {
+  bridgeTokenInfoAtom,
+  swapBridgeNetworkAtom,
+  useBridgeTokenBalance,
+} from "@/atoms/bridge/tokenNetworkAtom";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const BridgeCard: React.FC = () => {
   const swapSelection = useSetAtom(swapBridgeNetworkAtom);
+  const inputTokenAmount = useAtomValue(tokenInputAtom);
+  const tokenInfo = useAtomValue(bridgeTokenInfoAtom);
+  const tokenBalance = useBridgeTokenBalance();
+
   const { openModal } = useModal(ModalIds.TransactionOverviewModal);
 
-  const inputTokenAmount = useAtomValue(tokenInputAtom);
-
   const ctaText = useCallback(() => {
+    if (!tokenInfo) return "Select token";
     if (!inputTokenAmount) return "Enter Amount";
+    if (BigNumber(inputTokenAmount).gt(tokenBalance ?? BigNumber(0)))
+      return "Insufficient Balance";
     return "Transfer";
-  }, [inputTokenAmount]);
+  }, [inputTokenAmount, tokenBalance, tokenInfo]);
 
   return (
     <Card>

@@ -1,9 +1,5 @@
-import { SelectionType } from "@/enums";
-import useBridgeQuote from "@/lib/hooks/contract/useBridgeQuote";
 import BigNumber from "bignumber.js";
 import { atom } from "jotai";
-import { bridgeNetworkAtom, bridgeTokenAtom } from "./tokenNetworkAtom";
-import { bridgeAddressAtom } from "./bridgeSelectAtom";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -12,19 +8,11 @@ BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 //  and return BigNumber when getting
 export const tokenInputAtom = atom<string>("");
 
+// REFACTOR: can remove this since output token is 1:1 to input
 export const outputTokenAmountAtom = atom(async (get) => {
   const inputString = get(tokenInputAtom);
   const inputValue = !!inputString ? BigNumber(inputString ?? 0) : null;
 
-  const tokenAddress = get(bridgeTokenAtom);
-  const bridgeAddress = get(bridgeAddressAtom);
-  const targetNetworkId = get(bridgeNetworkAtom)[SelectionType.FROM];
-
-  const quote = useBridgeQuote({
-    amount: inputValue,
-    tokenAddress: tokenAddress,
-    networkId: targetNetworkId,
-    bridgeAddress: bridgeAddress,
-  });
-  return quote;
+  // INFO: output token amount is 1:1 with input token amount
+  return inputValue;
 });

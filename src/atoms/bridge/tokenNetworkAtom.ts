@@ -1,7 +1,12 @@
 import { NetworkId, SelectionType } from "@/enums";
+import useGetUserTokenBalance from "@/lib/hooks/contract/useGetUserTokenBalance";
 import { getTokenInfo } from "@/lib/networks";
-import { atom } from "jotai";
+import BigNumber from "bignumber.js";
+import { atom, useAtomValue } from "jotai";
 import { Address } from "viem";
+import { useAccount } from "wagmi";
+
+BigNumber.config({ DECIMAL_PLACES: 1e9 });
 
 // Default bridge network configuration, specifying the default 'FROM' and 'TO' networks
 const DEFAULT_BRIDGE_NETWORK = {
@@ -50,7 +55,7 @@ export const selectingBridgeNetworkAtom = atom(
   },
 );
 
-// Atom to swap the 'FROM' and 'TO' bridge networks; use only with swap button
+// Atom to swap the 'FROM' and 'TO' bridge networks
 export const swapBridgeNetworkAtom = atom(null, (get, set) => {
   const from = get(bridgeNetworkAtom)[SelectionType.FROM];
   const to = get(bridgeNetworkAtom)[SelectionType.TO];
@@ -60,3 +65,19 @@ export const swapBridgeNetworkAtom = atom(null, (get, set) => {
     [SelectionType.TO]: from,
   });
 });
+
+// Custom hook to get the balance of the sending token
+export const useBridgeTokenBalance = () => {
+  const tokenInfo = useAtomValue(bridgeTokenInfoAtom);
+  const networkId = useAtomValue(bridgeNetworkAtom)[SelectionType.FROM];
+  const { address } = useAccount();
+
+  const rawBalance = useGetUserTokenBalance({
+    tokenAddress: tokenInfo?.address ?? null,
+    address: address,
+    chainId: networkId,
+  });
+
+  if (!tokenInfo || !rawBalance) return null;
+  return rawBalance.div(tokenInfo.underlyingDecimals);
+};

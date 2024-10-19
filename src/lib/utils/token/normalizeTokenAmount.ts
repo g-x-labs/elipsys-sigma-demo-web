@@ -4,8 +4,8 @@ BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 export const normalizeTokenAmount = (
   value: BigNumber,
-  tokenDecimals: number | undefined,
+  underlyingDecimals: BigNumber | undefined,
 ): BigNumber | undefined => {
-  if (!tokenDecimals) return undefined;
-  return value.div(BigNumber(10).pow(tokenDecimals));
+  if (!underlyingDecimals) return undefined;
+  return value.div(underlyingDecimals);
 };
