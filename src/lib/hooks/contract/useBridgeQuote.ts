@@ -5,18 +5,18 @@ import { Address } from "viem";
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 interface UseBridgeQuoteProps {
-  tokenFromInfo: Address;
-  tokenToInfo: Address;
-  amount: BigNumber | null;
+  tokenAddress: Address | null;
   networkId: NetworkId;
+  bridgeAddress: Address | null;
+  amount: BigNumber | null;
 }
 
 export default function useBridgeQuote(
   props: UseBridgeQuoteProps,
 ): BigNumber | null {
-  const { tokenFromInfo, tokenToInfo, amount, networkId } = props;
+  const { bridgeAddress, tokenAddress, amount, networkId } = props;
 
-  if (!tokenFromInfo || !tokenToInfo || !amount || !networkId) return null;
+  if (!bridgeAddress || !tokenAddress || !amount || !networkId) return null;
 
   // TODO: Call contract here to fetch quote
   // const result = useSimulateContract()

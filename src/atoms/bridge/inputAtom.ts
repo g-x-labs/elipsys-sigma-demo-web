@@ -1,7 +1,9 @@
-import { NetworkId } from "@/enums";
+import { SelectionType } from "@/enums";
 import useBridgeQuote from "@/lib/hooks/contract/useBridgeQuote";
 import BigNumber from "bignumber.js";
 import { atom } from "jotai";
+import { bridgeNetworkAtom, bridgeTokenAtom } from "./tokenNetworkAtom";
+import { bridgeAddressAtom } from "./bridgeSelectAtom";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -14,12 +16,15 @@ export const outputTokenAmountAtom = atom(async (get) => {
   const inputString = get(tokenInputAtom);
   const inputValue = !!inputString ? BigNumber(inputString ?? 0) : null;
 
-  // TODO: replace with real value
+  const tokenAddress = get(bridgeTokenAtom);
+  const bridgeAddress = get(bridgeAddressAtom);
+  const targetNetworkId = get(bridgeNetworkAtom)[SelectionType.FROM];
+
   const quote = useBridgeQuote({
     amount: inputValue,
-    networkId: NetworkId.Sepolia,
-    tokenFromInfo: "0x",
-    tokenToInfo: "0x",
+    tokenAddress: tokenAddress,
+    networkId: targetNetworkId,
+    bridgeAddress: bridgeAddress,
   });
   return quote;
 });
