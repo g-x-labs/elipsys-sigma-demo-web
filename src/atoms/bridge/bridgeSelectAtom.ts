@@ -7,7 +7,7 @@ export const bridgeSelectAtom = atom("wormhole-lite"); // Preselect "wormhole-li
 export const bridgeAddressAtom = atom((get) => {
   const bridge = get(bridgeSelectAtom);
   switch (bridge) {
-    // TODO: change to enum as separated json config file
+    // TODO: change to enum as separated json config file, and replace with real bridge address
     case "wormhole-lite":
       return "0x" as Address;
     case "wormhole":

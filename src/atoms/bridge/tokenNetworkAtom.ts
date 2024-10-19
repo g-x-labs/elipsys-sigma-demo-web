@@ -14,7 +14,10 @@ const DEFAULT_BRIDGE_NETWORK = {
   [SelectionType.TO]: NetworkId.OptimismSepolia,
 };
 
-export const bridgeTokenAtom = atom<Address | null>(null);
+// Default to MOCK token
+export const bridgeTokenAtom = atom<Address | null>(
+  "0x1234567890abcdef1234567890abcdef12345678",
+);
 export const bridgeNetworkAtom = atom(DEFAULT_BRIDGE_NETWORK);
 
 // Atom to get a TokenInfo for a sending token
