@@ -1,5 +1,4 @@
-import WormholeLiteIcon from "@/assets/icons/wormhole-lite.svg";
-import { Button } from "@/components/ui";
+import { BridgeSelect } from "@/components/bridge";
 
 const BridgeHeader: React.FC = () => {
   return (
@@ -8,14 +7,7 @@ const BridgeHeader: React.FC = () => {
       <hr className="h-0.5 w-full border-black-700" />
       <div className="flex flex-col gap-y-3">
         <h3 className="text-gray-400 text-sb3">Bridge</h3>
-        {/* TODO: Replace with dropdown */}
-        <Button
-          className="border border-gray-600"
-          size={"dropdown"}
-          variant={"dropdown"}
-        >
-          <WormholeLiteIcon className="w-[132px]" />
-        </Button>
+        <BridgeSelect />
       </div>
     </div>
   );

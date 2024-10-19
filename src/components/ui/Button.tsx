@@ -16,7 +16,6 @@ const buttonVariants = cva(
         transparent:
           "bg-transparent hover:bg-black-700 data-[active=true]:bg-black-700 rounded-lg",
         // INFO: One-offs goes here
-        dropdown: "bg-black-800 rounded-lg",
         tokenSelector:
           "bg-black-700 hover:bg-gray-800 flex rounded-tl-[4px] border-r border-gray-800",
         networkSelector:
@@ -26,7 +25,6 @@ const buttonVariants = cva(
         default: "h-[56px] px-5 py-4",
         large: "h-[76px] p-4",
         medium: "h-[44px] px-3 py-4",
-        dropdown: "h-[44px] px-4 py-3",
         small: "h-[26px] rounded-[4px] px-3 py-2",
         icon: "h-10 w-10",
         fit: "h-auto p-0",
