@@ -38,11 +38,18 @@ const BridgeCard: React.FC = () => {
 
   const ctaText = useCallback(() => {
     if (!tokenInfo) return "Select token";
-    if (!inputTokenAmount) return "Enter Amount";
+    if (!inputTokenAmount || BigNumber(inputTokenAmount).isZero())
+      return "Enter Amount";
     if (BigNumber(inputTokenAmount).gt(tokenBalance ?? BigNumber(0)))
       return "Insufficient Balance";
     return "Transfer";
   }, [inputTokenAmount, tokenBalance, tokenInfo]);
+
+  const isCtaDisabled =
+    !tokenInfo ||
+    !inputTokenAmount ||
+    BigNumber(inputTokenAmount).isZero() ||
+    BigNumber(inputTokenAmount).gt(tokenBalance ?? BigNumber(0));
 
   return (
     <Card>
@@ -68,7 +75,12 @@ const BridgeCard: React.FC = () => {
         <TransactionDetails label="Est. Time to Destination" value={null} />
       </CardContent>
       <CardFooter>
-        <Button variant={"action"} onClick={openModal} className="w-full">
+        <Button
+          variant={"action"}
+          onClick={openModal}
+          className="w-full"
+          disabled={isCtaDisabled}
+        >
           {ctaText()}
         </Button>
       </CardFooter>
