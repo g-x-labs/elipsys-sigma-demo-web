@@ -17,7 +17,7 @@ export const outputTokenAmountAtom = atom(async (get) => {
   // TODO: replace with real value
   const quote = useBridgeQuote({
     amount: inputValue,
-    networkId: NetworkId.BlastSepolia,
+    networkId: NetworkId.Sepolia,
     tokenFromInfo: "0x",
     tokenToInfo: "0x",
   });
