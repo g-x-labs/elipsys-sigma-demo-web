@@ -17,15 +17,14 @@ import {
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const TokenOutput: React.FC = () => {
-  const tokenPrice = 0.01; //INFO: hardcoded value just for demo
   const quoteValue = useAtomValue(outputTokenAmountAtom);
-
-  const usdValue = quoteValue?.times(tokenPrice).toNumber() ?? 0;
-
   const tokenInfo = useAtomValue(bridgeTokenInfoAtom);
-
   const selectedNetwork = useAtomValue(bridgeNetworkAtom)[SelectionType.TO];
+
   const networkInfo = getNetworkInfo(selectedNetwork);
+
+  const tokenPrice = 0.01; //INFO: hardcoded value just for demo
+  const usdValue = quoteValue?.times(tokenPrice).toNumber() ?? 0;
 
   return (
     <div className="flex w-full flex-col rounded-md border border-gray-700">

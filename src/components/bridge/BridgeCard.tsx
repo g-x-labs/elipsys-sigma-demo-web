@@ -76,7 +76,7 @@ const BridgeCard: React.FC = () => {
       </CardContent>
       <CardFooter>
         <Button
-          variant={"action"}
+          variant="action"
           onClick={openModal}
           className="w-full"
           disabled={isCtaDisabled}
