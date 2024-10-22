@@ -5,11 +5,13 @@ import { Button } from "@/components/ui";
 import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
 import { getTokenIcon } from "@/lib/utils/icons";
-import { useAtom } from "jotai";
-import { selectionTypeAtom } from "@/atoms/bridge/tokenNetworkAtom";
+import { useSetAtom } from "jotai";
+import {
+  bridgeTokenAtom,
+  selectionTypeAtom,
+} from "@/atoms/bridge/tokenNetworkAtom";
 import { TokenInfo } from "@/types";
 import { ModalIds, SelectionType } from "@/enums";
-import { useSelectionAtoms } from "@/lib/hooks/bridge";
 
 interface TokenSelectorProps {
   selectionType: SelectionType;
@@ -21,14 +23,13 @@ const TokenSelector: React.FC<TokenSelectorProps> = (props) => {
 
   const { openModal } = useModal(ModalIds.TokenNetworkSelectorModal);
 
-  const [, setSelectionType] = useAtom(selectionTypeAtom);
-
-  const { setSelectedToken } = useSelectionAtoms(selectionType);
+  const setSelectionType = useSetAtom(selectionTypeAtom);
+  const setBridgeToken = useSetAtom(bridgeTokenAtom);
 
   const handleOnClick = () => {
     setSelectionType(selectionType);
     openModal();
-    setSelectedToken(tokenInfo?.address || null);
+    setBridgeToken(tokenInfo?.address || null);
   };
 
   return (

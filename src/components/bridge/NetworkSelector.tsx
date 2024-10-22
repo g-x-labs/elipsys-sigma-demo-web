@@ -3,11 +3,10 @@
 import { Button } from "@/components/ui";
 import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import ChevronDownIcon from "@/assets/icons/chevron-down.svg";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { selectionTypeAtom } from "@/atoms/bridge/tokenNetworkAtom";
 import { NetworkInfo } from "@/types";
 import { ModalIds, SelectionType } from "@/enums";
-import { useSelectionAtoms } from "@/lib/hooks/bridge";
 
 interface NetworkSelectorProps {
   selectionType: SelectionType;
@@ -20,16 +19,11 @@ const NetworkSelector: React.FC<NetworkSelectorProps> = ({
 }) => {
   const { openModal } = useModal(ModalIds.TokenNetworkSelectorModal);
 
-  const [, setSelectionType] = useAtom(selectionTypeAtom);
-
-  const { setSelectedNetwork } = useSelectionAtoms(selectionType);
+  const setSelectionType = useSetAtom(selectionTypeAtom);
 
   const handleOnClick = () => {
     setSelectionType(selectionType);
     openModal();
-    if (networkInfo?.id) {
-      setSelectedNetwork(networkInfo.id);
-    }
   };
 
   return (

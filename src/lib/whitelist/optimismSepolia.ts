@@ -4,8 +4,8 @@ import { Address } from "viem";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
-// TODO: replace with actual token info
 export const optimismSepoliaWhitelist: Record<Address, TokenInfo> = {
+  // TODO: Replace with mock token
   "0x1234567890abcdef1234567890abcdef12345678": {
     address: "0x1234567890abcdef1234567890abcdef12345678",
     name: "Mock Token",
@@ -14,12 +14,12 @@ export const optimismSepoliaWhitelist: Record<Address, TokenInfo> = {
     underlyingDecimals: BigNumber(1e18),
     iconUrl: "assets/tokens/mock-token.svg",
   },
-  "0x944B5C530f7112D8533BB87E3dCAb99D881B3C73": {
-    address: "0x944B5C530f7112D8533BB87E3dCAb99D881B3C73",
-    name: "Tether USD",
-    symbol: "USDT",
+  "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd": {
+    address: "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd",
+    name: "Fake Token",
+    symbol: "FAKE",
     decimals: 18,
     underlyingDecimals: BigNumber(1e18),
-    iconUrl: "assets/tokens/usdt.svg",
+    iconUrl: "assets/tokens/fake-token.svg",
   },
 };

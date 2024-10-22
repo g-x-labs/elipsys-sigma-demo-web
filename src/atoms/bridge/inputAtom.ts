@@ -1,5 +1,3 @@
-import { NetworkId } from "@/enums";
-import useBridgeQuote from "@/lib/hooks/contract/useBridgeQuote";
 import BigNumber from "bignumber.js";
 import { atom } from "jotai";
 
@@ -10,16 +8,11 @@ BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 //  and return BigNumber when getting
 export const tokenInputAtom = atom<string>("");
 
+// REFACTOR: can remove this since output token is 1:1 to input
 export const outputTokenAmountAtom = atom(async (get) => {
   const inputString = get(tokenInputAtom);
   const inputValue = !!inputString ? BigNumber(inputString ?? 0) : null;
 
-  // TODO: replace with real value
-  const quote = useBridgeQuote({
-    amount: inputValue,
-    networkId: NetworkId.BlastSepolia,
-    tokenFromInfo: "0x",
-    tokenToInfo: "0x",
-  });
-  return quote;
+  // INFO: output token amount is 1:1 with input token amount
+  return inputValue;
 });
