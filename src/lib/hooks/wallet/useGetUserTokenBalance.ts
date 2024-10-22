@@ -41,10 +41,8 @@ export default function useGetUserTokenBalance({
   });
 
   if (tokenAddress === ZERO_ADDRESS) {
-    return balance.data !== undefined
-      ? BigNumber(balance.data?.value.toString())
-      : null;
+    return balance?.data ? BigNumber(balance.data?.value.toString()) : null;
   } else {
-    return result.data !== undefined ? BigNumber(result.data.toString()) : null;
+    return result?.data ? BigNumber(result.data.toString()) : null;
   }
 }
