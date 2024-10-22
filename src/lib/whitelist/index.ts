@@ -1,6 +1,5 @@
 import { optimismSepoliaWhitelist } from "./optimismSepolia";
 import { sepoliaWhitelist } from "./sepolia";
-import { blastSepoliaWhitelist } from "./blastSepolia";
 import { NetworkId } from "@/enums";
 import { NetworkInfo } from "@/types";
 
@@ -16,11 +15,5 @@ export const whitelistNetworks: Record<NetworkId, NetworkInfo> = {
     name: "Optimism Sepolia",
     iconUrl: "assets/networks/optimism.svg",
     tokens: optimismSepoliaWhitelist,
-  },
-  168587773: {
-    id: NetworkId.BlastSepolia,
-    name: "Blast Sepolia",
-    iconUrl: "assets/networks/optimism.svg",
-    tokens: blastSepoliaWhitelist,
   },
 };

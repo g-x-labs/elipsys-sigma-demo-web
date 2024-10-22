@@ -3,38 +3,23 @@
 import { Button, Input } from "@/components/ui";
 import { NetworkSelector, TokenSelector } from "@/components/bridge";
 import { formatTokenAmount, formatAmountInput } from "@/lib/utils/formats";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
-import useGetUserTokenBalance from "@/lib/hooks/wallet/useGetUserTokenBalance";
-import { useAccount } from "wagmi";
 import BigNumber from "bignumber.js";
-import { getNetworkInfo, getTokenInfo } from "@/lib/networks";
+import { getNetworkInfo } from "@/lib/networks";
 import { SelectionType } from "@/enums";
-import { useSelectionAtoms } from "@/lib/hooks/bridge";
-import { normalizeTokenAmount } from "@/lib/utils/token/normalizeTokenAmount";
+import {
+  bridgeNetworkAtom,
+  bridgeTokenInfoAtom,
+  useBridgeTokenBalance,
+} from "@/atoms/bridge/tokenNetworkAtom";
 
 const TokenInput: React.FC = () => {
   const [inputValue, setInputValue] = useAtom(tokenInputAtom);
-  const { address } = useAccount();
-
-  const { selectedNetwork, selectedToken } = useSelectionAtoms(
-    SelectionType.FROM,
-  );
-
-  const tokenInfo = getTokenInfo(selectedNetwork, selectedToken);
+  const selectedNetwork = useAtomValue(bridgeNetworkAtom)[SelectionType.FROM];
+  const tokenInfo = useAtomValue(bridgeTokenInfoAtom);
   const networkInfo = getNetworkInfo(selectedNetwork);
-
-  // REFACTOR: move this to atom
-  const rawTokenBalance =
-    useGetUserTokenBalance({
-      tokenAddress: selectedToken,
-      address: address,
-      chainId: selectedNetwork,
-    }) ?? BigNumber(0);
-
-  // REFACTOR: might move this to some where else
-  const tokenBalance =
-    normalizeTokenAmount(rawTokenBalance, tokenInfo?.decimals) ?? BigNumber(0);
+  const tokenBalance = useBridgeTokenBalance();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -61,7 +46,7 @@ const TokenInput: React.FC = () => {
         <Button
           size={"small"}
           onClick={() => {
-            onSetInputValue(tokenBalance);
+            onSetInputValue(tokenBalance ?? BigNumber(0));
           }}
         >
           <span className="text-sb3">Max</span>
