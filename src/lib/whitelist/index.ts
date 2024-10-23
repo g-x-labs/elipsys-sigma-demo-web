@@ -1,3 +1,4 @@
+import { bnbSepoliaWhitelist } from "./bnbSepolia";
 import { optimismSepoliaWhitelist } from "./optimismSepolia";
 import { sepoliaWhitelist } from "./sepolia";
 import { NetworkId } from "@/enums";
@@ -15,5 +16,12 @@ export const whitelistNetworks: Record<NetworkId, NetworkInfo> = {
     name: "Optimism Sepolia",
     iconUrl: "assets/networks/optimism.svg",
     tokens: optimismSepoliaWhitelist,
+  },
+  // bsc
+  97: {
+    id: NetworkId.BnbSepolia,
+    name: "Binance Smart Chain",
+    iconUrl: "assets/networks/bnb.svg",
+    tokens: bnbSepoliaWhitelist,
   },
 };
