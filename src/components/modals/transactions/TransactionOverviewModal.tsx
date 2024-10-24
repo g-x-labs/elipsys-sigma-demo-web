@@ -13,7 +13,7 @@ const TransactionOverviewModal: React.FC = () => {
   const tempTokenUsdValue = 1;
   const tempTokenAmount = BigNumber(10000000000000000);
 
-  const { startBridgeTransaction } = useBridgeTransactionHandler();
+  const { startBridgeTransaction, isPending } = useBridgeTransactionHandler();
 
   const { address } = useAccount();
 
@@ -45,7 +45,9 @@ const TransactionOverviewModal: React.FC = () => {
         size={"medium"}
         onClick={startBridgeTransaction}
       >
-        <span className="uppercase text-sb3">Confirm Transaction</span>
+        <span className="uppercase text-sb3">
+          {isPending ? "Loading" : "Confirm Transaction"}
+        </span>
       </Button>
     </Modal>
   );

@@ -3,6 +3,7 @@ import { NetworkId } from "@/enums";
 import BigNumber from "bignumber.js";
 import { useWriteContract } from "wagmi";
 import { useCallback } from "react";
+import { CCTOKEN_ADDRESS } from "@/lib/constants/addresses";
 
 export default function useSendCCToken({
   networkId,
@@ -12,7 +13,7 @@ export default function useSendCCToken({
 }: {
   networkId: NetworkId;
   targetChain: NetworkId;
-  bridgeIndex: string;
+  bridgeIndex: 0 | 1;
   amount: BigNumber;
 }) {
   const { writeContractAsync, data: hash, isPending } = useWriteContract();
@@ -20,10 +21,10 @@ export default function useSendCCToken({
   const writeAsync = useCallback(async () => {
     return writeContractAsync({
       chainId: networkId,
-      address: "0x1", // TODO: add contract address
+      address: CCTOKEN_ADDRESS,
       abi: crossChainTokenAbi,
       functionName: "sendTokens",
-      args: [targetChain, bridgeIndex, amount, 300000], // TODO: fix gas limit
+      args: [targetChain, bridgeIndex, amount, 100000],
     });
   }, [amount, bridgeIndex, networkId, targetChain, writeContractAsync]);
 
