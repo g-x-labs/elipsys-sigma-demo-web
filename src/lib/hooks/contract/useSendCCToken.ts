@@ -6,6 +6,8 @@ import { useCallback } from "react";
 import { CCTOKEN_ADDRESS } from "@/lib/constants/addresses";
 import { WormholeNetworkId } from "@/enums/networks";
 
+BigNumber.config({ EXPONENTIAL_AT: 1e9 });
+
 export default function useSendCCToken({
   networkId,
   targetChain,
@@ -19,16 +21,19 @@ export default function useSendCCToken({
 }) {
   const { writeContractAsync, data: hash, isPending } = useWriteContract();
 
+  // INFO: Const for now since only bridging CCToken
+  const rawAmount = amount.times(BigNumber(1e18));
+
   const writeAsync = useCallback(async () => {
     return writeContractAsync({
       chainId: networkId,
       address: CCTOKEN_ADDRESS,
       abi: crossChainTokenAbi,
       functionName: "sendTokens",
-      args: [targetChain, bridgeIndex, amount, 100000],
+      args: [targetChain, bridgeIndex, rawAmount, 100000],
       value: BigInt(100000), // hardcoded for now
     });
-  }, [amount, bridgeIndex, networkId, targetChain, writeContractAsync]);
+  }, [rawAmount, bridgeIndex, networkId, targetChain, writeContractAsync]);
 
   return {
     writeAsync,

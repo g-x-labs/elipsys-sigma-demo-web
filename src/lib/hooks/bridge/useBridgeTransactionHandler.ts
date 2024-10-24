@@ -7,36 +7,67 @@ import {
 } from "@/atoms/modal/modalAtom";
 import useSendCCToken from "../contract/useSendCCToken";
 import BigNumber from "bignumber.js";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useWaitForTransactionReceipt } from "wagmi";
 import { wormholeNetworkMap } from "@/enums/networks";
 import { bridgeAddressAtom } from "@/atoms/bridge/bridgeSelectAtom";
+import { relayTransaction } from "@/lib/relayer/relay";
+import { Hash } from "viem";
+import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
+
+BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 export function useBridgeTransactionHandler() {
+  const tokenAmount = useAtomValue(tokenInputAtom);
   const [, setTransactionStatus] = useAtom(transactionStatusAtom);
   // const [, setTransactionHash] = useAtom(transactionHashAtom);
   const [, setModal] = useAtom(modalAtom);
   const bridgeIndex = useAtomValue(bridgeAddressAtom);
+  const relayerHash = useRef<Hash | undefined>();
 
-  //TODO: replace with real data
   const { writeAsync, hash, isPending } = useSendCCToken({
     networkId: NetworkId.Sepolia,
-    targetChain: wormholeNetworkMap[NetworkId.Sepolia], //It's wormhole networkId, 4 is BSC / 2 is Sepolia
+    targetChain: wormholeNetworkMap[NetworkId.BnbSepolia],
     bridgeIndex: bridgeIndex,
-    amount: BigNumber(20000000000000000),
+    amount: BigNumber(tokenAmount),
   });
 
   const { isSuccess, isError } = useWaitForTransactionReceipt({ hash });
 
+  const { isSuccess: isRelayerSuccess, isError: isRelayerError } =
+    useWaitForTransactionReceipt({
+      hash: relayerHash.current,
+    });
+
   useEffect(() => {
-    if (isSuccess) {
+    const handleTransaction = async () => {
+      console.log("Transaction Hash: ", hash);
+      console.log("Transaction Success: ", isSuccess);
+      if (isSuccess && hash) {
+        relayerHash.current = await relayTransaction(hash);
+        console.log("Relayer Hash: ", relayerHash.current);
+        // setTransactionStatus(TransactionStatus.Success);
+        // setModal(ModalIds.TransactionSuccessModal);
+      }
+
+      if (isError) {
+        setTransactionStatus(TransactionStatus.Fail);
+        setModal(ModalIds.TransactionFailModal);
+      }
+    };
+
+    handleTransaction();
+  }, [isSuccess, isError, hash, setTransactionStatus, setModal]);
+
+  useEffect(() => {
+    if (isRelayerSuccess && relayerHash.current) {
       setTransactionStatus(TransactionStatus.Success);
       setModal(ModalIds.TransactionSuccessModal);
-    } else {
+    } else if (isRelayerError) {
       setTransactionStatus(TransactionStatus.Fail);
       setModal(ModalIds.TransactionFailModal);
     }
-  }, [isSuccess, isError, setTransactionStatus, setModal]);
+  });
 
   const startBridgeTransaction = async () => {
     // Open the pending modal first
@@ -44,5 +75,5 @@ export function useBridgeTransactionHandler() {
     setModal(ModalIds.TransactionPendingModal);
   };
 
-  return { startBridgeTransaction, isPending };
+  return { startBridgeTransaction, isPending, isSuccess };
 }
