@@ -8,7 +8,7 @@ import {
 } from "viem";
 import { publicClient } from "@/lib/client/viem/client";
 import { createEthersClient } from "@/lib/client/ethers/client";
-import { generateSignature } from "../utils/signature/aggregate";
+// import { generateSignature } from "../utils/signature/aggregate";
 import {
   WCOM_ADDRESS,
   WRCOM_ADDRESS,
@@ -21,9 +21,9 @@ import { ethers } from "ethers";
 import { wrDeliverAbi } from "../../contract/abi";
 
 // Constants variables
-const SIGNATURE_PARITY = 28;
-const SIGNATURE_PX =
-  "0x5fe055a80305da76a999c83a4bc19f26b498bb2424874138eccd8dee9a2b5c4e";
+// const SIGNATURE_PARITY = 28;
+// const SIGNATURE_PX =
+//   "0x5fe055a80305da76a999c83a4bc19f26b498bb2424874138eccd8dee9a2b5c4e";
 const GAS_LIMIT = ethers.parseEther("0.0000000000001"); // Fix gas limit
 const W_BNB_CHAIN_ID = 4;
 
@@ -136,27 +136,31 @@ async function encodedVMCom(
     instruction,
   );
 
+  console.log("encFirstPart", encFirstPart);
+  console.log("h", h);
+  console.log("lastPart", lastPart);
+
   try {
-    const { rAddress, s } = await generateSignature(h);
+    // const { rAddress, s } = await generateSignature(h);
 
-    let enc = encodePacked(
-      ["bytes", "bytes12", "address", "uint8", "bytes32", "uint256"],
-      [
-        encFirstPart,
-        "0x000000000000000000000000",
-        rAddress,
-        SIGNATURE_PARITY,
-        SIGNATURE_PX,
-        s,
-      ],
-    );
+    // let enc = encodePacked(
+    //   ["bytes", "bytes12", "address", "uint8", "bytes32", "uint256"],
+    //   [
+    //     encFirstPart,
+    //     "0x000000000000000000000000",
+    //     rAddress,
+    //     SIGNATURE_PARITY,
+    //     SIGNATURE_PX,
+    //     s,
+    //   ],
+    // );
 
-    const lastPartBytes = Buffer.from(lastPart, "utf8").toString(
-      "hex",
-    ) as `0x${string}`;
+    // const lastPartBytes = Buffer.from(lastPart, "utf8").toString(
+    //   "hex",
+    // ) as `0x${string}`;
 
-    enc = encodePacked(["bytes", "bytes"], [enc, lastPartBytes]);
-    console.log("Encoded VM: ", enc);
+    // enc = encodePacked(["bytes", "bytes"], [enc, lastPartBytes]);
+    // console.log("Encoded VM: ", enc);
 
     // TODO: remove mock encodeVM
     const mockEnc = mockSignature.mockEncodedVM;
