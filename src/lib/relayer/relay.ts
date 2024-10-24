@@ -158,6 +158,7 @@ async function encodedVMCom(
     enc = encodePacked(["bytes", "bytes"], [enc, lastPartBytes]);
     console.log("Encoded VM: ", enc);
 
+    // TODO: remove mock encodeVM
     const mockEnc = mockSignature.mockEncodedVM;
 
     return mockEnc;
