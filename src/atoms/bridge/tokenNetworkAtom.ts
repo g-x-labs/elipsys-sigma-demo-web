@@ -11,7 +11,7 @@ BigNumber.config({ DECIMAL_PLACES: 1e9 });
 // Default bridge network configuration, specifying the default 'FROM' and 'TO' networks
 const DEFAULT_BRIDGE_NETWORK = {
   [SelectionType.FROM]: NetworkId.Sepolia,
-  [SelectionType.TO]: NetworkId.OptimismSepolia,
+  [SelectionType.TO]: NetworkId.BnbSepolia,
 };
 
 // Default to MOCK token

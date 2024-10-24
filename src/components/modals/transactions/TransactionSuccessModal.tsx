@@ -7,13 +7,20 @@ import { Modal } from "@/components/ui";
 import { TokenSummary, TransactionDivider } from "@/components/shared";
 import { useAccount } from "wagmi";
 import { useTransactionInfo } from "@/lib/hooks/bridge";
+import { useAtomValue } from "jotai";
+import {
+  outputTokenAmountAtom,
+  tokenInputAtom,
+  usdValueAtom,
+} from "@/atoms/bridge/inputAtom";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const TransactionSuccessModal: React.FC = () => {
   // TODO: Remove these
-  const tempTokenUsdValue = 1;
-  const tempTokenAmount = BigNumber(10000000000000000);
+  const fromTokenAmount = useAtomValue(tokenInputAtom);
+  const toTokenAmount = useAtomValue(outputTokenAmountAtom);
+  const tokenUsdValue = useAtomValue(usdValueAtom);
 
   const { closeModal } = useModal(ModalIds.TransactionSuccessModal);
 
@@ -37,16 +44,16 @@ const TransactionSuccessModal: React.FC = () => {
         <div className="flex w-full flex-col">
           <TokenSummary
             token={fromToken}
-            tokenAmount={tempTokenAmount}
-            tokenUSDValue={tempTokenUsdValue}
+            tokenAmount={BigNumber(fromTokenAmount)}
+            tokenUSDValue={tokenUsdValue}
             network={fromNetwork}
             destinationAddress={address}
           />
           <TransactionDivider className="h-[40px]" />
           <TokenSummary
             token={toToken}
-            tokenAmount={tempTokenAmount}
-            tokenUSDValue={tempTokenUsdValue}
+            tokenAmount={toTokenAmount ?? BigNumber(0)}
+            tokenUSDValue={tokenUsdValue}
             network={toNetwork}
             destinationAddress={address}
           />

@@ -8,13 +8,20 @@ import { ModalIds, SelectionType } from "@/enums";
 import BigNumber from "bignumber.js";
 import { useAccount } from "wagmi";
 import { useTransactionInfo } from "@/lib/hooks/bridge";
+import { useAtomValue } from "jotai";
+import {
+  outputTokenAmountAtom,
+  tokenInputAtom,
+  usdValueAtom,
+} from "@/atoms/bridge/inputAtom";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const TransactionPendingModal: React.FC = () => {
-  // TODO: Remove these
-  const tempTokenUsdValue = 1;
-  const tempTokenAmount = BigNumber(10000000000000000);
+  // TODO: Consider moving in to useTransactionInfo
+  const fromTokenAmount = useAtomValue(tokenInputAtom);
+  const toTokenAmount = useAtomValue(outputTokenAmountAtom);
+  const tokenUsdValue = useAtomValue(usdValueAtom);
 
   const { address } = useAccount();
 
@@ -39,8 +46,8 @@ const TransactionPendingModal: React.FC = () => {
         <div className="flex w-full flex-col">
           <TokenSummary
             token={fromToken}
-            tokenAmount={tempTokenAmount}
-            tokenUSDValue={tempTokenUsdValue}
+            tokenAmount={BigNumber(fromTokenAmount)}
+            tokenUSDValue={tokenUsdValue}
             network={fromNetwork}
             destinationAddress={address}
           />
@@ -50,8 +57,8 @@ const TransactionPendingModal: React.FC = () => {
           />
           <TokenSummary
             token={toToken}
-            tokenAmount={tempTokenAmount}
-            tokenUSDValue={tempTokenUsdValue}
+            tokenAmount={toTokenAmount ?? BigNumber(0)}
+            tokenUSDValue={tokenUsdValue}
             network={toNetwork}
             destinationAddress={address}
           />
