@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Button,
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui";
+import { Button, Card, CardFooter, CardHeader } from "@/components/ui";
 import SwapIcon from "@/assets/icons/swap.svg";
 import BigNumber from "bignumber.js";
 import {
@@ -14,7 +8,6 @@ import {
   TokenInput,
   TokenOutput,
 } from "@/components/bridge";
-import { TransactionDetails } from "@/components/shared";
 import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import { ModalIds } from "@/enums";
 import { useCallback } from "react";
@@ -65,15 +58,6 @@ const BridgeCard: React.FC = () => {
           <TokenOutput />
         </div>
       </CardHeader>
-      <CardContent className="flex flex-col gap-y-2">
-        <TransactionDetails
-          label="Est. Cost"
-          value={null}
-          secondaryValue={null}
-          tooltip="Estimated cost of transaction"
-        />
-        <TransactionDetails label="Est. Time to Destination" value={null} />
-      </CardContent>
       <CardFooter>
         <Button
           variant="action"

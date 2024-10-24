@@ -1,7 +1,6 @@
 import {
   PerpetualCircularLoader,
   TokenSummary,
-  TransactionDetails,
   TransactionDivider,
 } from "@/components/shared";
 import { Modal } from "@/components/ui";
@@ -57,11 +56,6 @@ const TransactionPendingModal: React.FC = () => {
             destinationAddress={address}
           />
         </div>
-        <TransactionDetails
-          label="Network Cost"
-          value={null}
-          tooltip="Estimated network cost"
-        />
       </div>
     </Modal>
   );

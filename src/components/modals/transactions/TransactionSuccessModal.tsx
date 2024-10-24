@@ -4,11 +4,7 @@ import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import LinkOutIcon from "@/assets/icons/link-out.svg";
 import BigNumber from "bignumber.js";
 import { Modal } from "@/components/ui";
-import {
-  TokenSummary,
-  TransactionDetails,
-  TransactionDivider,
-} from "@/components/shared";
+import { TokenSummary, TransactionDivider } from "@/components/shared";
 import { useAccount } from "wagmi";
 import { useTransactionInfo } from "@/lib/hooks/bridge";
 
@@ -55,11 +51,6 @@ const TransactionSuccessModal: React.FC = () => {
             destinationAddress={address}
           />
         </div>
-        <TransactionDetails
-          label="Network Cost"
-          value={null}
-          tooltip="Estimated network cost"
-        />
         <div className="mx-auto flex w-full items-center justify-center border-t border-gray-600 pb-3 pt-7">
           {/* TODO: Fix group hover */}
           <Button variant={"link"} size={"fit"} className="gap-x-1">

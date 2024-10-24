@@ -4,7 +4,7 @@ import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import { ModalIds, SelectionType } from "@/enums";
 import BigNumber from "bignumber.js";
 import { Button, Modal } from "@/components/ui";
-import { TokenSummary, TransactionDetails } from "@/components/shared";
+import { TokenSummary } from "@/components/shared";
 import { useAccount } from "wagmi";
 import { useTransactionInfo } from "@/lib/hooks/bridge";
 import { useAtomValue } from "jotai";
@@ -33,11 +33,6 @@ const TransactionFailModal: React.FC = () => {
           tokenUSDValue={tokenUsdValue}
           network={fromNetwork}
           destinationAddress={address}
-        />
-        <TransactionDetails
-          label="Network Cost"
-          value={null}
-          tooltip="Estimated network cost"
         />
       </div>
       <Button variant={"action"} size={"medium"} onClick={closeModal}>

@@ -4,7 +4,7 @@ import { ModalIds, SelectionType } from "@/enums";
 import { useBridgeTransactionHandler } from "@/lib/hooks/bridge/useBridgeTransactionHandler";
 import BigNumber from "bignumber.js";
 import { Button, Modal } from "@/components/ui";
-import { TokenSummary, TransactionDetails } from "@/components/shared";
+import { TokenSummary } from "@/components/shared";
 import { useAccount } from "wagmi";
 import { useTransactionInfo } from "@/lib/hooks/bridge";
 import { useAtomValue } from "jotai";
@@ -36,11 +36,6 @@ const TransactionOverviewModal: React.FC = () => {
           tokenUSDValue={tokenUsdValue}
           network={fromNetwork}
           destinationAddress={address}
-        />
-        <TransactionDetails
-          label="Network Cost"
-          value={null}
-          tooltip="Estimated network cost"
         />
       </div>
       <Button
