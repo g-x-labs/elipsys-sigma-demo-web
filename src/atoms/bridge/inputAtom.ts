@@ -16,3 +16,11 @@ export const outputTokenAmountAtom = atom(async (get) => {
   // INFO: output token amount is 1:1 with input token amount
   return inputValue;
 });
+
+export const tokenPriceAtom = atom<number>(0.01); // INFO: hardcoded value just for demo
+export const usdValueAtom = atom(async (get) => {
+  const quoteValue = await get(outputTokenAmountAtom);
+  const tokenPrice = get(tokenPriceAtom);
+
+  return quoteValue ? quoteValue.times(tokenPrice).toNumber() : 0;
+});

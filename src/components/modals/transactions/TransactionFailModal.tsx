@@ -1,3 +1,5 @@
+"use client";
+
 import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import { ModalIds, SelectionType } from "@/enums";
 import BigNumber from "bignumber.js";
@@ -5,14 +7,14 @@ import { Button, Modal } from "@/components/ui";
 import { TokenSummary, TransactionDetails } from "@/components/shared";
 import { useAccount } from "wagmi";
 import { useTransactionInfo } from "@/lib/hooks/bridge";
+import { useAtomValue } from "jotai";
+import { tokenInputAtom, usdValueAtom } from "@/atoms/bridge/inputAtom";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
-// TODO: Confirm what this is suppose to display
 const TransactionFailModal: React.FC = () => {
-  // TODO: Remove these
-  const tempTokenUsdValue = 1;
-  const tempTokenAmount = BigNumber(10000000000000000);
+  const tokenAmount = useAtomValue(tokenInputAtom);
+  const tokenUsdValue = useAtomValue(usdValueAtom);
 
   const { closeModal } = useModal(ModalIds.TransactionFailModal);
 
@@ -27,8 +29,8 @@ const TransactionFailModal: React.FC = () => {
       <div className="flex w-full flex-col gap-y-3 rounded-lg border border-gray-700 p-4">
         <TokenSummary
           token={fromToken}
-          tokenAmount={tempTokenAmount}
-          tokenUSDValue={tempTokenUsdValue}
+          tokenAmount={BigNumber(tokenAmount)}
+          tokenUSDValue={tokenUsdValue}
           network={fromNetwork}
           destinationAddress={address}
         />
