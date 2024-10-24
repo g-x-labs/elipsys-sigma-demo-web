@@ -12,7 +12,7 @@ export default function useSendCCToken({
   amount,
 }: {
   networkId: NetworkId;
-  targetChain: NetworkId;
+  targetChain: 2 | 4;
   bridgeIndex: 0 | 1;
   amount: BigNumber;
 }) {
@@ -25,6 +25,7 @@ export default function useSendCCToken({
       abi: crossChainTokenAbi,
       functionName: "sendTokens",
       args: [targetChain, bridgeIndex, amount, 100000],
+      value: BigInt(100000), // hardcoded for now
     });
   }, [amount, bridgeIndex, networkId, targetChain, writeContractAsync]);
 

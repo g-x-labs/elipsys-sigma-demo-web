@@ -19,7 +19,7 @@ export function useBridgeTransactionHandler() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { writeAsync, hash, isPending } = useSendCCToken({
     networkId: NetworkId.Sepolia,
-    targetChain: NetworkId.BnbSepolia,
+    targetChain: 4, //It's wormhole networkId, 4 is BSC / 2 is Sepolia
     bridgeIndex: 0,
     amount: BigNumber(20000000000000000),
   });
