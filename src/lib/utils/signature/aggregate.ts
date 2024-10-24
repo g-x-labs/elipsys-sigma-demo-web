@@ -105,9 +105,14 @@ async function makeApiRequest<T, D = unknown>(
 export async function generateSignature(
   hash: string,
 ): Promise<{ rAddress: Address; s: bigint }> {
-  const signature = await aggregateSignature(hash);
+  console.log("hash", hash);
+  // const signature = await aggregateSignature(hash);
 
-  return extractSignature(signature);
+  // TODO: remove mock signature
+  const mockSignature =
+    "6896bd60eeae296db48a229ff71dfe071bde413e6d43f917dc8dcf8c78de33418906d11ac976abccb20b091292bff4ea897efcb639ea871cfa95f6de339e4b0a";
+
+  return extractSignature(mockSignature);
 }
 
 async function extractSignature(
