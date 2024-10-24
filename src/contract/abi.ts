@@ -881,3 +881,33 @@ export const crossChainTokenMetadataAbi = [
     outputs: [{ internalType: "bool", name: "", type: "bool" }],
   },
 ];
+
+export const wrDeliverAbi = [
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "encodedVMs",
+        type: "bytes[]",
+      },
+      {
+        name: "encodedDeliveryVAA",
+        type: "bytes",
+      },
+      {
+        name: "relayerRefundAddress",
+        type: "address",
+      },
+      {
+        name: "deliveryOverrides",
+        type: "bytes",
+      },
+    ],
+    name: "deliver",
+    outputs: [],
+    payable: true,
+    stateMutability: "payable",
+    type: "function",
+    nonReentrant: true,
+  },
+] as const;

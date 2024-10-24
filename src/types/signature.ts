@@ -15,7 +15,7 @@ export type Commitments = {
 };
 
 export type AddSignatureSharePayload = {
-  roundId: string;
-  signerId: string;
-  signatureShare: string;
+  round_id: string;
+  signer_id: string;
+  signature_share: string;
 };
