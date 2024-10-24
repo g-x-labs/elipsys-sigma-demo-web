@@ -17,7 +17,6 @@ export const whitelistNetworks: Record<NetworkId, NetworkInfo> = {
     iconUrl: "assets/networks/optimism.svg",
     tokens: optimismSepoliaWhitelist,
   },
-  // bsc
   97: {
     id: NetworkId.BnbSepolia,
     name: "Binance Smart Chain",

@@ -4,6 +4,7 @@ import BigNumber from "bignumber.js";
 import { useWriteContract } from "wagmi";
 import { useCallback } from "react";
 import { CCTOKEN_ADDRESS } from "@/lib/constants/addresses";
+import { WormholeNetworkId } from "@/enums/networks";
 
 export default function useSendCCToken({
   networkId,
@@ -12,7 +13,7 @@ export default function useSendCCToken({
   amount,
 }: {
   networkId: NetworkId;
-  targetChain: 2 | 4;
+  targetChain: WormholeNetworkId;
   bridgeIndex: 0 | 1;
   amount: BigNumber;
 }) {
