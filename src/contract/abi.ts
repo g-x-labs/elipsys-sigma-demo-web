@@ -222,3 +222,33 @@ export const ierc20MetadataAbi = [
     name: "Transfer",
   },
 ] as const;
+
+export const wrDeliverAbi = [
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "encodedVMs",
+        type: "bytes[]",
+      },
+      {
+        name: "encodedDeliveryVAA",
+        type: "bytes",
+      },
+      {
+        name: "relayerRefundAddress",
+        type: "address",
+      },
+      {
+        name: "deliveryOverrides",
+        type: "bytes",
+      },
+    ],
+    name: "deliver",
+    outputs: [],
+    payable: true,
+    stateMutability: "payable",
+    type: "function",
+    nonReentrant: true,
+  },
+] as const;

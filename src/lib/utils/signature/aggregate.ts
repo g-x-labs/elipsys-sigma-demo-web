@@ -5,6 +5,7 @@ import {
   StartRoundPayload,
   AddSignatureSharePayload,
 } from "@/types/signature";
+import { Address } from "viem";
 import config from "@/lib/config/config";
 
 export async function aggregateSignature(msg: string): Promise<string> {
@@ -16,7 +17,7 @@ export async function aggregateSignature(msg: string): Promise<string> {
     const roundUUID = await createRound(msgHex, pkgUUID);
 
     await Promise.all(
-      mockSignature.participant_shares.map((share) =>
+      mockSignature.participants.map((share) =>
         addSignatureShare(roundUUID, share.identifier, share.signature_share),
       ),
     );
@@ -32,9 +33,9 @@ async function createPublicKeyGroup(): Promise<string> {
   try {
     const payload: PublicKeyPackage = {
       verifying_shares: Object.fromEntries(
-        mockSignature.participant_shares.map((share) => [
+        mockSignature.participants.map((share) => [
           share.identifier,
-          share.participant_share,
+          share.verifying_share,
         ]),
       ),
       verifying_key: mockSignature.verifying_key,
@@ -51,7 +52,7 @@ async function createRound(msg: string, uuid: string): Promise<string> {
   const payload: StartRoundPayload = {
     msg,
     public_key_set: uuid,
-    commitments: mockSignature.participant_shares.map((share) => [
+    commitments: mockSignature.participants.map((share) => [
       share.identifier,
       share.commitment,
     ]),
@@ -65,9 +66,9 @@ async function addSignatureShare(
   signatureShare: string,
 ): Promise<void> {
   const payload: AddSignatureSharePayload = {
-    roundId: roundUUID,
-    signerId: signerId,
-    signatureShare: signatureShare,
+    round_id: roundUUID,
+    signer_id: signerId,
+    signature_share: signatureShare,
   };
   await makeApiRequest("POST", `/round/${roundUUID}/signature`, payload);
 }
@@ -99,4 +100,21 @@ async function makeApiRequest<T, D = unknown>(
     }
     throw new Error("API request failed: Unknown error");
   }
+}
+
+export async function generateSignature(
+  hash: string,
+): Promise<{ rAddress: Address; s: bigint }> {
+  const signature = await aggregateSignature(hash);
+
+  return extractSignature(signature);
+}
+
+async function extractSignature(
+  signature: string,
+): Promise<{ rAddress: Address; s: bigint }> {
+  const rAddress = `0x${signature.slice(2, 42)}` as Address;
+  const s = BigInt(signature.slice(42));
+
+  return { rAddress, s };
 }

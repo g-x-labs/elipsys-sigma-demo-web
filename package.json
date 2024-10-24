@@ -20,6 +20,7 @@
     "axios": "^1.7.7",
     "bignumber.js": "^9.1.2",
     "class-variance-authority": "^0.7.0",
+    "ethers": "^6.13.4",
     "framer-motion": "^11.11.9",
     "jotai": "^2.10.0",
     "jotai-optics": "^0.4.0",
@@ -28,7 +29,7 @@
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.5.3",
-    "viem": "2.x",
+    "viem": "^2.21.32",
     "wagmi": "^2.12.17"
   },
   "devDependencies": {
