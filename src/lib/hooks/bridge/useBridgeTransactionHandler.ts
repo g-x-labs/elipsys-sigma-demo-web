@@ -7,7 +7,7 @@ import {
 } from "@/atoms/modal/modalAtom";
 import useSendCCToken from "../contract/useSendCCToken";
 import BigNumber from "bignumber.js";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useWaitForTransactionReceipt } from "wagmi";
 import { wormholeNetworkMap } from "@/enums/networks";
 import { bridgeAddressAtom } from "@/atoms/bridge/bridgeSelectAtom";
@@ -37,27 +37,37 @@ export function useBridgeTransactionHandler() {
   const { isSuccess: isRelayerSuccess, isError: isRelayerError } =
     useWaitForTransactionReceipt({
       hash: relayerHash.current,
+      // Need to send chainId
     });
 
+  const handleTransaction = useCallback(async () => {
+    console.log("handleTransaction");
+    if (isPending) {
+      console.log("isPending", isPending);
+      setTransactionStatus(TransactionStatus.Pending);
+      // setModal(ModalIds.TransactionPendingModal);
+    }
+
+    if (isSuccess && hash) {
+      console.log("isSuccess", isSuccess);
+      console.log("hash", hash);
+      setTransactionStatus(TransactionStatus.SentCCTToken);
+      relayerHash.current = await relayTransaction(hash);
+      if (relayerHash.current) {
+        setTransactionStatus(TransactionStatus.Success);
+        setModal(ModalIds.TransactionSuccessModal);
+      }
+    }
+
+    if (isError) {
+      setTransactionStatus(TransactionStatus.Fail);
+      setModal(ModalIds.TransactionFailModal);
+    }
+  }, [isPending, isSuccess, isError, hash, setTransactionStatus, setModal]);
+
   useEffect(() => {
-    const handleTransaction = async () => {
-      console.log("Transaction Hash: ", hash);
-      console.log("Transaction Success: ", isSuccess);
-      if (isSuccess && hash) {
-        relayerHash.current = await relayTransaction(hash);
-        console.log("Relayer Hash: ", relayerHash.current);
-        // setTransactionStatus(TransactionStatus.Success);
-        // setModal(ModalIds.TransactionSuccessModal);
-      }
-
-      if (isError) {
-        setTransactionStatus(TransactionStatus.Fail);
-        setModal(ModalIds.TransactionFailModal);
-      }
-    };
-
     handleTransaction();
-  }, [isSuccess, isError, hash, setTransactionStatus, setModal]);
+  }, [handleTransaction]);
 
   useEffect(() => {
     if (isRelayerSuccess && relayerHash.current) {
@@ -67,13 +77,12 @@ export function useBridgeTransactionHandler() {
       setTransactionStatus(TransactionStatus.Fail);
       setModal(ModalIds.TransactionFailModal);
     }
-  });
+  }, [isRelayerSuccess, isRelayerError, setTransactionStatus, setModal]);
 
-  const startBridgeTransaction = async () => {
-    // Open the pending modal first
+  const startBridgeTransaction = useCallback(async () => {
     await writeAsync();
     setModal(ModalIds.TransactionPendingModal);
-  };
+  }, [writeAsync]);
 
-  return { startBridgeTransaction, isPending, isSuccess };
+  return { startBridgeTransaction, isPending };
 }

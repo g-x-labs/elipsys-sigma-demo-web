@@ -4,7 +4,7 @@ import {
   TransactionDivider,
 } from "@/components/shared";
 import { Modal } from "@/components/ui";
-import { ModalIds, SelectionType } from "@/enums";
+import { ModalIds, SelectionType, TransactionStatus } from "@/enums";
 import BigNumber from "bignumber.js";
 import { useAccount } from "wagmi";
 import { useTransactionInfo } from "@/lib/hooks/bridge";
@@ -14,6 +14,7 @@ import {
   tokenInputAtom,
   usdValueAtom,
 } from "@/atoms/bridge/inputAtom";
+import { transactionStatusAtom } from "@/atoms/modal/modalAtom";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -22,6 +23,7 @@ const TransactionPendingModal: React.FC = () => {
   const fromTokenAmount = useAtomValue(tokenInputAtom);
   const toTokenAmount = useAtomValue(outputTokenAmountAtom);
   const tokenUsdValue = useAtomValue(usdValueAtom);
+  const transactionStatus = useAtomValue(transactionStatusAtom);
 
   const { address } = useAccount();
 
@@ -33,6 +35,15 @@ const TransactionPendingModal: React.FC = () => {
     SelectionType.TO,
   );
 
+  const renderTitle = () => {
+    switch (transactionStatus) {
+      case TransactionStatus.SentCCTToken:
+        return "Fetching Signature";
+      default:
+        return "Entering the Portal";
+    }
+  };
+
   return (
     <Modal
       modalId={ModalIds.TransactionPendingModal}
@@ -42,7 +53,7 @@ const TransactionPendingModal: React.FC = () => {
         <PerpetualCircularLoader /> {/* Pass duration as needed */}
       </div>
       <div className="flex w-full flex-col gap-y-5 rounded-lg border border-gray-800 p-4">
-        <h2 className="text-gray-400 text-sb3">Entering the Portal</h2>
+        <h2 className="text-gray-400 text-sb3">{renderTitle()}</h2>
         <div className="flex w-full flex-col">
           <TokenSummary
             token={fromToken}
