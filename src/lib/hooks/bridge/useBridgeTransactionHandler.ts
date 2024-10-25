@@ -2,6 +2,7 @@ import { useAtom, useAtomValue } from "jotai";
 import { ModalIds, TransactionStatus } from "@/enums";
 import {
   modalAtom,
+  transactionHashAtom,
   // transactionHashAtom,
   transactionStatusAtom,
 } from "@/atoms/modal/modalAtom";
@@ -21,7 +22,7 @@ BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 export function useBridgeTransactionHandler() {
   const tokenAmount = useAtomValue(tokenInputAtom);
   const [, setTransactionStatus] = useAtom(transactionStatusAtom);
-  // const [, setTransactionHash] = useAtom(transactionHashAtom);
+  const [, setTransactionHash] = useAtom(transactionHashAtom);
   const [, setModal] = useAtom(modalAtom);
   const { FROM: fromNetwork, TO: toNetwork } = useAtomValue(bridgeNetworkAtom);
   const bridgeIndex = useAtomValue(bridgeAddressAtom);
@@ -59,6 +60,7 @@ export function useBridgeTransactionHandler() {
       if (relayerHash.current) {
         console.log("relayerHash", relayerHash.current);
         setTransactionStatus(TransactionStatus.Success);
+        setTransactionHash(relayerHash.current);
         setModal(ModalIds.TransactionSuccessModal);
       }
     }
@@ -67,7 +69,15 @@ export function useBridgeTransactionHandler() {
       setTransactionStatus(TransactionStatus.Fail);
       setModal(ModalIds.TransactionFailModal);
     }
-  }, [isPending, isSuccess, isError, hash, setTransactionStatus, setModal]);
+  }, [
+    isPending,
+    isSuccess,
+    isError,
+    hash,
+    setTransactionStatus,
+    setTransactionHash,
+    setModal,
+  ]);
 
   useEffect(() => {
     handleTransaction();

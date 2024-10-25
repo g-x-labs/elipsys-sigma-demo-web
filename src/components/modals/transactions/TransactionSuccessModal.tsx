@@ -13,6 +13,9 @@ import {
   tokenInputAtom,
   usdValueAtom,
 } from "@/atoms/bridge/inputAtom";
+import { transactionHashAtom } from "@/atoms/modal/modalAtom";
+import { formatAddress } from "@/lib/utils/formats";
+import Link from "next/link";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -21,6 +24,7 @@ const TransactionSuccessModal: React.FC = () => {
   const fromTokenAmount = useAtomValue(tokenInputAtom);
   const toTokenAmount = useAtomValue(outputTokenAmountAtom);
   const tokenUsdValue = useAtomValue(usdValueAtom);
+  const txnHash = useAtomValue(transactionHashAtom);
 
   const { closeModal } = useModal(ModalIds.TransactionSuccessModal);
 
@@ -40,7 +44,9 @@ const TransactionSuccessModal: React.FC = () => {
       title="Transaction Success"
     >
       <div className="flex w-full flex-col gap-y-5 rounded-lg border border-gray-800 p-4">
-        <h2 className="text-gray-400 text-sb3">Transaction # 0x0000...0000</h2>
+        <h2 className="text-gray-400 text-sb3">
+          Transaction # {formatAddress(txnHash ?? "0x0000000000000")}
+        </h2>
         <div className="flex w-full flex-col">
           <TokenSummary
             token={fromToken}
@@ -61,6 +67,13 @@ const TransactionSuccessModal: React.FC = () => {
         <div className="mx-auto flex w-full items-center justify-center border-t border-gray-600 pb-3 pt-7">
           {/* TODO: Fix group hover */}
           <Button variant={"link"} size={"fit"} className="gap-x-1">
+            <Link
+              prefetch={false}
+              target="_blank"
+              href={`https://testnet.bscscan.com/search?q=${txnHash}`}
+            >
+              BSC Scanner
+            </Link>
             <span className="text-green text-sb2">Wormholescan</span>{" "}
             <LinkOutIcon className="w-3 stroke-green" />
           </Button>
