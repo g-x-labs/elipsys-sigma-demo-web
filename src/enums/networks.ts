@@ -1,6 +1,5 @@
 export enum NetworkId {
   Sepolia = 11155111,
-  OptimismSepolia = 11155420,
   BnbSepolia = 97,
 }
 
@@ -11,6 +10,5 @@ export enum WormholeNetworkId {
 
 export const wormholeNetworkMap: Record<NetworkId, WormholeNetworkId> = {
   [NetworkId.Sepolia]: WormholeNetworkId.Sepolia,
-  [NetworkId.OptimismSepolia]: WormholeNetworkId.Sepolia,
   [NetworkId.BnbSepolia]: WormholeNetworkId.BnbSepolia,
 };
