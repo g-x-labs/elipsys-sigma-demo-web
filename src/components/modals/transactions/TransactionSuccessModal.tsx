@@ -65,16 +65,15 @@ const TransactionSuccessModal: React.FC = () => {
           />
         </div>
         <div className="mx-auto flex w-full items-center justify-center border-t border-gray-600 pb-3 pt-7">
-          {/* TODO: Fix group hover */}
           <Button variant={"link"} size={"fit"} className="gap-x-1">
             <Link
               prefetch={false}
               target="_blank"
               href={`https://testnet.bscscan.com/search?q=${txnHash}`}
+              className="text-green text-sb2"
             >
               BSC Scanner
             </Link>
-            <span className="text-green text-sb2">Wormholescan</span>{" "}
             <LinkOutIcon className="w-3 stroke-green" />
           </Button>
         </div>
