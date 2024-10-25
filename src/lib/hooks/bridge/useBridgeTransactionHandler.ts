@@ -45,20 +45,15 @@ export function useBridgeTransactionHandler() {
   //   });
 
   const handleTransaction = useCallback(async () => {
-    console.log("handleTransaction");
     if (isPending) {
-      console.log("isPending", isPending);
       setTransactionStatus(TransactionStatus.Pending);
       setModal(ModalIds.TransactionPendingModal);
     }
 
     if (isSuccess && hash) {
-      console.log("isSuccess", isSuccess);
-      console.log("hash", hash);
       setTransactionStatus(TransactionStatus.SentCCTToken);
       relayerHash.current = await relayTransaction(hash);
       if (relayerHash.current) {
-        console.log("relayerHash", relayerHash.current);
         setTransactionStatus(TransactionStatus.Success);
         setTransactionHash(relayerHash.current);
         setModal(ModalIds.TransactionSuccessModal);
