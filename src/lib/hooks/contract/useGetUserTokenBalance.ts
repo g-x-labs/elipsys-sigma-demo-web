@@ -40,8 +40,6 @@ export default function useGetUserTokenBalance({
     },
   });
 
-  // console.log(result);
-
   if (tokenAddress === ZERO_ADDRESS) {
     return balance?.data ? BigNumber(balance.data?.value.toString()) : null;
   } else {
