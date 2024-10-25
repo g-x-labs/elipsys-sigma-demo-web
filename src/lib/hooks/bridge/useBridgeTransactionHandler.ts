@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from "jotai";
-import { ModalIds, NetworkId, TransactionStatus } from "@/enums";
+import { ModalIds, TransactionStatus } from "@/enums";
 import {
   modalAtom,
   // transactionHashAtom,
@@ -14,6 +14,7 @@ import { bridgeAddressAtom } from "@/atoms/bridge/bridgeSelectAtom";
 import { relayTransaction } from "@/lib/relayer/relay";
 import { Hash } from "viem";
 import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
+import { bridgeNetworkAtom } from "@/atoms/bridge/tokenNetworkAtom";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -22,30 +23,32 @@ export function useBridgeTransactionHandler() {
   const [, setTransactionStatus] = useAtom(transactionStatusAtom);
   // const [, setTransactionHash] = useAtom(transactionHashAtom);
   const [, setModal] = useAtom(modalAtom);
+  const { FROM: fromNetwork, TO: toNetwork } = useAtomValue(bridgeNetworkAtom);
   const bridgeIndex = useAtomValue(bridgeAddressAtom);
   const relayerHash = useRef<Hash | undefined>();
 
   const { writeAsync, hash, isPending } = useSendCCToken({
-    networkId: NetworkId.Sepolia,
-    targetChain: wormholeNetworkMap[NetworkId.BnbSepolia],
+    networkId: fromNetwork,
+    targetChain: wormholeNetworkMap[toNetwork],
     bridgeIndex: bridgeIndex,
     amount: BigNumber(tokenAmount),
   });
 
   const { isSuccess, isError } = useWaitForTransactionReceipt({ hash });
 
-  const { isSuccess: isRelayerSuccess, isError: isRelayerError } =
-    useWaitForTransactionReceipt({
-      hash: relayerHash.current,
-      // Need to send chainId
-    });
+  // const { isSuccess: isRelayerSuccess, isError: isRelayerError } =
+  //   useWaitForTransactionReceipt({
+  //     hash: relayerHash.current,
+  //     chainId: toNetwork,
+  //     // Need to send chainId
+  //   });
 
   const handleTransaction = useCallback(async () => {
     console.log("handleTransaction");
     if (isPending) {
       console.log("isPending", isPending);
       setTransactionStatus(TransactionStatus.Pending);
-      // setModal(ModalIds.TransactionPendingModal);
+      setModal(ModalIds.TransactionPendingModal);
     }
 
     if (isSuccess && hash) {
@@ -54,6 +57,7 @@ export function useBridgeTransactionHandler() {
       setTransactionStatus(TransactionStatus.SentCCTToken);
       relayerHash.current = await relayTransaction(hash);
       if (relayerHash.current) {
+        console.log("relayerHash", relayerHash.current);
         setTransactionStatus(TransactionStatus.Success);
         setModal(ModalIds.TransactionSuccessModal);
       }
@@ -69,19 +73,8 @@ export function useBridgeTransactionHandler() {
     handleTransaction();
   }, [handleTransaction]);
 
-  useEffect(() => {
-    if (isRelayerSuccess && relayerHash.current) {
-      setTransactionStatus(TransactionStatus.Success);
-      setModal(ModalIds.TransactionSuccessModal);
-    } else if (isRelayerError) {
-      setTransactionStatus(TransactionStatus.Fail);
-      setModal(ModalIds.TransactionFailModal);
-    }
-  }, [isRelayerSuccess, isRelayerError, setTransactionStatus, setModal]);
-
   const startBridgeTransaction = useCallback(async () => {
     await writeAsync();
-    setModal(ModalIds.TransactionPendingModal);
   }, [writeAsync]);
 
   return { startBridgeTransaction, isPending };
