@@ -4,20 +4,27 @@ import { useModal } from "@/lib/hooks/modals/useModalAtom";
 import LinkOutIcon from "@/assets/icons/link-out.svg";
 import BigNumber from "bignumber.js";
 import { Modal } from "@/components/ui";
-import {
-  TokenSummary,
-  TransactionDetails,
-  TransactionDivider,
-} from "@/components/shared";
+import { TokenSummary, TransactionDivider } from "@/components/shared";
 import { useAccount } from "wagmi";
 import { useTransactionInfo } from "@/lib/hooks/bridge";
+import { useAtomValue } from "jotai";
+import {
+  outputTokenAmountAtom,
+  tokenInputAtom,
+  usdValueAtom,
+} from "@/atoms/bridge/inputAtom";
+import { transactionHashAtom } from "@/atoms/modal/modalAtom";
+import { formatAddress } from "@/lib/utils/formats";
+import Link from "next/link";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const TransactionSuccessModal: React.FC = () => {
   // TODO: Remove these
-  const tempTokenUsdValue = 1;
-  const tempTokenAmount = BigNumber(10000000000000000);
+  const fromTokenAmount = useAtomValue(tokenInputAtom);
+  const toTokenAmount = useAtomValue(outputTokenAmountAtom);
+  const tokenUsdValue = useAtomValue(usdValueAtom);
+  const txnHash = useAtomValue(transactionHashAtom);
 
   const { closeModal } = useModal(ModalIds.TransactionSuccessModal);
 
@@ -37,33 +44,36 @@ const TransactionSuccessModal: React.FC = () => {
       title="Transaction Success"
     >
       <div className="flex w-full flex-col gap-y-5 rounded-lg border border-gray-800 p-4">
-        <h2 className="text-gray-400 text-sb3">Transaction # 0x0000...0000</h2>
+        <h2 className="text-gray-400 text-sb3">
+          Transaction # {formatAddress(txnHash ?? "0x0000000000000")}
+        </h2>
         <div className="flex w-full flex-col">
           <TokenSummary
             token={fromToken}
-            tokenAmount={tempTokenAmount}
-            tokenUSDValue={tempTokenUsdValue}
+            tokenAmount={BigNumber(fromTokenAmount)}
+            tokenUSDValue={tokenUsdValue}
             network={fromNetwork}
             destinationAddress={address}
           />
           <TransactionDivider className="h-[40px]" />
           <TokenSummary
             token={toToken}
-            tokenAmount={tempTokenAmount}
-            tokenUSDValue={tempTokenUsdValue}
+            tokenAmount={toTokenAmount ?? BigNumber(0)}
+            tokenUSDValue={tokenUsdValue}
             network={toNetwork}
             destinationAddress={address}
           />
         </div>
-        <TransactionDetails
-          label="Network Cost"
-          value={null}
-          tooltip="Estimated network cost"
-        />
         <div className="mx-auto flex w-full items-center justify-center border-t border-gray-600 pb-3 pt-7">
-          {/* TODO: Fix group hover */}
           <Button variant={"link"} size={"fit"} className="gap-x-1">
-            <span className="text-green text-sb2">Wormholescan</span>{" "}
+            <Link
+              prefetch={false}
+              target="_blank"
+              href={`https://testnet.bscscan.com/search?q=${txnHash}`}
+              className="text-green text-sb2"
+            >
+              BSC Scanner
+            </Link>
             <LinkOutIcon className="w-3 stroke-green" />
           </Button>
         </div>

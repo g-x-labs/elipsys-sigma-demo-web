@@ -9,14 +9,19 @@ import {
   walletConnectWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 import { http } from "viem";
-import { blastSepolia, optimismSepolia, sepolia } from "wagmi/chains";
+import { bscTestnet, sepolia } from "wagmi/chains";
+
+const {
+  NEXT_PUBLIC_SEPOLIA_PROVIDER_URL,
+  NEXT_PUBLIC_BNB_TESTNET_PROVIDER_URL,
+} = process.env;
 
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID ?? "";
 
 export const wagmiConfig = getDefaultConfig({
   appName: "Elipsys App",
   projectId: projectId,
-  chains: [sepolia, optimismSepolia, blastSepolia],
+  chains: [sepolia, bscTestnet],
   wallets: [
     {
       groupName: "Recommended",
@@ -33,9 +38,14 @@ export const wagmiConfig = getDefaultConfig({
   ],
 
   transports: {
-    [sepolia.id]: http("https://ethereum-sepolia-rpc.publicnode.com"),
-    [optimismSepolia.id]: http("https://sepolia.optimism.io"),
-    [blastSepolia.id]: http("https://sepolia.blast.io"),
+    [sepolia.id]: http(
+      NEXT_PUBLIC_SEPOLIA_PROVIDER_URL ||
+        "https://eth-sepolia.api.onfinality.io/public",
+    ),
+    [bscTestnet.id]: http(
+      NEXT_PUBLIC_BNB_TESTNET_PROVIDER_URL ||
+        "https://bsc-testnet-rpc.publicnode.com",
+    ),
   },
   ssr: true,
 });

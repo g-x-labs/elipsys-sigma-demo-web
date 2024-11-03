@@ -8,17 +8,26 @@ import {
   TransactionSuccessModal,
   TransactionFailModal,
 } from "@/components/modals/transactions";
+import { useAtomValue } from "jotai";
+import { modalAtom } from "@/atoms/modal/modalAtom";
+import { ModalIds } from "@/enums";
+
+const modalComponents: Record<ModalIds, React.FC> = {
+  [ModalIds.TokenNetworkSelectorModal]: TokenNetworkSelectorModal,
+  [ModalIds.TransactionOverviewModal]: TransactionOverviewModal,
+  [ModalIds.TransactionPendingModal]: TransactionPendingModal,
+  [ModalIds.TransactionSuccessModal]: TransactionSuccessModal,
+  [ModalIds.TransactionFailModal]: TransactionFailModal,
+};
 
 const ModalManager: React.FC = () => {
-  return (
-    <>
-      <TokenNetworkSelectorModal />
-      <TransactionOverviewModal />
-      <TransactionPendingModal />
-      <TransactionSuccessModal />
-      <TransactionFailModal />
-    </>
-  );
+  const activeModal = useAtomValue(modalAtom);
+
+  const ModalComponent = activeModal
+    ? modalComponents[activeModal as ModalIds]
+    : null;
+
+  return <>{ModalComponent && <ModalComponent />}</>;
 };
 
 export { ModalManager };

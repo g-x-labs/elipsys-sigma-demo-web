@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Button,
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui";
+import { Button, Card, CardFooter, CardHeader } from "@/components/ui";
 import SwapIcon from "@/assets/icons/swap.svg";
 import BigNumber from "bignumber.js";
 import {
@@ -14,9 +8,8 @@ import {
   TokenInput,
   TokenOutput,
 } from "@/components/bridge";
-import { TransactionDetails } from "@/components/shared";
-import { useModal } from "@/lib/hooks/modals/useModalAtom";
-import { ModalIds } from "@/enums";
+// import { useModal } from "@/lib/hooks/modals/useModalAtom";
+// import { ModalIds } from "@/enums";
 import { useCallback } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { tokenInputAtom } from "@/atoms/bridge/inputAtom";
@@ -25,6 +18,7 @@ import {
   swapBridgeNetworkAtom,
   useBridgeTokenBalance,
 } from "@/atoms/bridge/tokenNetworkAtom";
+import { useBridgeTransactionHandler } from "@/lib/hooks/bridge";
 
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
@@ -34,7 +28,8 @@ const BridgeCard: React.FC = () => {
   const tokenInfo = useAtomValue(bridgeTokenInfoAtom);
   const tokenBalance = useBridgeTokenBalance();
 
-  const { openModal } = useModal(ModalIds.TransactionOverviewModal);
+  // const { openModal } = useModal(ModalIds.TransactionOverviewModal);
+  const { startBridgeTransaction, isPending } = useBridgeTransactionHandler();
 
   const ctaText = useCallback(() => {
     if (!tokenInfo) return "Select token";
@@ -42,10 +37,12 @@ const BridgeCard: React.FC = () => {
       return "Enter Amount";
     if (BigNumber(inputTokenAmount).gt(tokenBalance ?? BigNumber(0)))
       return "Insufficient Balance";
+    if (isPending) return "Loading";
     return "Transfer";
-  }, [inputTokenAmount, tokenBalance, tokenInfo]);
+  }, [inputTokenAmount, tokenBalance, tokenInfo, isPending]);
 
   const isCtaDisabled =
+    isPending ||
     !tokenInfo ||
     !inputTokenAmount ||
     BigNumber(inputTokenAmount).isZero() ||
@@ -65,19 +62,12 @@ const BridgeCard: React.FC = () => {
           <TokenOutput />
         </div>
       </CardHeader>
-      <CardContent className="flex flex-col gap-y-2">
-        <TransactionDetails
-          label="Est. Cost"
-          value={null}
-          secondaryValue={null}
-          tooltip="Estimated cost of transaction"
-        />
-        <TransactionDetails label="Est. Time to Destination" value={null} />
-      </CardContent>
       <CardFooter>
         <Button
           variant="action"
-          onClick={openModal}
+          onClick={() => {
+            startBridgeTransaction();
+          }}
           className="w-full"
           disabled={isCtaDisabled}
         >

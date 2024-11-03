@@ -5,11 +5,10 @@ import { Address } from "viem";
 BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 export const sepoliaWhitelist: Record<Address, TokenInfo> = {
-  // TODO: Replace with mock token
-  "0x1234567890abcdef1234567890abcdef12345678": {
-    address: "0x1234567890abcdef1234567890abcdef12345678",
-    name: "Mock Token",
-    symbol: "MOCK",
+  "0x2124d7c0c242225c95197d54bf280ac0f5cea65d": {
+    address: "0x2124d7c0c242225c95197d54bf280ac0f5cea65d",
+    name: "CC Token",
+    symbol: "CCT",
     decimals: 18,
     underlyingDecimals: BigNumber(1e18),
     iconUrl: "assets/tokens/mock-token.svg",

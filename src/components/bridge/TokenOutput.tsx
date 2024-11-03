@@ -6,7 +6,7 @@ import { getNetworkInfo } from "@/lib/networks";
 
 import { SelectionType } from "@/enums";
 import { useAtomValue } from "jotai";
-import { outputTokenAmountAtom } from "@/atoms/bridge/inputAtom";
+import { outputTokenAmountAtom, usdValueAtom } from "@/atoms/bridge/inputAtom";
 import BigNumber from "bignumber.js";
 import { cn } from "@/lib/utils/common/cn";
 import {
@@ -18,13 +18,11 @@ BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
 const TokenOutput: React.FC = () => {
   const quoteValue = useAtomValue(outputTokenAmountAtom);
+  const usdValue = useAtomValue(usdValueAtom);
   const tokenInfo = useAtomValue(bridgeTokenInfoAtom);
   const selectedNetwork = useAtomValue(bridgeNetworkAtom)[SelectionType.TO];
 
   const networkInfo = getNetworkInfo(selectedNetwork);
-
-  const tokenPrice = 0.01; //INFO: hardcoded value just for demo
-  const usdValue = quoteValue?.times(tokenPrice).toNumber() ?? 0;
 
   return (
     <div className="flex w-full flex-col rounded-md border border-gray-700">
@@ -48,7 +46,7 @@ const TokenOutput: React.FC = () => {
         </div>
         <div className="flex flex-col items-end justify-center">
           <span className="text-gray-400 text-sb3">USD</span>
-          <span className="text-gray-400 text-sb3">
+          <span className="whitespace-nowrap text-gray-400 text-sb3">
             {formatAsUsd(usdValue)}
           </span>
         </div>

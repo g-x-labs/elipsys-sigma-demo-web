@@ -15,6 +15,7 @@ BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 interface TokenSummaryProps {
   token: TokenInfo | null;
   tokenAmount: BigNumber;
+  // TODO: Make this nullable
   tokenUSDValue: number;
   network: NetworkInfo | null;
   destinationAddress: Address | undefined;

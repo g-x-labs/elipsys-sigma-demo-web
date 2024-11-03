@@ -3,6 +3,7 @@ import RightArrowIcon from "@/assets/icons/right-arrow.svg";
 import { formatAsUsd } from "@/lib/utils/formats";
 import { Tooltip } from "@/components/ui";
 
+// TODO: Bring back when have network details
 // TODO: Change values to type number
 export interface TransactionDetailsProps {
   label: string;
